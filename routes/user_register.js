@@ -6,4 +6,6 @@ const bcrypt = require('bcrypt');
 
 module.exports = (knex) => {
   router.post("/", (req, res) => {
-    knex("users")
+  });
+  return router;
+}
