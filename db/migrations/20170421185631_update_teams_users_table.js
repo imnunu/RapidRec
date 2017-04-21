@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('teams_users', (table) => {
+  return knex.schema.table('teams_users', (table) => {
+    table.dropColumn('dropthisinupdate')
     table.increments();
-    table.string('dropthisinupdate');
     table.integer('team_id');
     table.integer('user_id');
     table.foreign('team_id').references('teams.id');
@@ -11,5 +11,9 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('teams_users');
+  return knex.schema.table('teams_users', (table) => {
+    table.dropColumns('id', 'team_id', 'user_id', 'created_at');
+    table.string('dropthisinupdate');
+  });
 };
+
