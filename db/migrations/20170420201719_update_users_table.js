@@ -9,7 +9,6 @@ exports.up = function(knex, Promise) {
     table.string('skill_type');
     table.string('image');
     table.timestamp('created_at');
-
   });
 };
 
