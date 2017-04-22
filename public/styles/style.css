@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Montserrat:700|Merriweather:400italic');
 
 
+/*map*/
+#map-container { height: 300px }
+
+/*create event nav bar*/
+.btn-info {
+  color: #ffffff;
+  background-color: #00bcd4;
+  border-color: transparent;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
 /*login register*/
 .modal-dialog{max-width:340px;}
 
@@ -279,7 +294,7 @@ hr {
 }
 
 #intro.intro {
-	padding:20% 0 0 0;
+	padding:15% 0 0 0;
 }
 
 .intro .slogan {

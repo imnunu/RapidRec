@@ -18,4 +18,15 @@ $(document).ready(function($){
 		}
 	});
 
+
+// time picker
+
+	$(function(){
+		$('*[name=start_time]').appendDtpicker();
+	});
+
+	$(function(){
+		$('*[name=end_time]').appendDtpicker();
+	});
+
 });
