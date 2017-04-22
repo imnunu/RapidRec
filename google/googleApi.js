@@ -1,5 +1,5 @@
 var map;
-    var infowindow;
+var infowindow;
     //initializes map and centers onto Vancouver
     function initialize() {
       var center = new google.maps.LatLng(49.281422, -123.12303);
