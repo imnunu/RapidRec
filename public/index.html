@@ -100,6 +100,12 @@
                     <div class="form-group">
                     	<input type="password" class="form-control register_password_confirm" id="confirm-password" placeholder="Confirm Password" required>
                     </div>
+                    <form enctype='multipart/form-data' action='/profile_pic' method='POST' id='uploadForm'>
+                      <!-- <input type='hidden' name='MAX_FILE_SIZE' value='100000'> -->
+                        Upload a Profile Pic!
+                        <input type='file' name='userPhoto' />
+                      <input type='submit' value='Upload Image' name='Submit' />
+                     </form>
                     <div class="form-group">
                     	<input type="submit" class="form-control btn-primary register_submit_button" value="Register">
                     </div>
