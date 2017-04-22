@@ -8,8 +8,8 @@ const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
 const app         = express();
-const bcrypt = require('bcrypt');
-const flash = require('connect-flash');
+const bcrypt      = require('bcrypt');
+const flash       = require('connect-flash');
 app.use(flash());
 
 const knexConfig  = require("./knexfile");
@@ -20,6 +20,9 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
+
+const googleApi = require("./google/googleApi");
+const pageInitialize = require("./google/createPageinitialize");
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
