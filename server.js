@@ -21,8 +21,6 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 
-const googleApi = require("./google/googleApi");
-const pageInitialize = require("./google/createPageinitialize");
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT

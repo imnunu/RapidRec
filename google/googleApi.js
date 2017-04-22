@@ -30,7 +30,7 @@ function getUserLocation() {
 }
 
 //successful callback function for getCurrentPosition
-//stores user location and make a automatic call to search for drinks
+//stores user location and make a automatic call to search for events
 function storePosition(position) {
   postionOfUserFromGeolocation[0] = position.coords.latitude;
   postionOfUserFromGeolocation[1] = position.coords.longitude;

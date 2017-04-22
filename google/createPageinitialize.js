@@ -61,3 +61,5 @@ function setActiveListItem(element) {
   var timeZoneData = $(element).find("h3").data("timeZoneData");
   fillForm(locationData, timeZoneData);
 }
+
+google.maps.event.addDomListener(window, 'load', initialize);
