@@ -23,18 +23,23 @@ module.exports = (knex) => {
       .then((results) => {
         const match = results[0];
         const user = results[1];
+        console.log(match);
+        console.log(user);
         if(!match) {
           return Promise.reject({
             message: 'Incorrect password'
           });
         }
 
-        req.session.user_id = user.id;
-        res.redirect('/');
+        else{
+          req.session.user_id = user.id;
+          res.json(results)
+        }
+
+
       })
       .catch((error) => {
-        req.flash('errors', error.message);
-        res.redirect('/');
+        res.json('error')
       });
   });
 
