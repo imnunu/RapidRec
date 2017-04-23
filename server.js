@@ -43,6 +43,19 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
+// code below is used for uploading a picture from the internet(over 1 from your phone)
+const multer = require('multer');
+const storage= multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './uploads');
+  },
+  filename: function(req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now());
+  }
+});
+const upload = multer({ storage: storage }).any();
+
 app.use(express.static("public"));
 
 // Mount all resource routes
@@ -51,10 +64,17 @@ app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
 
 
+//requiring profile_pic route
+const postPicRoutes = require('./routes/post_profile_pic');
+const getPostRoutes = require('./routes/get_profile_pic');
+
+app.use('/api/uploadID/picture', postPicRoutes());
+app.use('/api/uploadID/picture', getPostRoutes());
+
 // Home page
-app.get("/", (req, res) => {
-  res.render("index");
-});
+// app.get("/", (req, res) => {
+//   res.render("index");
+// });
 
 
 app.listen(PORT, () => {
