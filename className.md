@@ -2,8 +2,15 @@
 
 - login_button
 - logout_button
+- profile_button
 - register_button
 - create_event_button
+
+## Create event page
+
+- profile_button
+- logout_button
+- login_button
 
 ## Login page
 
@@ -26,20 +33,23 @@
 
 - create_event_title
 - create_event_location
-- create_event_start_day_time
-- create_event_end_day_time
+- create_event_start_date_time
+- create_event_end_date_time
+- create_event_description
 - create_event_equipment
 - create_event_number_of_players
-- create_event_invite_friend
-- create_event_type_public_button
-- create_event_type_private_button
 - create_event_submit_button
 
 ## event page
 
 - event_join_button
 - event_drop_button
-- event_post_submit_button
-- event_comment_submit_button
+- event_title
+- event_location
+- event_start_time
+- event_end_time
+- event_description
+
+
 
 ## Profile page
