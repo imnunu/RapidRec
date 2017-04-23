@@ -31,6 +31,106 @@
   opacity: 0.5;*/
 }
 
+/* Post Message box */
+
+.post {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 2em;
+  background-color: rgba(6, 128, 253, 0.28);
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  overflow: auto;
+  padding: 20px;
+}
+
+section h2 {
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+section textarea {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+}
+
+textarea[name="text"] {
+  padding: 5px;
+}
+
+.counter {
+  float: right;
+}
+
+/*posts container*/
+#posts {
+  opacity: 0.7;
+  border-radius: 5px;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: white;
+  text-align: left;
+}
+
+article.post {
+  border-radius: 0.5em;
+  border: 1px solid #cacaca;
+  margin-bottom: 1em;
+  background-color: white;
+}
+
+article.post header {
+  background-color: #efefef;
+}
+
+article.post img.avatar {
+  padding-top: 5px;
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+}
+
+article.post > p {
+  background: white;
+  padding: 30px 15px;
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+article.post header > h3 {
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
+  padding-top: 10px;
+}
+article.post .user-handle {
+  float: right;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+article.post:hover {
+  border: 1px solid #919191;
+}
+
+article.post:hover header {
+  opacity: 0.5;
+}
+
+article.post footer > p {
+  background-color: #ffffff;
+  border-radius: 0 0 .5em .5em;
+  border-top: 1px solid #cacaca;
+  font-size: .75em;
+  line-height: 2em;
+  padding-left: 10px;
+}
+
 /* ===========================
 --- Intro
 ============================ */

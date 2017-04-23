@@ -295,6 +295,7 @@ hr {
 
 #intro.intro {
 	padding:15% 0 0 0;
+  opacity: 1;
 }
 
 .intro .slogan {
