@@ -13,9 +13,9 @@ module.exports = (knex) => {
       .then((results) => {
         const user = results[0];
         if(!user) {
-          return Promise.reject({
-            message: 'Please enter a valid email and password to log in'
-          });
+          return Promise.reject(
+            res.send('Please enter a valid email and password to log in')
+          );
         }
 
         return Promise.all([bcrypt.compare(req.body.password, user.password), user]);
@@ -26,16 +26,15 @@ module.exports = (knex) => {
         console.log(match);
         console.log(user);
         if(!match) {
-          return Promise.reject({
-            message: 'Incorrect password'
-          });
+          return Promise.reject(
+            res.send('Incorrect Credentials')
+          );
         }
 
         else{
           req.session.user_id = user.id;
           res.json(results)
         }
-
 
       })
       .catch((error) => {

@@ -1,41 +1,43 @@
 $(() => {
 
     $('.register_submit_button').on('click', function(event){
+        var first_name = $('.register_first_name').val()
+        var last_name = $('.register_last_name').val()
+        var email = $('.register_email').val()
+        var password = $('.register_password').val()
+        var password2 = $('.register_password_confirm').val()
 
-      event.preventDefault();
-      console.log("hi");
-    var first_name = $('.register_first_name').val()
-    var last_name = $('.register_last_name').val()
-    var email = $('.register_email').val()
-    var password1 = $('.register_password').val()
-    var password2 = $('.register_password_confirm').val()
-    var data = {
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      password: password
-    };
-    console.log(data);
-
-
-    // $.ajax({
-    //   method: "POST",
-    //   url: "/api/login",
-    //   data: data,
-    //   dataType: "JSON",
-    //   success: function(data){
-    //     if(data!="error"){
-    //       console.log("user was authenticated");
-    //       window.location='/';
-    //     }
-    //     else{
-    //       console.log("user was not authenticated");
-    //     }
-    //   },
-    //   error: function(error){
-    //     console.log(error);
-    //   }
-    // }); //for the ajax call
+        if (password !== password2) {
+          event.preventDefault();
+          $('#register_error').html("Passwords don't match").css('color', 'red');
+        } else {
+            event.preventDefault();
+            console.log("hi");
+            var data = {
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            password: password
+            };
+            $.ajax({
+              method: "POST",
+              url: "/api/register",
+              data: data,
+              dataType: "JSON",
+              success: function(data){
+                if(data!='error'){
+                  console.log("user was registered");
+                  window.location.reload(true)
+                } else {
+                  console.log("error: user was not registered");
+                }
+              },
+              error: function(error){
+                $('#register_error').html(error.responseText).css('color', 'red');
+              }
+            }); //ajax
+        }
+      });
 
   });
-});
+

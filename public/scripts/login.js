@@ -1,17 +1,13 @@
 $(() => {
 
     $('.login_submit_button').on('click', function(event){
-
-      event.preventDefault();
-      console.log("hi");
+    event.preventDefault();
     var email = $('#email').val()
     var password = $('#password').val()
     var data = {
       email: email,
       password: password
     };
-    console.log(data);
-
 
     $.ajax({
       method: "POST",
@@ -19,16 +15,16 @@ $(() => {
       data: data,
       dataType: "JSON",
       success: function(data){
+          console.log(data);
         if(data!="error"){
-          console.log("user was authenticated");
           window.location='/';
         }
         else{
-          console.log("user was not authenticated");
+        $('#login_error').html('Invalid Credentials').css('color', 'red');
         }
       },
       error: function(error){
-        console.log(error);
+        $('#login_error').html(error.responseText).css('color', 'red');
       }
     }); //for the ajax call
 

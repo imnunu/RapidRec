@@ -31,7 +31,7 @@ module.exports = (knex) => {
     existingEmail.then((email) => {
       if (email) {
         res.send("Error: An account already exists with that email");
-        res.redirect('/');
+        // res.redirect('/');
       } else {
         knex.insert({
           first_name: req.body.first_name,
@@ -45,6 +45,7 @@ module.exports = (knex) => {
         .then(function(id){
           console.log(id)
           req.session.user_id = id;
+          res.json('id');
         })
       }
     })
