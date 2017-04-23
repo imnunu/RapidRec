@@ -15,6 +15,14 @@
   opacity: 0.8;
 }
 
+.btn-block {
+  display: inline;
+}
+
+.event_join, .event_drop:hover {
+  color: #67b0d1;
+}
+
 
 #map {
   width: 100%;
