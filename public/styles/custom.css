@@ -1,15 +1,3 @@
-/*create event nav bar*/
-/*.btn-info {
-  color: #ffffff;
-  background-color: #00bcd4;
-  border-color: transparent;
-}
-
-.btn-block {
-  display: block;
-  width: 100%;
-}*/
-
 
 .create_event {
   margin-top: 40px;
@@ -26,6 +14,15 @@
 .jumbotron {
   opacity: 0.8;
 }
+
+
+#map {
+  width: 100%;
+  height: 400px;
+  /*background-color: #F0EDED;
+  opacity: 0.5;*/
+}
+
 /* ===========================
 --- Intro
 ============================ */

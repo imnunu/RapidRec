@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -18,24 +19,7 @@
     <link href="styles/style.css" rel="stylesheet">
 	  <link href="styles/default.css" rel="stylesheet">
     <link href="styles/custom.css" rel="stylesheet">
-
-    <script type="text/javascript" src="scripts/googleApi.js"></script>
-
     <!-- <link href="styles/reset.css" rel="stylesheet"> -->
-
-    <style>
-       html, body {
-         height: 100%;
-         margin: 0;
-         padding-top: 0;
-
-       }
-       #map {
-        width: 50%;
-         height: 50%;
-         background-color: red;
-      }
-   </style>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -68,7 +52,7 @@
   <section id="intro" class="intro">
     <div class="slogan">
       <h2>WELCOME TO <span class="text_color">RapidRec</span> </h2>
-      <h4>Find a basketball game near you</h4>
+      <h4>finding basketball game around you</h4>
     </div>
   </section>
 
@@ -90,7 +74,7 @@
                     	<input type="submit" class="form-control btn-primary login_submit_button" value="Login">
                     </div>
                 </form>
-                <span class="login-validation" id="login_error"></span>
+                <span class="validation" id="login_error"></span>
                 <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Register</a></p>
             </div>
         </div>
@@ -100,29 +84,29 @@
 	<div class="modal-dialog margin-auto">
     	<div class="modal-content">
         	<div class="modal-body">
-            	<h2 class="text-center text-uppercase">Register for an Account</h2>
+            	<h2 class="text-center text-uppercase">Register to Your Account</h2>
                 <form>
                 	<div class="form-group">
-                    	<input type="text" class="form-control register_first_name" id="first_name" placeholder="First Name" required>
+                    	<input type="text" class="form-control register_first_name" placeholder="First Name" required>
                     </div>
                 	<div class="form-group">
-                    	<input type="text" class="form-control register_last_name" id="last_name" placeholder="Last Name" required>
+                    	<input type="text" class="form-control register_last_name" placeholder="Last Name" required>
                     </div>
                     <div class="form-group">
-                    	<input type="text" class="form-control register_email" id="email" placeholder="Email" required>
+                    	<input type="text" class="form-control register_email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                    	<input type="password" class="form-control register_password" id="password" placeholder="Password" required>
+                    	<input type="password" class="form-control register_password" placeholder="Password" required>
                     </div>
                     <div class="form-group">
-                    	<input type="password" class="form-control register_password_confirm" id="confirm-password" placeholder="Confirm Password" required>
-                      <span class="password-validation" id="register_error"></span>
+                    	<input type="password" class="form-control register_password_confirm" placeholder="Confirm Password" required>
+                      <span class="validation" id="register_error"></span>
                     </div>
                     <div class="form-group">
                     	<input type="submit" class="form-control btn-primary register_submit_button" value="Register">
                     </div>
                 </form>
-                <span class="register-validation flash-message"></span>
+                <span class="validation flash-message"></span>
                 <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Login</a></p>
             </div>
         </div>
@@ -150,19 +134,22 @@
 </div>
 
 <!-- google map -->
+<div class="container">
+  <div class="col-sm-12 col-lg-12">
+    <div class="row">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
 
-<div id="map"></div>
+    <!-- <iframe width="1200" height="300" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/search?q=basketball%20court&key=AIzaSyDFtIuOQ4_yVigfNtCNtHonlwOrHM3l0I0" allowfullscreen></iframe> -->
 
-  <footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-lg-12">
 
-				</div>
-			</div>
-		</div>
-	</footer>
 
+
+<br />
+<br />
     <!-- Core JavaScript Files -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <!-- <script src="vendor/jquery.min.js"></script> -->
@@ -171,11 +158,15 @@
 	<script src="vendor/jquery.scrollTo.js"></script>
 	<script src="vendor/wow.min.js"></script>
   <script src="vendor/jquery.simple-dtpicker.js"></script>
+  <script src="scripts/googleApi.js"></script>
   <script src="scripts/main.js"></script>
+  <!-- google API -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&callback=myMap"></script>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places"></script>
 
 </body>
 
 </html>
+
