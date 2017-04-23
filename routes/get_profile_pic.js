@@ -1,13 +1,13 @@
-"use strict";
+// "use strict";
 
-const express = require('express');
-const app = express();
+// const express = require('express');
+// const app = express();
 
-module.exports = () => {
+// module.exports = () => {
 
-  app.get('/', (req, res) => {
-    console.log('inside app.get----------------------------------<<<<<<<<<<<');
-    res.render('./public/index');
-  });
-  return app;
-}
+//   app.get('/', (req, res) => {
+//     console.log('inside app.get----------------------------------<<<<<<<<<<<');
+//     res.render('./public/index');
+//   });
+//   return app;
+// }
