@@ -18,7 +18,24 @@
     <link href="styles/style.css" rel="stylesheet">
 	  <link href="styles/default.css" rel="stylesheet">
     <link href="styles/custom.css" rel="stylesheet">
+
+    <script type="text/javascript" src="scripts/googleApi.js"></script>
+
     <!-- <link href="styles/reset.css" rel="stylesheet"> -->
+
+    <style>
+       html, body {
+         height: 100%;
+         margin: 0;
+         padding-top: 0;
+
+       }
+       #map {
+        width: 50%;
+         height: 50%;
+         background-color: red;
+      }
+   </style>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -51,7 +68,7 @@
   <section id="intro" class="intro">
     <div class="slogan">
       <h2>WELCOME TO <span class="text_color">RapidRec</span> </h2>
-      <h4>finding basketball game around you</h4>
+      <h4>Find a basketball game near you</h4>
     </div>
   </section>
 
@@ -134,45 +151,8 @@
 
 <!-- google map -->
 
-<div id="map" style="width:400px;height:400px"></div>
-<script>
-var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
-        });
-        infoWindow = new google.maps.InfoWindow;
+<div id="map"></div>
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
-</script>
   <footer>
 		<div class="container">
 			<div class="row">
@@ -190,11 +170,11 @@ var map, infoWindow;
   <script src="vendor/jquery.easing.min.js"></script>
 	<script src="vendor/jquery.scrollTo.js"></script>
 	<script src="vendor/wow.min.js"></script>
+  <script src="vendor/jquery.simple-dtpicker.js"></script>
   <script src="scripts/main.js"></script>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&callback=initMap"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places"></script>
 
 </body>
 
