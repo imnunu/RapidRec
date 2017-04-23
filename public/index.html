@@ -100,22 +100,27 @@
                     <div class="form-group">
                     	<input type="password" class="form-control register_password_confirm" id="confirm-password" placeholder="Confirm Password" required>
                     </div>
-                    <form enctype='multipart/form-data' action='/profile_pic' method='POST' id='uploadForm'>
-                      <!-- <input type='hidden' name='MAX_FILE_SIZE' value='100000'> -->
-                        Upload a Profile Pic!
-                        <input type='file' name='userPhoto' />
-                      <input type='submit' value='Upload Image' name='Submit' />
-                     </form>
                     <div class="form-group">
                     	<input type="submit" class="form-control btn-primary register_submit_button" value="Register">
                     </div>
                 </form>
                 <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Login</a></p>
                 <!-- <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#forget-modal">Forget Password</a></p> -->
+
+                  <!-- profile pic upload -->
+                  <!-- get 1 right, then make scallable in action -->
+              <form enctype='multipart/form-data' action='/api/uploadID/picture' method='POST' target='../uploads'>
+                  <!-- <input type='hidden' name='MAX_FILE_SIZE' value='100000'> -->
+                Upload a Profile Picture!
+                <input type='file' name='A profile pic photo' />
+                <input type='submit' value='Upload' name='Submit' />
+              </form>
             </div>
         </div>
     </div>
 </div>
+<img src='{}' alt='moon'>
+
 <!-- <div id="forget-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog margin-auto">
     	<div class="modal-content">
