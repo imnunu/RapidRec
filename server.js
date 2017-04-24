@@ -23,6 +23,9 @@ const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 const usersRoutesRegister = require("./routes/user_register");
 
+const postsRoutesFactory = require("./routes/posts");
+const dataHelpersFactory = require("./dataHelpers")(knex);
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -63,6 +66,8 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
+
+app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 
 
 //requiring profile_pic route
