@@ -22,6 +22,7 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 const usersRoutesRegister = require("./routes/user_register");
+const gamesRoutesCreate = require("./routes/create_game");
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -46,16 +47,16 @@ app.use("/styles", sass({
 }));
 
 // code below is used for uploading a picture from the internet(over 1 from your phone)
-// const multer = require('multer');
-// const storage= multer.diskStorage({
-//   destination: function (req, file, callback) {
-//     callback(null, './uploads');
-//   },
-//   filename: function(req, file, callback) {
-//     callback(null, file.fieldname + '-' + Date.now());
-//   }
-// });
-// const upload = multer({ storage: storage }).any();
+const multer = require('multer');
+const storage= multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './uploads');
+  },
+  filename: function(req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now());
+  }
+});
+const upload = multer({ storage: storage }).any();
 
 app.use(express.static("public"));
 
@@ -63,13 +64,14 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
+app.use("/api/games/new", gamesRoutesCreate(knex));
 
 
-//requiring profile_pic route
-// const postPicRoutes = require('./routes/post_profile_pic');
+// requiring profile_pic route
+const postPicRoutes = require('./routes/post_profile_pic');
 // const getPostRoutes = require('./routes/get_profile_pic');
 
-// app.use('/api/uploadID/picture', postPicRoutes());
+app.use('/api/uploadID/picture', postPicRoutes(knex));
 // app.use('/api/uploadID/picture', getPostRoutes());
 
 // Home page

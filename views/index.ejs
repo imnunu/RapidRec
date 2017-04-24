@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Home Page</title>
@@ -17,4 +17,182 @@
     <h1>Hello World!</h1>
 
   </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidRec</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/animate.css" rel="stylesheet" />
+    <!-- Fonts -->
+    <!-- Website Font style -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+    <!-- Squad theme CSS -->
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/default.css" rel="stylesheet">
+    <link href="styles/custom.css" rel="stylesheet">
+    <!-- <link href="styles/reset.css" rel="stylesheet"> -->
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="load"></div>
+  </div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <h1>RapidRec</h1>
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav">
+                  <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                  <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+               </ul>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Section: intro -->
+  <section id="intro" class="intro">
+    <div class="slogan">
+      <h2>WELCOME TO <span class="text_color">RapidRec</span> </h2>
+      <h4>finding basketball game around you</h4>
+    </div>
+  </section>
+
+
+  <!-- login | register -->
+  <div id="login-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog margin-auto">
+      <div class="modal-content">
+          <div class="modal-body">
+              <h2 class="text-center text-uppercase">Login to Your Account</h2>
+                <form>
+                  <div class="form-group">
+                      <input type="text" class="form-control login_email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control login_password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="form-control btn-primary login_submit_button" value="Login">
+                    </div>
+                </form>
+                <span class="validation" id="login_error"></span>
+                <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Register</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="register-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog margin-auto">
+      <div class="modal-content">
+          <div class="modal-body">
+              <h2 class="text-center text-uppercase">Register to Your Account</h2>
+                <form>
+                  <div class="form-group">
+                      <input type="text" class="form-control register_first_name" placeholder="First Name" required>
+                    </div>
+                  <div class="form-group">
+                      <input type="text" class="form-control register_last_name" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control register_email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control register_password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control register_password_confirm" placeholder="Confirm Password" required>
+                      <span class="validation" id="register_error"></span>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="form-control btn-primary register_submit_button" value="Register">
+                    </div>
+                </form>
+
+                              <!-- profile pic upload -->
+                  <!-- get 1 right, then make scallable in action -->
+              <form enctype='multipart/form-data' action='/api/uploadID/picture' method='POST' target='../uploads'>
+                  <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+                Upload a Profile Picture!
+                <input type='file' name='A profile pic photo' />
+                <input type='submit' value='Upload' name='Submit' />
+              </form>
+
+
+                <span class="validation flash-message"></span>
+                <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Login</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<img src=public/img/profile/<%= profile_pic %> alt=<%= pic_name %> >
+
+
+<!-- nav bar -->
+<div class="col-sm-12 col-lg-12">
+  <div class="row">
+    <!-- <div class="container"> -->
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a class="btn btn-info btn-block create_event_button" href="/create_event.html">Create Your Own Game</a></li>
+                  <!-- <li><a class="create_event_button" href="#">Create Your Own Game</a></li> -->
+
+               </ul>
+            </div>
+        </div>
+      </nav>
+    <!-- </div> -->
+  </div>
+</div>
+
+<!-- google map -->
+<div class="container google_map">
+  <div class="col-sm-12 col-lg-12">
+    <div class="row">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Core JavaScript Files -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="vendor/bootstrap.min.js"></script>
+  <script src="vendor/jquery.easing.min.js"></script>
+  <script src="vendor/jquery.scrollTo.js"></script>
+  <script src="vendor/jquery.js"></script>
+  <script src="vendor/jquery.simple-dtpicker.js"></script>
+  <script src="vendor/wow.min.js"></script>
+  <script src="scripts/googleApi.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/login.js"></script>
+  <script src="scripts/register.js"></script>
+  <!-- google API -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&callback=myMap"></script>
+
+</body>
+
 </html>

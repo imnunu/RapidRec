@@ -56,12 +56,14 @@
       <div class="container create_event">
     	   <div class="col-lg-12 well">
     	      <div class="row">
-    				<form class="create_event_form" action="" method="POST">
+
+
+    				<form id="create_event_id" class="create_event_form" action="/api/games/new" method="POST">
     					<div class="col-sm-12">
     						<div class="row">
                   <div class="col-sm-12 form-group">
     								<label>Title</label>
-    								<input type="text" placeholder="title" class="form-control create_event_title" required>
+    								<input type="text" placeholder="title" class="form-control create_event_title" name="title" required>
     							</div>
     							<div class="col-sm-6 form-group">
     								<label>Start Date/Time</label>
@@ -76,11 +78,11 @@
     						<div class="row">
     							<div class="col-sm-4 form-group">
     								<label>Location</label>
-    								<input type="text" placeholder="location" class="form-control create_event_location" required>
+    								<input type="text" placeholder="location" class="form-control create_event_location" name="location" required>
     							</div>
     							<div class="col-sm-4 form-group">
     								<label>Number of Players</label>
-                    <select class="form-control create_event_number_of_players" required>
+                    <select class="form-control create_event_number_of_players" name="numbPlayas" required="" required>
                       <option>2</option>
                       <option>3</option>
                       <option>4</option>
@@ -94,23 +96,23 @@
     							</div>
     							<div class="col-sm-4 form-group">
                     <div class="checkbox">
-                        <label>
-                          <input type="checkbox" class="create_event_equipment">Bring a basketball?
+                        <input id="ball" type="checkbox" class="create_event_equipment" name="equip">
+                        <label for="ball">Bring a basketball?
                         </label>
                       </div>
     							</div>
     						</div>
                 <div class="form-group">
       							<label>Description</label>
-      							<input type="text" placeholder="Description.." class="form-control create_event_description"></input>
+      							<input type="text" placeholder="Description.." class="form-control create_event_description" name="descr"></input>
       					</div>
-    					<button type="button" class="btn btn-lg btn-info create_event_submit_button">Create</button>
+    					<button type="submit" class="btn btn-lg btn-info create_event_submit_button">Create</button>
+              <span class="validation" id="_error" style="display:inline;"></span>
     					</div>
     				</form>
     				</div>
     	</div>
     	</div>
-
     </section>
 
     <!-- Core JavaScript Files -->

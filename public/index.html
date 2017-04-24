@@ -105,12 +105,27 @@
                     	<input type="submit" class="form-control btn-primary register_submit_button" value="Register">
                     </div>
                 </form>
+
+                              <!-- profile pic upload -->
+                  <!-- get 1 right, then make scallable in action -->
+              <form enctype='multipart/form-data' action='/api/uploadID/picture' method='POST' target='../uploads'>
+                  <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+                Upload a Profile Picture!
+                <input type='file' name='A profile pic photo' />
+                <input type='submit' value='Upload' name='Submit' />
+              </form>
+
+
                 <span class="validation flash-message"></span>
                 <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Login</a></p>
             </div>
         </div>
     </div>
 </div>
+
+
+<img src=public/img/profile/<%= profilePic %> alt=<%= picName %> >
+
 
 <!-- nav bar -->
 <div class="col-sm-12 col-lg-12">
