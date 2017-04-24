@@ -78,10 +78,14 @@ app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 // app.use('/api/uploadID/picture', getPostRoutes());
 
 // Home page
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
+app.get("/", (req, res) => {
+  res.redirect("/index");
+});
 
+app.get("/index", (req, res) => {
+  res.status(200).render('index');
+
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
