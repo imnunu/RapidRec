@@ -1,8 +1,8 @@
 $(document).ready(function() {
   function renderPosts(posts) {
     $('#posts').empty();
-    for (let post in posts){
-      $(createPostElement(posts[post])).prependTo('#posts');
+    for (let newpost in posts){
+      $(createPostElement(posts[newpost])).prependTo('#posts');
     }
   }
 
@@ -12,20 +12,20 @@ $(document).ready(function() {
       html: [
         createHeader(post),
         createBody(post),
-        createFooter(post)
+        //createFooter(post)
       ]
     })
 }
 
 function createHeader(data) {
   var $header = $('<header></header>')
-  $header.append($('<h3></h3>').text(data.user.name))
+  $header.append($('<h3></h3>').text(data.first_name))
   return $header;
 }
 
 function createBody(data) {
   var $body = $('<div>')
-  $body.append($('<p>').text(data.content.text));
+  $body.append($('<p>').text(data.content));
   return $body;
 }
 
@@ -38,8 +38,9 @@ function createFooter(data) {
 function loadPosts() {
   $.ajax ({
     method: 'GET',
-    url: '/posts',
+    url: '/posts/1',
     success: function(posts) {
+      console.log(posts);
       renderPosts(posts);
       $("main textarea").val("");
       $("main textarea").focus();
@@ -51,17 +52,17 @@ function loadPosts() {
 }
 //event handlers
 
-$('section.post').css("display", "none");
+$('section.posts').css("display", "none");
 $('#usr-nav').on('click', function(e){
     $('section.post').slideToggle();
     $('section textarea').focus();
   });
 
-$('.post form').on('submit', function (e) {
+$('.new-post form').on('submit', function (e) {
   e.preventDefault();
 
   $('#error').text("");
-  var $newPost = $('.post textarea');
+  var $newPost = $('.new-post textarea');
   var $newPostText = $newPost.val().trim();
   if ($newPostText.length === 0) {
     $('#error').text("Cannot post empty message.");
@@ -70,7 +71,7 @@ $('.post form').on('submit', function (e) {
       method: 'POST',
       url: '/posts',
       data: {
-        text: $newPostText
+        content: $newPostText
       },
       success: function() {
         loadPosts();

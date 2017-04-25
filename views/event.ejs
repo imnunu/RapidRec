@@ -53,9 +53,11 @@
 
     <section id="intro" class="intro">
       <div class="slogan">
-        <h2 class="event_title">Sunday morning 3 vs 3</h2>
-        <h4 class="event_location">Kitsilano Beach Park</h4>
-        <h4 class="event_start_time">2017/04/23 9:30AM</h4>
+        <h2 class="event_title"></h2>
+        <h4 class="event_location"></h4>
+        <h4 class="number_of_players"></h4>
+        <h4 class="event_start_time"></h4>
+        <h4 class="event_end_time"></h4>
       </div>
       <!-- nav bar -->
     <!-- nav bar -->
@@ -84,14 +86,14 @@
       <h2>Write Post</h2>
       <form id="form" action="/posts" method="POST">
       <span id="error"></span>
-        <textarea name="text" placeholder="Write something...">
-        </textarea>
+        <textarea name="text" placeholder="Write something..."></textarea>
         <input type="submit" value="Post">
         </form>
         </section>
 
         <section id="posts">
-      </section>
+
+        </section>
 
           </div>
        </div>
@@ -108,6 +110,7 @@
 	<script src="vendor/wow.min.js"></script>
   <script src="vendor/jquery.simple-dtpicker.js"></script>
   <script src="scripts/main.js"></script>
+  <script src="scripts/postmessage.js"></script>
 
 </body>
 

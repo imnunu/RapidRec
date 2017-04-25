@@ -22,6 +22,8 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 const usersRoutesRegister = require("./routes/user_register");
+const eventRoutes = require("./routes/event");
+const gamesRoutesCreate = require("./routes/create_game");
 
 const postsRoutesFactory = require("./routes/posts");
 const dataHelpersFactory = require("./dataHelpers")(knex);
@@ -66,6 +68,8 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
+app.use("/api/event", eventRoutes(knex));
+app.use("/api/games/new", gamesRoutesCreate(knex));
 
 app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 
