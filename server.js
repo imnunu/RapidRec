@@ -22,6 +22,7 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 const usersRoutesRegister = require("./routes/user_register");
+const usersRoutesPicture = require('./routes/post_profile_pic');
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -63,14 +64,7 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
-
-
-//requiring profile_pic route
-// const postPicRoutes = require('./routes/post_profile_pic');
-// const getPostRoutes = require('./routes/get_profile_pic');
-
-// app.use('/api/uploadID/picture', postPicRoutes());
-// app.use('/api/uploadID/picture', getPostRoutes());
+app.use('/api/users/picture', usersRoutesPicture());
 
 // Home page
 // app.get("/", (req, res) => {
