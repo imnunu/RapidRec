@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   function renderPosts(posts) {
     $('#posts').empty();
     for (let newpost in posts){
@@ -38,9 +39,8 @@ function createFooter(data) {
 function loadPosts() {
   $.ajax ({
     method: 'GET',
-    url: '/posts/1',
+    url: '/posts/3',
     success: function(posts) {
-      console.log(posts);
       renderPosts(posts);
       $("main textarea").val("");
       $("main textarea").focus();
@@ -62,16 +62,16 @@ $('.new-post form').on('submit', function (e) {
   e.preventDefault();
 
   $('#error').text("");
-  var $newPost = $('.new-post textarea');
-  var $newPostText = $newPost.val().trim();
-  if ($newPostText.length === 0) {
+  var newPost = $('.new-post textarea');
+  var newPostText = newPost.val().trim();
+  if (newPostText.length === 0) {
     $('#error').text("Cannot post empty message.");
   } else {
     $.ajax ({
       method: 'POST',
       url: '/posts',
       data: {
-        content: $newPostText
+        content: newPostText
       },
       success: function() {
         loadPosts();
