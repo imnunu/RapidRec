@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidRec</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/typeahead.min.css" rel="stylesheet" type="text/css">
+    <!-- Fonts -->
+    <!-- Website Font style -->
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	  <link href="vendor/animate.css" rel="stylesheet" />
+    <link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="styles/style.css" rel="stylesheet">
+	  <link href="styles/default.css" rel="stylesheet">
+    <link href="styles/custom.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index">
+                    <h1>RapidRec</h1>
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/index">Home</a></li>
+                <li><a href="/create_event">Create Event</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+               </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="intro" class="intro">
+      <div class="slogan">
+        <h2 class="event_title">event tile here</h2>
+        <div class='event_details'><br />
+            <h4 class="event_location">event location here</h4>
+            <h4 class="number_of_players">Player needed: </h4>
+            <h4 class="event_start_time">start time</h4>
+            <h4 class="event_end_time">end time</h4>
+        </div>
+      </div>
+
+      <!--join and drop button-->
+
+      <div class="col-sm-12 col-lg-12">
+        <div class="row">
+             <div class="container"> 
+                <nav class="navbar" role="navigation">
+                <div class="container">
+                    <div class="collapse navbar-collapse navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a class="btn btn-info btn-block event_join_button" href="/event">JOIN</a></li>
+                        <li><a class="btn btn-info btn-block event_drop_button" href="/index">DROP</a></li>
+
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+         </div>
+        </div>
+    </div>
+
+
+    </section>
+
+<!--this is the section for list of player-->
+    <div class="container">
+        <div class="col-sm-12 col-lg-12">
+            <div class="row">
+                <h2>Player list</h2>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="list-group">
+                        <!--<span>is the place to show little icon of basketball, base on T/F-->
+                    <a href="#" class="list-group-item active"> <span class="badge">basketball</span> Player 1 Name</a>
+                    <a href="#" class="list-group-item"><span class="badge">basketball</span>Player 2 Name</a>
+                    <a href="#" class="list-group-item"><span class="badge"></span>Player 3 Name</a>
+                    <a href="#" class="list-group-item"><span class="badge"></span>Player 4 Name</a>
+                    <a href="#" class="list-group-item"><span class="badge">basketball</span>Player 5 Name</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- create event form -->
+    <main class="container">
+      <section class="new-post">
+      <h2>Write Post</h2>
+      <form id="form" action="/posts" method="POST">
+      <span id="error"></span>
+        <textarea name="text" placeholder="Write something..."></textarea>
+        <input type="submit" value="Post">
+        </form>
+        </section>
+
+        <section id="posts">
+
+        </section>
+
+          </div>
+       </div>
+    </div>
+
+    <!-- Core JavaScript Files -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!-- <script src="vendor/jquery.min.js"></script> -->
+  <script src="vendor/bootstrap.min.js"></script>
+  <script src="vendor/bootstrap.techie.min.js"></script>
+  <script src="vendor/jquery.easing.min.js"></script>
+	<script src="vendor/jquery.scrollTo.js"></script>
+  <script src="vendor/jquery.js"></script>
+	<script src="vendor/wow.min.js"></script>
+  <script src="vendor/jquery.simple-dtpicker.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/postmessage.js"></script>
+  <script src="scripts/event.js"></script>
+
+</body>
+
+
+</html>
