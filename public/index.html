@@ -107,8 +107,15 @@
                     </div>
                 </form>
 
+                              <!-- profile pic upload -->
+                  <!-- get 1 right, then make scallable in action + change action path when moved to profile  -->
+              <form enctype='multipart/form-data' action='api/users/picture' method='POST' target='../uploads'>
+                  <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+                Upload a Profile Picture!
+                <input class='upload_profile_photo' type='file' name='A profile pic photo' />
+                <input class='profile_pic_submit_button' type='submit' value='Upload' name='Submit' />
+              </form>
 
-                api/users/picture
 
 
                 <span class="validation flash-message"></span>
