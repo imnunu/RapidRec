@@ -11,6 +11,7 @@ module.exports = function(dbHelpers) {
         console.log(JSON.toString(err));
         res.status(500).json({ error: err.message });
       } else {
+        console.log(posts);
         res.json(posts);
       }
     });
