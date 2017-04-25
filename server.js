@@ -18,6 +18,22 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
+
+// uploading picture files (profile picture)
+const multer = require('multer');
+const storage= multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public/uploads');
+  },
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + '-' +file.originalname );
+
+  },
+});
+
+const upload = multer({ storage: storage }).any();
+//  -------- uploading files constants end
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
@@ -46,17 +62,6 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 
-// code below is used for uploading a picture from the internet(over 1 from your phone)
-// const multer = require('multer');
-// const storage= multer.diskStorage({
-//   destination: function (req, file, callback) {
-//     callback(null, './uploads');
-//   },
-//   filename: function(req, file, callback) {
-//     callback(null, file.fieldname + '-' + Date.now());
-//   }
-// });
-// const upload = multer({ storage: storage }).any();
 
 app.use(express.static("public"));
 
@@ -64,7 +69,7 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
-app.use('/api/users/picture', usersRoutesPicture());
+app.use('/api/users/picture', usersRoutesPicture(knex));
 
 // Home page
 // app.get("/", (req, res) => {
