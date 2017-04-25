@@ -3,11 +3,12 @@
 const express       = require('express');
 const postsRoutes  = express.Router();
 
-module.exports = function(DataHelpers) {
+module.exports = function(dbHelpers) {
 
-  postsRoutes.get("/", function(req, res) {
-    DataHelpers.getPosts((err, posts) => {
+  postsRoutes.get("/:game_id", function(req, res) {
+    dbHelpers.getPosts(req.params.game_id, (err, posts) => {
       if (err) {
+        console.log(JSON.toString(err));
         res.status(500).json({ error: err.message });
       } else {
         res.json(posts);
@@ -16,21 +17,21 @@ module.exports = function(DataHelpers) {
   });
 
   postsRoutes.post("/", function(req, res) {
-    if (!req.body.text) {
+    if (!req.body.content) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
     }
 
     // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     const post = {
-      // user: user,
-      content: {
-        text: req.body.text
-      },
-      created_at: Date.now()
-    };
+    game_id: req.body.game_id,
+    user_id: req.body.user_id,
+    post_type: req.body.post_type,
+    content: req.body.content,
+    created_at: new Date()
+  };
 
-    DataHelpers.savePost(post, (err) => {
+    dbHelpers.savePost(post, (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {

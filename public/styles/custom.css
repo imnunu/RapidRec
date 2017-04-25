@@ -63,10 +63,6 @@ textarea[name="text"] {
   padding: 5px;
 }
 
-.counter {
-  float: right;
-}
-
 /*posts container*/
 #posts {
   opacity: 0.7;

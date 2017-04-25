@@ -1,8 +1,8 @@
 $(document).ready(function() {
   function renderPosts(posts) {
     $('#posts').empty();
-    for (let post in posts){
-      $(createPostElement(posts[post])).prependTo('#posts');
+    for (let newpost in posts){
+      $(createPostElement(posts[newpost])).prependTo('#posts');
     }
   }
 
@@ -25,7 +25,7 @@ function createHeader(data) {
 
 function createBody(data) {
   var $body = $('<div>')
-  $body.append($('<p>').text(data.content.text));
+  $body.append($('<p>').text(data.content.content));
   return $body;
 }
 
@@ -38,7 +38,7 @@ function createFooter(data) {
 function loadPosts() {
   $.ajax ({
     method: 'GET',
-    url: '/posts',
+    url: '/posts/1',
     success: function(posts) {
       renderPosts(posts);
       $("main textarea").val("");
@@ -57,11 +57,11 @@ $('#usr-nav').on('click', function(e){
     $('section textarea').focus();
   });
 
-$('.post form').on('submit', function (e) {
+$('.new-post form').on('submit', function (e) {
   e.preventDefault();
 
   $('#error').text("");
-  var $newPost = $('.post textarea');
+  var $newPost = $('.new-post textarea');
   var $newPostText = $newPost.val().trim();
   if ($newPostText.length === 0) {
     $('#error').text("Cannot post empty message.");
@@ -70,7 +70,7 @@ $('.post form').on('submit', function (e) {
       method: 'POST',
       url: '/posts',
       data: {
-        text: $newPostText
+        content: $newPostText
       },
       success: function() {
         loadPosts();
