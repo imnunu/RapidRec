@@ -12,14 +12,14 @@ $(document).ready(function() {
       html: [
         createHeader(post),
         createBody(post),
-        createFooter(post)
+        //createFooter(post)
       ]
     })
 }
 
 function createHeader(data) {
   var $header = $('<header></header>')
-  $header.append($('<h3></h3>').text(data.user.name))
+  $header.append($('<h3></h3>').text(data.first_name))
   return $header;
 }
 
@@ -40,6 +40,7 @@ function loadPosts() {
     method: 'GET',
     url: '/posts/1',
     success: function(posts) {
+      console.log(posts);
       renderPosts(posts);
       $("main textarea").val("");
       $("main textarea").focus();
@@ -51,7 +52,7 @@ function loadPosts() {
 }
 //event handlers
 
-$('section.post').css("display", "none");
+$('section.posts').css("display", "none");
 $('#usr-nav').on('click', function(e){
     $('section.post').slideToggle();
     $('section textarea').focus();
