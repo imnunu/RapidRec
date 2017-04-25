@@ -25,7 +25,7 @@ function createHeader(data) {
 
 function createBody(data) {
   var $body = $('<div>')
-  $body.append($('<p>').text(data.content.content));
+  $body.append($('<p>').text(data.content));
   return $body;
 }
 

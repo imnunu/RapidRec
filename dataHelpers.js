@@ -15,7 +15,7 @@ function savePost(newPost, callback) {
 
     // sort messages by newest in databsae
 function getPosts(game_id,callback) {
-  db("posts")
+  return db("posts")
   .join('users', 'posts.user_id', 'users.id')
   .select('first_name', 'posts.created_at', 'content', 'post_type')
   .where({
