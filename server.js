@@ -88,17 +88,22 @@ app.get("/", (req, res) => {
 
 app.get("/index", (req, res) => {
   let id = req.session.user_id;
-  console.log(id);
   let templateVars = {id: id};
   res.status(200).render('index', templateVars);
 });
 
-app.get('/create_game', (req, res) => {
-  res.render('create_event');
+app.get('/create_event', (req, res) => {
+  let id = req.session.user_id;
+  if (!id) {
+    res.status(401).send('Please log in first');
+    return;
+  } else {
+    res.render('create_event', {id: id});
+  }
 });
 
 app.post("/create_game/:id", (req, res) => {
-  res.redirect('/events/' + id);
+  res.redirect('/events/' + data);
 });
 
 app.get('/create_game/:id', (req, res) => {
