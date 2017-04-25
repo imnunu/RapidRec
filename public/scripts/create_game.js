@@ -28,7 +28,8 @@ $(() => {
       success: function(data){
         if (data!='error') {
           console.log('game created, dble chck db for correct data');
-          window.location.href = '/event.html';
+          console.log(data)
+          window.location.href = `api/event/${data}`;
         } else {
           console.log('error: something went wrong!');
         }
