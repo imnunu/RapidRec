@@ -25,6 +25,9 @@ const usersRoutesRegister = require("./routes/user_register");
 // const eventRoutes = require("./routes/event");
 const gamesRoutesCreate = require("./routes/create_game");
 
+const postsRoutesFactory = require("./routes/posts");
+const dataHelpersFactory = require("./dataHelpers")(knex);
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -67,6 +70,8 @@ app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
 // app.use("/api/event", eventRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
+
+app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 
 
 //requiring profile_pic route

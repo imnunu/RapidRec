@@ -46,7 +46,6 @@
                 <li><a href="#">Profile</a></li>
                 <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
                 <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-
                </ul>
             </div>
         </div>
@@ -58,13 +57,23 @@
         <h4 class="event_location">Kitsilano Beach Park</h4>
         <h4 class="event_start_time">2017/04/23 9:30AM</h4>
       </div>
+      <a class="btn btn-info btn-block event_join_button" href="/event.html">JOIN</a>
+      <a class="btn btn-info btn-block event_drop_button" href="/index.html">DROP</a>
     </section>
 
 
     <!-- create event form -->
-    <div class="container event_details">
-       <div class="col-lg-12 well">
-          <div class="row">
+    <main class="container">
+      <section class="new-post">
+      <h2>Write Post</h2>
+      <form id="form" action="/posts" method="POST">
+      <span id="error"></span>
+        <textarea name="text" placeholder="Write something..."></textarea>
+        <input type="submit" value="Post">
+        </form>
+        </section>
+
+        <section id="posts"></section>
 
           </div>
        </div>
@@ -81,6 +90,7 @@
 	<script src="vendor/wow.min.js"></script>
   <script src="vendor/jquery.simple-dtpicker.js"></script>
   <script src="scripts/main.js"></script>
+  <script src="scripts/postmessage.js"></script>
 
 </body>
 
