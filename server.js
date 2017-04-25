@@ -83,8 +83,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/index", (req, res) => {
-  res.status(200).render('index');
+  let id = req.session.user_id;
+  console.log(id);
+  let templateVars = {id: id};
+  res.status(200).render('index', templateVars);
+});
 
+app.get("/createEvent", (req, res) => {
+
+});
+
+app.post("/logout", (req, res) => {
+  delete req.session.user_id;
+  res.redirect("/index");
 });
 
 app.listen(PORT, () => {

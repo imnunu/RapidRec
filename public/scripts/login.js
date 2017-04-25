@@ -29,6 +29,26 @@ $(() => {
     }); //for the ajax call
 
   });
+
+  $(() => {
+    $('.logout_button').on('click', function(event){
+    event.preventDefault();
+    
+    $.ajax({
+      method: "POST",
+      url: "/logout",
+      
+      success: function(){
+          window.location='/';
+      },
+    }); //for the ajax call
+
+  });
+});
+
+
+
+
 });
 
 
