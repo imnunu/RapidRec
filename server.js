@@ -93,8 +93,16 @@ app.get("/index", (req, res) => {
   res.status(200).render('index', templateVars);
 });
 
-app.get("/createEvent", (req, res) => {
+app.get('/create_game', (req, res) => {
+  res.render('create_event');
+});
 
+app.post("/create_game/:id", (req, res) => {
+  res.redirect('/events/' + id);
+});
+
+app.get('/create_game/:id', (req, res) => {
+  res.render('event')
 });
 
 app.post("/logout", (req, res) => {
