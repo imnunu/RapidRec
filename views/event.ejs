@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RapidRec</title>
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/typeahead.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/typeahead.min.css" rel="stylesheet" type="text/css">
     <!-- Fonts -->
     <!-- Website Font style -->
 	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 		<!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-	  <link href="vendor/animate.css" rel="stylesheet" />
-    <link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+	  <link href="/vendor/animate.css" rel="stylesheet" />
+    <link href="/vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
     <!-- Squad theme CSS -->
-    <link href="styles/style.css" rel="stylesheet">
-	  <link href="styles/default.css" rel="stylesheet">
-    <link href="styles/custom.css" rel="stylesheet">
+    <link href="/styles/style.css" rel="stylesheet">
+	  <link href="/styles/default.css" rel="stylesheet">
+    <link href="/styles/custom.css" rel="stylesheet">
 
 </head>
 <body>
@@ -54,6 +54,7 @@
     <section id="intro" class="intro">
       <div class="slogan">
         <h2 class="event_title"></h2>
+        <h4 class="description"></h4>
         <h4 class="event_location"></h4>
         <h4 class="number_of_players"></h4>
         <h4 class="event_start_time"></h4>
@@ -86,17 +87,23 @@
     <!-- Core JavaScript Files -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <!-- <script src="vendor/jquery.min.js"></script> -->
-  <script src="vendor/bootstrap.min.js"></script>
-  <script src="vendor/bootstrap.techie.min.js"></script>
-  <script src="vendor/jquery.easing.min.js"></script>
-	<script src="vendor/jquery.scrollTo.js"></script>
-  <script src="vendor/jquery.js"></script>
-	<script src="vendor/wow.min.js"></script>
-  <script src="vendor/jquery.simple-dtpicker.js"></script>
-  <script src="scripts/main.js"></script>
-  <script src="scripts/postmessage.js"></script>
-  <script src="scripts/event.js"></script>
-
+  <script src="/vendor/bootstrap.min.js"></script>
+  <script src="/vendor/bootstrap.techie.min.js"></script>
+  <script src="/vendor/jquery.easing.min.js"></script>
+	<script src="/vendor/jquery.scrollTo.js"></script>
+  <script src="/vendor/jquery.js"></script>
+	<script src="/vendor/wow.min.js"></script>
+  <script src="/vendor/jquery.simple-dtpicker.js"></script>
+  <script src="/scripts/main.js"></script>
+  <script src="/scripts/postmessage.js"></script>
+  <script src="/scripts/event.js"></script>
+  <script>
+    $(() => {
+      loadPage(<%= id %>);
+    });
+  </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>
 </body>
 
 
