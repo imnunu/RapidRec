@@ -16,6 +16,7 @@ router.post('/', (req, res) => {
   let date = new Date();
   let r = req.body;
   let badTime = endsBeforeStart(r.start_time, r.end_time);
+  let loggedInUser = req.session.user_id;
 
   console.log('Post to Create Games', r, badTime);
   if (badTime) {
@@ -35,7 +36,12 @@ router.post('/', (req, res) => {
     .returning('id')
     .then(function(id){
       console.log(id);
-      res.json(id);
+      knex.insert({game_id: Number(id), user_id: loggedInUser, created_at: date})
+        .into('participations')
+        .then(function () {
+        res.json(id);
+      });
+      // res.json(id);
     });
   }
 });

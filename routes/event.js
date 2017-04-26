@@ -7,7 +7,7 @@ module.exports = (knex) => {
 
   router.get("/:id", (req, res) => {
     knex("games")
-    .select('location', 'start_time', 'end_time', 'description', 'number_of_players')
+    .select('location', 'start_time', 'end_time', 'description', 'number_of_players', 'title')
     .where({
       id: req.params.id
     }).then(function(rows){

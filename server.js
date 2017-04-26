@@ -110,6 +110,17 @@ app.get('/create_event', (req, res) => {
   }
 });
 
+app.get('/event/:id', (req, res) => {
+  let id = req.session.user_id;
+  let url = req.params.id;
+  if (!id) {
+    res.status(401).send('Please log in first');
+    return;
+  } else {
+    res.render('event', {id: url});
+  }
+});
+
 app.post("/create_game/:id", (req, res) => {
   res.redirect('/events/' + data);
 });
