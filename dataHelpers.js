@@ -15,7 +15,7 @@ function savePost(newPost, callback) {
 
     // sort messages by newest in databsae
 function getPosts(game_id,callback) {
-  db("posts")
+   db("posts")
   .join('users', 'posts.user_id', 'users.id')
   .select('first_name', 'posts.created_at', 'content', 'post_type')
   .where({
@@ -26,12 +26,26 @@ function getPosts(game_id,callback) {
 })
 .catch(function(error) {
   callback(error,null);
-});;
+});
   };
+
+// function getGameInfo(id, callback) {
+//   db("games")
+//   .select('location', 'start_time', 'end_time', 'description', 'number_of_players')
+//   .where({
+//     game_id: id
+//   }).then(function(rows){
+//     console.log(rows);
+//     callback(error, null);
+//   }).catch(function(error) {
+//     callback(error, null);
+//   });
+// };
 
   return {
     savePost: savePost,
-    getPosts: getPosts
+    getPosts: getPosts,
+    // getGameInfo: getGameInfo
   };
 
 }

@@ -71,5 +71,4 @@ function mapDrag(user_lat, user_lng, zoom) {
   service.nearbySearch(request, callback);
 }
 
-
 //google.maps.event.addDomListener(window, 'load', initialize);

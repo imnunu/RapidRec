@@ -1,0 +1,25 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <h1>RapidRec</h1>
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                  <% if (id) { %>
+                  <li><a class="" href="#" data-toggle="modal" data-target="#login-modal">Log Out</a></li>
+                   
+                    <%  } else { %>
+                     <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                    <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+                    <% } %>
+
+               </ul>
+            </div>
+        </div>
+    </nav>

@@ -22,6 +22,8 @@ const knexLogger  = require('knex-logger');
 const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 const usersRoutesRegister = require("./routes/user_register");
+const eventRoutes = require("./routes/event");
+const gamesRoutesCreate = require("./routes/create_game");
 
 const postsRoutesFactory = require("./routes/posts");
 const dataHelpersFactory = require("./dataHelpers")(knex);
@@ -66,6 +68,8 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
+app.use("/api/event", eventRoutes(knex));
+app.use("/api/games/new", gamesRoutesCreate(knex));
 
 app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 
@@ -78,10 +82,49 @@ app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 // app.use('/api/uploadID/picture', getPostRoutes());
 
 // Home page
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
+app.get("/", (req, res) => {
+  res.redirect("/index");
+});
 
+app.get("/index", (req, res) => {
+  let id = req.session.user_id;
+  let templateVars = {id: id};
+  res.status(200).render('index', templateVars);
+});
+
+app.get('/create_event', (req, res) => {
+  let id = req.session.user_id;
+  if (!id) {
+    res.status(401).send('Please log in first');
+    return;
+  } else {
+    res.render('create_event', {id: id});
+  }
+});
+
+app.get('/event/:id', (req, res) => {
+  let id = req.session.user_id;
+  let url = req.params.id;
+  if (!id) {
+    res.status(401).send('Please log in first');
+    return;
+  } else {
+    res.render('event', {id: url});
+  }
+});
+
+app.post("/create_game/:id", (req, res) => {
+  res.redirect('/events/' + data);
+});
+
+app.get('/create_game/:id', (req, res) => {
+  res.render('event')
+});
+
+app.post("/logout", (req, res) => {
+  delete req.session.user_id;
+  res.redirect("/index");
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
