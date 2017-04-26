@@ -36,10 +36,10 @@ function createFooter(data) {
   return $footer;
 }
 
-function loadPosts() {
+function loadPosts(game_id) {
   $.ajax ({
     method: 'GET',
-    url: '/posts/3',
+    url: `/posts/${game_id}`,
     success: function(posts) {
       renderPosts(posts);
       $("main textarea").val("");
@@ -52,11 +52,11 @@ function loadPosts() {
 }
 //event handlers
 
-$('section.posts').css("display", "none");
-$('#usr-nav').on('click', function(e){
-    $('section.post').slideToggle();
-    $('section textarea').focus();
-  });
+// $('section.posts').css("display", "none");
+// $('#usr-nav').on('click', function(e){
+//     $('section.post').slideToggle();
+//     $('section textarea').focus();
+//   });
 
 $('.new-post form').on('submit', function (e) {
   e.preventDefault();
