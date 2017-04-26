@@ -2,6 +2,7 @@ var map;
 var infowindow;
 var service;
 var markers = [];
+
 //initializes map and centers onto Vancouver
   function initialize() {
     var center = new google.maps.LatLng(49.281422, -123.12303);
@@ -26,7 +27,6 @@ map.addListener('dragend', function() {
 
     mapDrag(positionOne, positionTwo, 100);
   });
-
 }
 
 function callback(results, status) {
@@ -36,24 +36,35 @@ function callback(results, status) {
     }
   }
 }
-
-function createMarker(place) {
+//create marker on event map
+function createMarker(place, number) {
   var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
+//initialize new marker
+  var marker = new google.maps.Marker ({
       map: map,
       position: place.geometry.location
     });
-markers.push(marker);
-google.maps.event.addListener(marker, 'click', function() {
-infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br />");
-   infowindow.open(map, this);
+//add marker to array
+    markers.push(marker);
+//click event to render info window and fill event form with place name
+    google.maps.event.addListener(marker, 'click', function() {
+      fillFormOnMarkerClick(place.name);
+
+      infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br />");
+      infowindow.open(map, this);
   });
+}
+
+//fill event form on marker click
+function fillFormOnMarkerClick(placename) {
+
 }
 
 function mapDrag(user_lat, user_lng, zoom) {
   for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
+
   markers = [];
   var user_location = {
     lat: user_lat,
@@ -66,11 +77,9 @@ function mapDrag(user_lat, user_lng, zoom) {
     type: ['park']
   };
 
-
   infowindow = new google.maps.InfoWindow();
   service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, callback);
 }
-
 
 //google.maps.event.addDomListener(window, 'load', initialize);
