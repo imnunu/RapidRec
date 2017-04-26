@@ -50,7 +50,7 @@ function createMarker(place, number) {
     google.maps.event.addListener(marker, 'click', function() {
       fillFormOnMarkerClick(place.name);
 
-      infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br />");
+      infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br /><a data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+ place.vicinity + "');\" >Create Game</a>");
       infowindow.open(map, this);
   });
 }
