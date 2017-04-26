@@ -53,3 +53,9 @@
 
 
 ## Profile page
+
+- user_first_name
+- user_last_name
+- skill_level
+- user_img
+- 
