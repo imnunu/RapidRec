@@ -26,6 +26,7 @@ function loadGameMembers(){
 
 };
 
-function createMembersElement(){
-
+function createMembersElement(item){
+  let $members = $('<div>').addClass('list-group')
+  .append($('<a>').attr('href', '/profile/' + item.id).addClass('list-group-item'))
 }
