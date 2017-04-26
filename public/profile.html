@@ -6,91 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RapidRec</title>
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/typeahead.min.css" rel="stylesheet" type="text/css">
-    <!-- Fonts -->
-    <!-- Website Font style -->
-	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-		<!-- Google Fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-	  <link href="vendor/animate.css" rel="stylesheet" />
-    <link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
-    <!-- Squad theme CSS -->
-    <link href="styles/style.css" rel="stylesheet">
-	  <link href="styles/default.css" rel="stylesheet">
-    <link href="styles/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
 </head>
 <body>
-
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <h1>RapidRec</h1>
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
-                  <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-               </ul>
+<!-- nav bar -->
+<div class="mainbody container-fluid">
+    <div class="row">
+        <div class="navbar-wrapper">
+            <div class="container-fluid">
+                <div class="navbar navbar-default navbar-static-top" id="navbar-profile" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="/index">RapidRec</a>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Logout</a></li>
+                                <!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
+                                        <img src="img/avatars/danmeow.png" class="img-responsive img-circle user_img" title="Dan Meow" alt="Dan Meow" width="30px" height="30px">
+                                    </span>
+                                    <span class="user-name">
+                                        Dan Meow
+                                    </span>
+                                    <b class="caret"></b></a>
+                                </li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <section id="intro" class="intro">
-      <div class="slogan">
-        <h2></h2>
-      </div>
-      <!-- user profile -->
-      <div class="container">
-      <div class="container-fluid well span6">
-	    <div class="row-fluid">
-            <div class="span2" >
-		    <img src="http://www.gravatar.com/avatar/a1fd0c1adc1009877aa8a2bed19e5ee4?s=48&d=monsterid" class="img-circle">
+ <div class="container"> 
+        <!--left side pic etc..-->
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="img/avatars/danmeow.png" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <button class="add_friend_button" type="">Add Friend</button>
+                            <hr>
+                            <h3><strong>Friends</strong></h3>
+                            <ul>
+                                <li>HoHo Meow<li>
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="span8">
-            <h3>User Name</h3>
-            <h6>Skill Level: </h6>
-            <h6>Games played: 999</h6>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             
-        </div>
-        
-        <div class="span2">
-            <div class="btn-group">
-                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                    Action 
-                    <span class="icon-cog icon-white"></span><span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#"><span class="icon-wrench"></span> Modify</a></li>
-                    <li><a href="#"><span class="icon-trash"></span> Delete</a></li>
-                </ul>
+            <h2><strong>Dan Meow</strong></h2>
+            <hr>
+            <!-- Simple post content example. -->
+            <h2>Upcoming Events:</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                            <img class="media-object img-circle" src="img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </div>
+                    <h4 class="event_title"><strong>Saturday 3 vs 3</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <hr>
+                    <div class="post-content" >
+                        <a href="#" style="text-decoration:none;">
+                        <p><strong>Location: </strong>kits</p>
+                        <p><strong>Date/Time: </strong>April 29, 2017 9:00 AM</p>
+                        </a>
+                    </div>
+                    <hr>
+                </div>
             </div>
-        </div>
-</div>
-</div>
-</div>
-    <!--end of user profile-->
-    </section>
+            <!-- Past Events -->
+            <h2>Past Events:</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                            <img class="media-object img-circle" src="img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </div>
+                    <h4 class="event_title"><strong>Saturday 3 vs 3</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <hr>
+                    <div class="post-content" >
+                        <a href="#" style="text-decoration:none;">
+                        <p><strong>Location: </strong>kits</p>
+                        <p><strong>Date/Time: </strong>April 29, 2017 9:00 AM</p>
+                        </a>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <!-- Sample post content with picture. -->
 
-    <!-- Core JavaScript Files -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <!-- <script src="vendor/jquery.min.js"></script> -->
-  <script src="vendor/bootstrap.min.js"></script>
-  <script src="vendor/bootstrap.techie.min.js"></script>
-  <script src="vendor/jquery.easing.min.js"></script>
-	<script src="vendor/jquery.scrollTo.js"></script>
-  <script src="vendor/jquery.js"></script>
-	<script src="vendor/wow.min.js"></script>
-  <script src="vendor/jquery.simple-dtpicker.js"></script>
-  <script src="scripts/main.js"></script>
+
+        </div>
+
+      </div>
+  </div>
+     </div> 
+
+
+    <script src="scripts/main.js"></script>
 
 </body>
 
