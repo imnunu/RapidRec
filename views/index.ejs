@@ -3,17 +3,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RapidRec</title>
-    <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!-- Fonts -->
-    <!-- Website Font style -->
 	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-		<!-- Google Fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	  <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+	  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 	  <link href="vendor/animate.css" rel="stylesheet" />
     <!-- Squad theme CSS -->
     <link href="styles/style.css" rel="stylesheet">
@@ -34,7 +30,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/index">
                     <h1>RapidRec</h1>
                 </a>
             </div>
@@ -43,8 +39,6 @@
               <ul class="nav navbar-nav navbar-right">
                   <% if (id) { %>
                   <li><a class="logout_button">Log Out</a></li>
-                 
-                   
                     <%  } else { %>
                      <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
                     <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
@@ -172,8 +166,10 @@ src="https://www.google.com/maps/embed/v1/search?q=basketball%20court&key=AIzaSy
   <script src="scripts/create_game.js"></script>
 
   <!-- google API -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places"></script> -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places&callback=initialize"></script>
+
+
+
 
 
 

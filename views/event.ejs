@@ -23,10 +23,6 @@
 
 </head>
 <body>
-	<!-- Preloader -->
-	<!-- <div id="preloader">
-	  <div id="load"></div>
-	</div> -->
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -34,15 +30,15 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index">
                     <h1>RapidRec</h1>
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/create_event.html">Create Event</a></li>
+                <li><a href="/index">Home</a></li>
+                <li><a href="/create_event">Create Event</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
                 <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
@@ -53,59 +49,23 @@
 
     <section id="intro" class="intro">
       <div class="slogan">
-        <h2 class="event_title"></h2>
-        <h4 class="description"></h4>
-        <h4 class="event_location"></h4>
-        <h4 class="number_of_players"></h4>
-        <h4 class="event_start_time"></h4>
-        <h4 class="event_end_time"></h4>
+
+        <h2 class="event_title">event tile here</h2>
+        <div class='event_details'><br />
+            <h4 class="event_location">event location here</h4>
+            <h4 class="number_of_players">Player needed: </h4>
+            <h4 class="event_start_time">start time</h4>
+            <h4 class="event_end_time">end time</h4>
+        </div>
       </div>
 
-<!--join and drop button-->
-
-      <div class="col-sm-12 col-lg-12">
-        <div class="row">
-             <div class="container">
-                <nav class="navbar" role="navigation">
-                <div class="container">
-                    <div class="collapse navbar-collapse navbar-main-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a class="btn btn-info btn-block event_join_button" href="/event">JOIN</a></li>
-                        <li><a class="btn btn-info btn-block event_drop_button" href="/index">DROP</a></li>
-
-                    </ul>
-                    </div>
-                </div>
-            </nav>
-         </div>
-        </div>
-    </div>
-
-
+      <!--join and drop button-->
     </section>
-
-<!--this is the section for list of player-->
-    <div class="container">
-        <div class="col-sm-12 col-lg-12">
-            <div class="row">
-                <h2>Player list</h2>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="list-group">
-                        <!--<span>is the place to show little icon of basketball, base on T/F-->
-                    <a href="#" class="list-group-item active"> <span class="badge">basketball</span> Player 1 Name</a>
-                    <a href="#" class="list-group-item"><span class="badge">basketball</span>Player 2 Name</a>
-                    <a href="#" class="list-group-item"><span class="badge"></span>Player 3 Name</a>
-                    <a href="#" class="list-group-item"><span class="badge"></span>Player 4 Name</a>
-                    <a href="#" class="list-group-item"><span class="badge">basketball</span>Player 5 Name</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- create event form -->
-    <main class="container">
+
+    <!--<main class="container">
       <section class="new-post">
       <h2>Write Post</h2>
       <form id="form" action="/posts" method="POST">
@@ -116,13 +76,189 @@
         </section>
 
         <section id="posts">
-
         </section>
-
+      
           </div>
        </div>
+    </div>-->
+<div class="container">
+<div class="mainbody container-fluid">
+    <div class="row">
+       
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel-group">
+               
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="event_join_button" role="button" style="text-decoration:none;" href="/event">
+                            <h4 class="panel-title">Join</h4>
+                        </a>
+                    </div>
+                    <div class="panel-heading">
+                        <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
+                            <h4 class="panel-title">Drop</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <h3>Player List </h3>
+            <div class="list-group">
+                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span> Player 1 Name</a>
+                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>Player 2 Name</a>
+                <a href="#" class="list-group-item"><span class="pull-right"></span>Player 3 Name</a>
+                <a href="#" class="list-group-item"><span class="pull-right"></span>Player 4 Name</a>
+                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>Player 5 Name</a>
+            </div>
+            
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#">
+                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <textarea class="form-control" rows="2" placeholder="Start a conversation..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- Simple post content example. -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <span>
+                        <div class="navbar-right">
+                            <div class="dropdown">
+                                
+                                <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                                    <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </span>
+                    <hr>
+                    <div class="post-content">
+                        <p>Simple post content example.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="pull-right btn-group-xs">
+                            <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Like</a>
+                            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
+                            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
+                        </div>
+                        <div class="pull-left">
+                            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Public</p>
+                        </div>
+                        <br>
+                    </div>
+                    <hr>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#">
+                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Reshare Example -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <span>
+                        <div class="navbar-right">
+                            <div class="dropdown">
+                               
+                                <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                                    <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </span>
+                    <hr>
+                    <div class="post-content">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="pull-left">
+                                    <a href="#">
+                                        <img class="media-object img-circle" src="https://diaspote.org/uploads/images/thumb_large_283df6397c4db3fe0344.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                                    </a>
+                                </div>
+                                <h4><a href="#" style="text-decoration:none;"><strong>✪ SтeғOғғιcιel ✪ ツ</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> about 15 hours ago</i></a></small></small></h4>
+                                <hr>
+                                <div class="post-content">
+                                    Reshare post example.
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="pull-right btn-group-xs">
+                            <a class="btn btn-default btn-xs"><i class="fa fa-heart" aria-hidden="true"></i> Like</a>
+                            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
+                            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
+                        </div>
+                        <div class="pull-left">
+                            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Public</p>
+                        </div>
+                        <br>
+                    </div>
+                    <hr>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#">
+                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sample post content with picture. -->
+            
+            <!-- Sample post content with comments. -->
+            
+        </div>
     </div>
-
+</div>
+</div>
+  </main>
     <!-- Core JavaScript Files -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <!-- <script src="vendor/jquery.min.js"></script> -->

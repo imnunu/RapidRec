@@ -8,7 +8,6 @@ module.exports = function(dbHelpers) {
   postsRoutes.get("/:game_id", function(req, res) {
     dbHelpers.getPosts(req.params.game_id, (err, posts) => {
       if (err) {
-        console.log(JSON.toString(err));
         res.status(500).json({ error: err.message });
       } else {
         console.log(posts);
