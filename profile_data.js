@@ -94,7 +94,7 @@ module.exports = (knex) => ({
         user_friends: values[1]
       }
       console.log("this is results obj >>>>>>", results);
-      console.log("this is results.user_friends.friends array", results.user_friends.friends);
+      console.log("this is results.user_games.games array", results.user_games.games);
       return results;
     })
     .catch(err => {
