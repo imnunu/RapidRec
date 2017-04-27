@@ -36,7 +36,15 @@ router.post('/', (req, res) => {
     .returning('id')
     .then(function(id){
       console.log(id);
-      knex.insert({game_id: Number(id), user_id: Number(loggedInUser), created_at: date})
+      var newParticipant = {
+        game_id: Number(id),
+        user_id: Number(loggedInUser),
+        created_at: date
+      }
+
+      console.log('loggedInUser')
+      console.log(loggedInUser)
+      knex.insert(newParticipant)
         .into('participations')
         .then(function () {
         res.json(id);

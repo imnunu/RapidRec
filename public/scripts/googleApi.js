@@ -37,7 +37,8 @@ function callback(results, status) {
   }
 }
 //create marker on event map
-function createMarker(place, number) {
+function createMarker(place) {
+  console.log(place);
   var placeLoc = place.geometry.location;
 //initialize new marker
   var marker = new google.maps.Marker ({
@@ -48,16 +49,10 @@ function createMarker(place, number) {
     markers.push(marker);
 //click event to render info window and fill event form with place name
     google.maps.event.addListener(marker, 'click', function() {
-      fillFormOnMarkerClick(place.name);
 
       infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br /><a data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+ place.vicinity + "');\" >Create Game</a>");
       infowindow.open(map, this);
   });
-}
-
-//fill event form on marker click
-function fillFormOnMarkerClick(placename) {
-
 }
 
 function mapDrag(user_lat, user_lng, zoom) {
@@ -82,4 +77,5 @@ function mapDrag(user_lat, user_lng, zoom) {
   service.nearbySearch(request, callback);
 }
 
+// function findCurrentGame()
 //google.maps.event.addDomListener(window, 'load', initialize);
