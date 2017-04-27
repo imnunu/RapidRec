@@ -123,12 +123,8 @@ app.get('/create_game/:id', (req, res) => {
 
 // routes used for testing
 app.get('/user/:id/profile', (req, res) => {
-    console.log('**********************************************')
-    console.log(profileData.queryProfileData(req.params.id));
-    console.log(req.params.id);
-    console.log('**********************************************')
 
-    profileData.queryProfileData(req.params.id)
+    return profileData.queryProfileData(req.params.id)
       .then(data => {
         // res.json(data);
         let templateVars = {

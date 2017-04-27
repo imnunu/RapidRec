@@ -47,18 +47,17 @@
                 <div class="panel-body">
                     <div class="media">
                         <div align="center">
-                            <img class="thumbnail img-responsive" src="<%= profile.user.image %>" width="300px" height="300px">
+                            <img class="thumbnail img-responsive" src="<%= profile.user_games.user.image %>" width="300px" height="300px">
                         </div>
                         <div class="media-body">
                             <button class="add_friend_button" type="">Add Friend</button>
                             <hr>
                             <h3><strong>Friends</strong></h3>
-
-                            <% for (let friend of profile.friends) { %>
                             <ul>
-                                <li><%= friend.first_name %><%= friend.last_name %><li>
-                            </ul>
+                            <% for (let friend of profile.user_friends.friends) { %>
+                                <li><%= friend.first_name %> <%= friend.last_name %></li>
                             <% } %>
+                            </ul>
                             <hr>
                         </div>
                     </div>
@@ -67,11 +66,11 @@
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 
-            <h2><strong><%= profile.user.first_name %> <%= profile.user.last_name %></strong></h2>
+            <h2><strong><%= profile.user_games.user.first_name %> <%= profile.user_games.user.last_name %></strong></h2>
             <hr>
             <!-- Simple post content example. -->
             <h2>Upcoming Events:</h2>
-            <% for (let game of profile.games) { %>
+            <% for (let game of profile.user_games.games) { %>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="pull-left">
