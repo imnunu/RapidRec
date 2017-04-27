@@ -43,6 +43,7 @@ const gamesRoutesCreate = require("./routes/create_game");
 const postsRoutesFactory = require("./routes/posts");
 const dataHelpersFactory = require("./dataHelpers")(knex);
 const usersRoutesPicture = require('./routes/post_profile_pic');
+const profileData = require('./profile_data.js')(knex);
 
 
 
@@ -122,8 +123,15 @@ app.get('/create_game/:id', (req, res) => {
 
 // routes used for testing
 app.get('/user/:id/profile', (req, res) => {
-  const id = req.params.id;
-  res.render('profile')
+    profileData.queryProfileData(req.params.id)
+      .then(data => {
+        // res.json(data);
+        let templateVars = {
+          id: req.params.id,
+          profile: data
+        }
+        res.render('profile', templateVars)
+      });
 });
 
 app.get("/user/:id/edit", (req, res) => {

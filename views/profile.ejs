@@ -22,7 +22,7 @@
                         </div>
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/user/:id/edit" >Edit Profile</a></li>
+                            <li><a href="/user/<%= id %>/edit" >Edit Profile</a></li>
                                 <li><a href="#">Logout</a></li>
                                 <!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
@@ -47,15 +47,19 @@
                 <div class="panel-body">
                     <div class="media">
                         <div align="center">
-                            <img class="thumbnail img-responsive" src="/img/avatars/danmeow.png" width="300px" height="300px">
+                            <img class="thumbnail img-responsive" src="<%= profile.user.image %>" width="300px" height="300px">
                         </div>
                         <div class="media-body">
                             <button class="add_friend_button" type="">Add Friend</button>
                             <hr>
                             <h3><strong>Friends</strong></h3>
+
+
                             <ul>
                                 <li>HoHo Meow<li>
                             </ul>
+
+
                             <hr>
                         </div>
                     </div>
@@ -64,26 +68,28 @@
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 
-            <h2><strong>Dan Meow</strong></h2>
+            <h2><strong><%= profile.user.first_name %> <%= profile.user.last_name %></strong></h2>
             <hr>
             <!-- Simple post content example. -->
             <h2>Upcoming Events:</h2>
+            <% for (let game of profile.games) { %>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="pull-left">
                             <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                     </div>
-                    <h4 class="event_title"><strong>Saturday 3 vs 3</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                     <hr>
                     <div class="post-content" >
                         <a href="#" style="text-decoration:none;">
-                        <p><strong>Location: </strong>kits</p>
-                        <p><strong>Date/Time: </strong>April 29, 2017 9:00 AM</p>
+                        <p><strong>Location: </strong> <%= game.location %></p>
+                        <p><strong>Date/Time: </strong><%= game.start_time %></p>
                         </a>
                     </div>
                     <hr>
                 </div>
             </div>
+            <% } %>
             <!-- Past Events -->
             <h2>Past Events:</h2>
             <div class="panel panel-default">
