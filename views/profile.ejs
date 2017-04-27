@@ -90,26 +90,26 @@
             <% } %>
             <!-- Past Events -->
             <h2>Past Events:</h2>
-            <% if (profile.user_games.games.start_time < Date.now() ) { %>
-              <% for (let past of profile.user_games.games) { %>
+
+
+
               <div class="panel panel-default">
                   <div class="panel-body">
                       <div class="pull-left">
                               <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                       </div>
-                      <h4 class="event_title"><strong><%= past.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> <%= timeInHrsMinutes(Date.now) - timeInHrsMinutes(past.start_time) minutes ago %>42 minutes ago</i></a></small></small></h4>
+                      <h4 class="event_title"><strong></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                       <hr>
                       <div class="post-content" >
                           <a href="#" style="text-decoration:none;">
-                          <p><strong>Location: </strong><%= past.location %></p>
-                          <p><strong>Date/Time: </strong><%= past.start_time %></p>
+                          <p><strong>Location: </strong></p>
+                          <p><strong>Date/Time: </strong></p>
                           </a>
                       </div>
                       <hr>
                   </div>
               </div>
-              <% } %>
-            <% } %>
+
             <!-- Sample post content with picture. -->
 
 
