@@ -130,9 +130,15 @@
 <div class="col-sm-12 col-lg-12">
         
         <div class="row">
+
+          <% if (id) { %>
           <div class="col-sm-12 col-lg-12">
             <a data-toggle="modal" href="#myModal" class="btn btn-info btn-block create_event_button">Create Your Own Game</a>
           </div>
+          <%  } else { %>
+          <h3>Please Login to create your own game</h3>
+          <% } %>
+          
           <div class="col-sm-8 col-lg-8">
 
              <!-- sample modal content -->
