@@ -43,9 +43,6 @@ router.post('/', (req, res) => {
         user_id: Number(loggedInUser),
         created_at: date
       }
-
-      console.log('loggedInUser')
-      console.log(loggedInUser)
       knex.insert(newParticipant)
         .into('participations')
         .then(function () {

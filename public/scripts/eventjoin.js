@@ -1,13 +1,12 @@
-$(() => {
 
 function joinEvent(eventID) {
   $.ajax({
-    type: 'POST',
-    url: '/events/' + event.id + '/join',
+    method: 'POST',
+    url: '/api/event/' + eventID+ '/join',
     dataType: 'JSON',
-    data: data,
+    data: {},
     success: function(data) {
-      window.location.href = '/events/' + event.id
+      window.location.reload();
     },
     error: function(data) {
       console.log(error);
@@ -17,12 +16,12 @@ function joinEvent(eventID) {
 
 function dropEvent(eventID) {
   $.ajax({
-    type: "POST",
+    method: "POST",
     url: "/index",
     dataType: "JSON",
     data: data,
     success: function(data) {
-      window.location.href = "/events/" + event.id;
+      window.location.href = "/event/" + event.id;
     },
     error: function(data) {
       console.log(error);
@@ -31,5 +30,10 @@ function dropEvent(eventID) {
 }
 
 
+$(() => {
+$('#joinGame').on('click', function(e) {
+  e.preventDefault();
+  joinEvent(myId);
+  console.log('THE IDDDDD', myId);
 })
-
+});
