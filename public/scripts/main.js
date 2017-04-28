@@ -29,14 +29,5 @@ $(document).ready(function($){
 		$('*[name=end_time]').appendDtpicker();
 	});
 
-	// $(function () {
-	//   $('[data-toggle="popover"]').popover();
-	// })
-
-	// $(function () {
-	// $('[data-toggle="tooltip"]').tooltip();
-	// })
-
-
 
 });

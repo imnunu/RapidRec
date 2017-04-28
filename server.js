@@ -27,7 +27,6 @@ const storage= multer.diskStorage({
   },
   filename: function(req, file, callback) {
     callback(null, Date.now() + '-' +file.originalname );
-
   },
 });
 
@@ -45,6 +44,7 @@ const gamesRoutesCreate = require("./routes/create_game");
 const postsRoutesFactory = require("./routes/posts");
 const dataHelpersFactory = require("./dataHelpers")(knex);
 const usersRoutesPicture = require('./routes/post_profile_pic');
+const profileData = require('./profile_data.js')(knex);
 
 
 
@@ -74,6 +74,7 @@ app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
+app.use('/api/picture', usersRoutesPicture(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
 app.use("/api/event", eventRoutes(knex));
@@ -81,15 +82,6 @@ app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
 
 app.use("/posts", postsRoutesFactory(dataHelpersFactory));
-
-
-//requiring profile_pic route
-// const postPicRoutes = require('./routes/post_profile_pic');
-// const getPostRoutes = require('./routes/get_profile_pic');
-
-// app.use('/api/uploadID/picture', postPicRoutes());
-// app.use('/api/uploadID/picture', getPostRoutes());
-app.use('/api/users/picture', usersRoutesPicture(knex));
 
 // Home page
 app.get("/", (req, res) => {
@@ -131,9 +123,31 @@ app.get('/create_game/:id', (req, res) => {
   res.render('event')
 });
 
+// routes used for testing
+app.get('/user/:id/profile', (req, res) => {
+
+    return profileData.queryProfileData(req.params.id)
+      .then(data => {
+        // res.json(data);
+        let templateVars = {
+          id: req.params.id,
+          profile: data
+        }
+        res.render('profile', templateVars)
+      });
+});
+
+app.get("/user/:id/edit", (req, res) => {
+  const userId = req.params.id;
+
+  let id = req.session.user_id;
+  res.render('profile_edit', {id: id})
+});
+// finished testing routes
+
 app.post("/logout", (req, res) => {
   delete req.session.user_id;
-  res.redirect("/index");
+  res.redirect('index');
 });
 
 app.listen(PORT, () => {
