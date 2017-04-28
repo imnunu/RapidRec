@@ -99,7 +99,7 @@ function createCurrentGameMarker(event) {
 
   google.maps.event.addListener(marker, 'click', function() {
 
-      infowindow.setContent(event.location + "<br />" + event.description + "<br />" + "Need " + event.equipment + "basketballs" + "<br /><a data-toggle='modal' href='/event/:id' onclick=\"$('.create_event').val('"+ event.vicinity + "');\" >Join Game</a>");
+      infowindow.setContent(event.location + "<br />" + event.description + "<br />" + "Start:" + event.start_time + "End:"+ event.end_time + "<br />" + "Need " + event.equipment + "basketballs" + "<br /><a data-toggle='modal' href='/event/" + event.id + "' onclick=\"$('.create_event').val('"+ event.vicinity + "');\" >View Event</a>");
       infowindow.open(map, this);
   });
   setTimeout(function () {
