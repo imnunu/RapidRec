@@ -6,5 +6,5 @@ $(() => {
     for(event of events) {
       $("<div>").text(event.name).appendTo($("body"));
     }
-  });;
+  });
 });

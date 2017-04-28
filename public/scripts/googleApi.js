@@ -2,6 +2,7 @@ var map;
 var infowindow;
 var service;
 var markers = [];
+var createdEvents = [];
 
 //initializes map and centers onto Vancouver
   function initialize() {
@@ -16,6 +17,7 @@ var markers = [];
     radius: 400,
     type: ['park']
   };
+  testFunction();
 
   infowindow = new google.maps.InfoWindow();
   service = new google.maps.places.PlacesService(map);
@@ -26,6 +28,7 @@ map.addListener('dragend', function() {
     positionTwo = map.getCenter().lng();
 
     mapDrag(positionOne, positionTwo, 100);
+    testFunction();
   });
 }
 
@@ -38,7 +41,6 @@ function callback(results, status) {
 }
 //create marker on event map
 function createMarker(place) {
-  console.log(place);
   var placeLoc = place.geometry.location;
 //initialize new marker
   var marker = new google.maps.Marker ({
@@ -49,6 +51,13 @@ function createMarker(place) {
     markers.push(marker);
 //click event to render info window and fill event form with place name
     google.maps.event.addListener(marker, 'click', function() {
+      const { position } = marker;
+      const lat = position.lat();
+      const lng = position.lng();
+      const $loc = $('.location');
+      $loc.data('lat', lat);
+      $loc.data('lng', lng);
+  infowindow = new google.maps.InfoWindow();
 
       infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br /><a data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+ place.vicinity + "');\" >Create Game</a>");
       infowindow.open(map, this);
@@ -68,7 +77,7 @@ function mapDrag(user_lat, user_lng, zoom) {
 
   var request = {
     location: user_location,
-    radius: 400,
+    radius: 1000,
     type: ['park']
   };
 
@@ -77,5 +86,39 @@ function mapDrag(user_lat, user_lng, zoom) {
   service.nearbySearch(request, callback);
 }
 
-// function findCurrentGame()
+function createCurrentGameMarker(event) {
+  var placeLoc = new google.maps.LatLng(event.lat, event.lng);
+  var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+//initialize new marker
+  var marker = new google.maps.Marker ({
+      map: map,
+      position: placeLoc,
+      icon: image,
+      animation: google.maps.Animation.DROP
+    });
+
+  google.maps.event.addListener(marker, 'click', function() {
+
+      infowindow.setContent(event.location + "<br />" + event.description + "<br />" + "Need " + event.equipment + "basketballs" + "<br /><a data-toggle='modal' href='/event' onclick=\"$('.create_event').val('"+ event.vicinity + "');\" >Join Game</a>");
+      infowindow.open(map, this);
+  });
+  setTimeout(function () {
+        marker.setMap(null);
+        delete marker;
+    }, 259200000);
+    return marker;
+}
+
+function testFunction() {
+  $.ajax({
+    method: "GET",
+    url: "/api/events"
+  }).done((events) => {
+    for(event of events) {
+      if (event.lat != null) {
+        createCurrentGameMarker(event);
+      }
+    }
+  });
+}
 //google.maps.event.addDomListener(window, 'load', initialize);

@@ -30,11 +30,13 @@ router.post('/', (req, res) => {
       description: r.description,
       number_of_players: r.number_of_players,
       created_at: date,
-      title: r.title
+      title: r.title,
+      lat: r.lat,
+      lng: r.lng
     })
     .into('games')
     .returning('id')
-    .then(function(id){
+    .then(function(id) {
       console.log(id);
       var newParticipant = {
         game_id: Number(id),
