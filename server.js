@@ -38,6 +38,7 @@ const usersRoutes = require("./routes/users");
 const usersRoutesLogin = require("./routes/user_login");
 const usersRoutesRegister = require("./routes/user_register");
 const eventRoutes = require("./routes/event");
+const eventsRoutes = require("./routes/events");
 const gamesRoutesCreate = require("./routes/create_game");
 
 const postsRoutesFactory = require("./routes/posts");
@@ -77,6 +78,7 @@ app.use('/api/picture', usersRoutesPicture(knex));
 app.use("/api/login", usersRoutesLogin(knex));
 app.use("/api/register", usersRoutesRegister(knex));
 app.use("/api/event", eventRoutes(knex));
+app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
 
 app.use("/posts", postsRoutesFactory(dataHelpersFactory));
