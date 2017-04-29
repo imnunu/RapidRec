@@ -1,3 +1,5 @@
+
+
 function loadPage(id){
     console.log('loadPage called');
   $.ajax({
