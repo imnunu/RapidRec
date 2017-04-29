@@ -10,6 +10,7 @@
 	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 	  <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 	  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+       <link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
 	  <link href="vendor/animate.css" rel="stylesheet" />
     <!-- Squad theme CSS -->
     <link href="styles/style.css" rel="stylesheet">
@@ -39,6 +40,7 @@
               <ul class="nav navbar-nav navbar-right">
                   <% if (id) { %>
                   <li><a class="logout_button">Log Out</a></li>
+
                     <%  } else { %>
                      <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
                     <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
@@ -114,39 +116,97 @@
     </div>
 </div>
 
-<!-- nav bar -->
-<div class="col-sm-12 col-lg-12">
-  <div class="row">
-    <!-- <div class="container"> -->
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a class="btn btn-info btn-block create_event_button" a href="/create_event">Create Your Own Game</a></li>
-                  <!-- <li><a class="create_event_button" href="#">Create Your Own Game</a></li> -->
 
-               </ul>
-            </div>
-        </div>
-      </nav>
-    <!-- </div> -->
-  </div>
-</div>
 
 <!-- google map -->
-<div class="container">
+<div class="container google_map">
   <div class="col-sm-12 col-lg-12">
     <div class="row">
       <div id="map"></div>
     </div>
   </div>
+  <br />
+<hr>
+<div class="col-sm-12 col-lg-12">
+
+        <div class="row">
+
+          <% if (id) { %>
+          <div class="col-sm-12 col-lg-12">
+            <a data-toggle="modal" href="#myModal" class="btn btn-info btn-block create_event_button">Create Your Own Game</a>
+          </div>
+          <%  } else { %>
+          <h3>Please Login to create your own game</h3>
+          <% } %>
+          
+          <div class="col-sm-8 col-lg-8">
+
+             <!-- sample modal content -->
+            <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="container create_event">
+    	   <div class="col-lg-12 well">
+    	      <div class="row">
+    				<form class="create_event_form" action="" method="POST">
+    					<div class="col-sm-12">
+    						<div class="row">
+                  <div class="col-sm-12 form-group">
+    								<label>Title</label>
+    								<input type="text" placeholder="title" class="form-control create_event_title" required>
+    							</div>
+    							<div class="col-sm-6 form-group">
+    								<label>Start Date/Time</label>
+    								<input type="text" placeholder="Select start time" class="form-control create_event_start_date_time" id="create_event_start_date_time" name="start_time" required>
+    							</div>
+    							<div class="col-sm-6 form-group">
+    								<label>End Time</label>
+    								<input type="text" placeholder="Select end time" class="form-control create_event_end_date_time" id="create_event_end_date_time" name="end_time" required>
+    							</div>
+    						</div>
+
+    						<div class="row">
+    							<div class="col-sm-4 form-group location">
+    								<label>Location</label>
+    								<input type="text" placeholder="location" class="form-control create_event_location" required>
+    							</div>
+    							<div class="col-sm-4 form-group">
+    								<label>Number of Players</label>
+                    <select class="form-control create_event_number_of_players" required>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                    </select>
+    							</div>
+    							<div class="col-sm-4 form-group">
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox" class="create_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+                        </label>
+                      </div>
+    							</div>
+    						</div>
+                <div class="form-group">
+      							<label>Description</label>
+      							<input type="text" placeholder="Give potential players more details..." class="form-control create_event_description"></input>
+      					</div>
+    					<button type="button" class="btn btn-lg btn-info create_event_submit_button">Create</button>
+              <span id=dateError></span>
+    					</div>
+    				</form>
+    				</div>
+    	</div>
+    	</div>
+            </div><!-- /.modal -->
+          </div>
+        </div>
+      </div>
+
 </div>
-
-    <!-- <iframe width="1200" height="300" frameborder="0" style="border:0"
-src="https://www.google.com/maps/embed/v1/search?q=basketball%20court&key=AIzaSyDFtIuOQ4_yVigfNtCNtHonlwOrHM3l0I0" allowfullscreen></iframe> -->
-
-
 
 
 <br />

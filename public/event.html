@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidRec</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/typeahead.min.css" rel="stylesheet" type="text/css">
+    <!-- Fonts -->
+    <!-- Website Font style -->
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	  <link href="vendor/animate.css" rel="stylesheet" />
+    <link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="styles/style.css" rel="stylesheet">
+	  <link href="styles/default.css" rel="stylesheet">
+    <link href="styles/custom.css" rel="stylesheet">
+
+</head>
+<body>
+	<!-- Preloader -->
+	<!-- <div id="preloader">
+	  <div id="load"></div>
+	</div> -->
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <h1>RapidRec</h1>
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/create_event.html">Create Event</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+               </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="intro" class="intro">
+      <div class="slogan">
+        <h2 class="event_title">Sunday morning 3 vs 3</h2>
+        <h4 class="event_location">Kitsilano Beach Park</h4>
+        <h4 class="event_start_time">2017/04/23 9:30AM</h4>
+      </div>
+      <a class="btn btn-info btn-block event_join_button" href="/event.html">JOIN</a>
+      <a class="btn btn-info btn-block event_drop_button" href="/index.html">DROP</a>
+    </section>
+
+    <main class="container">
+      <section class="new-post">
+      <h2>Write Post</h2>
+      <form id="form" action="/posts" method="POST">
+      <span id="error"></span>
+        <textarea name="text" placeholder="Write something..."></textarea>
+        <input type="submit" value="Post">
+        </form>
+        </section>
+
+        <section id="posts">
+        </section>
+
+          </div>
+       </div>
+    </div>
+
+    <!-- Core JavaScript Files -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!-- <script src="vendor/jquery.min.js"></script> -->
+  <script src="vendor/bootstrap.min.js"></script>
+  <script src="vendor/bootstrap.techie.min.js"></script>
+  <script src="vendor/jquery.easing.min.js"></script>
+	<script src="vendor/jquery.scrollTo.js"></script>
+  <script src="vendor/jquery.js"></script>
+	<script src="vendor/wow.min.js"></script>
+  <script src="vendor/jquery.simple-dtpicker.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/postmessage.js"></script>
+
+</body>
+
+</html>

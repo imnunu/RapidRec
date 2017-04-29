@@ -7,10 +7,10 @@ module.exports = (knex) => {
 
   router.get("/:id", (req, res) => {
     knex("games")
-    .select('location', 'start_time', 'end_time', 'description', 'number_of_players', 'title')
-    .where({
+    .select('location', 'start_time', 'end_time', 'description', 'number_of_players', 'title', 'lat', 'lng')
+    .where ({
       id: req.params.id
-    }).then(function(rows){
+    }).then(function(rows) {
       console.log(rows);
       res.json(rows)
     });
