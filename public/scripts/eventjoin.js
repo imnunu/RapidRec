@@ -34,6 +34,12 @@ $(() => {
 $('#joinGame').on('click', function(e) {
   e.preventDefault();
   joinEvent(myId);
-  console.log('THE IDDDDD', myId);
+})
+});
+
+$(() => {
+$('#dropGame').on('click', function(e) {
+  e.preventDefault();
+  dropEvent(yourId);
 })
 });

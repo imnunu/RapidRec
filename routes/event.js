@@ -5,6 +5,21 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
+// function joinExistingUser(user_id) {
+//   return knex
+//   .select('user_id')
+//   .from('participations')
+//   .where({user_id : user_id})
+//   .limit(1)
+//   .then((results) => {
+//     if (results.length) {
+//       return Promise.resolve(user_id);
+//     } else {
+//       return Promise.resolve();
+//     }
+//   })
+// }
+
   router.get("/:id", (req, res) => {
     knex("games")
     .select('location', 'start_time', 'end_time', 'description', 'number_of_players', 'title', 'lat', 'lng')

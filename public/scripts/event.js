@@ -22,10 +22,10 @@ function loadPage(id){
   });
 }
 
-function loadGameMembers(){
+// function loadGameMembers(){
 
-};
+// };
 
-function createMembersElement(){
+// function createMembersElement(){
 
-}
+// }
