@@ -8,7 +8,6 @@ function loadPage(id){
     console.log('THE INFO', JSON.stringify(info, null, 2));
     console.log('items found in INFO');
     info.forEach(function (item) {
-      console.log(item);
       $('#intro .event_title').text(item.title);
       $('#intro .description').text('Description: ' + item.description);
       $('#intro .event_location').text('Location: ' + item.location);
