@@ -19,7 +19,7 @@
                         </div>
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/user/:id" >Profile Page</a></li>
+                            <li><a href="/user/<%= id %>/profile" >Profile Page</a></li>
                                 <li><a href="#">Logout</a></li>
                                 <!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
@@ -76,14 +76,13 @@
                     <br><br>
                     <div align="center">
                         <div class="col-lg-12 col-md-12">
-                            <img class="img-thumbnail img-responsive user_img" src="img/avatars/homeow.png" width="300px" height="300px">
+                            <img class="img-thumbnail img-responsive user_img" src="http://localhost:8080/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
                         </div>
                         <div class="col-lg-12 col-md-12">
 
                         <form enctype='multipart/form-data' action="/api/picture" method='POST' target='../public/uploads'>
-                          Upload a Profile Picture!
-                          <input type='file' name='profile_pic_photo' />
-                          <input type='submit' value='Upload' name='Submit' />
+                          <input class="upload-file" type='file' name='profile_pic_photo' />
+                          <input class="btn btn-primary" type='submit' value='Upload' name='Submit' />
 <!--                           <button class="btn btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> Upload a new profile photo!</button> -->
                         </form>
 

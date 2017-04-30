@@ -2,26 +2,6 @@
 
 module.exports = (knex) => ({
 
-	/*
-	{
-		user: {
-			firstName: 'foo'.
-			lastName: 'bar',
-			image: 'images',
-		}
-		games: [
-			{
-				id: 1,
-				location: 'vancouver',
-				...
-			},
-			{
-
-			}
-		]
-	}
-	*/
-
   queryUserGames: function(userId) {
     return knex('users')
       .select('games.id', 'games.title', 'games.location', 'games.start_time', 'users.first_name', 'users.last_name', 'users.image')
@@ -99,6 +79,7 @@ module.exports = (knex) => ({
     })
     .catch(err => {
       console.log("this is catching error in promise.all query", err);
+      return err;
     });
 	}
 });
