@@ -52,9 +52,9 @@ function loadPosts() {
 }
 //event handlers
 
-$('section#comments').css("display", "none");
+$('section.new-post').css("display", "none");
 $('#usr-nav').on('click', function(e){
-    $('section#comments').slideToggle();
+    $('section.new-post').slideToggle();
     $('section textarea').focus();
   });
 

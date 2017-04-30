@@ -95,25 +95,16 @@
             <div class="panel-group">
 
                 <div class="panel panel-default">
-                <% if (!partUserId) { %>
                     <div class="panel-heading">
-                        <span class="event_join_button" role="button" style="text-decoration:none;">
-                            <h4 class="panel-title" id= "joinGame">Join</h4>
-                        </span>
-                        <div id= "joinToggle" style="display: none">
-                          <label>
-                            <input type="checkbox" class="join_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
-                          </label>
-                        <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
-                        </div>
+                        <a class="event_join_button" role="button" style="text-decoration:none;" href="/event">
+                            <h4 class="panel-title" id= "joinGame" data=>Join</h4>
+                        </a>
                     </div>
-                    <% } else  {%>
                     <div class="panel-heading">
                         <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
                             <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
                         </a>
                     </div>
-                       <% } %>
                 </div>
             </div>
             <h3>Player List </h3>
@@ -126,9 +117,9 @@
             </div>
 
         </div>
-   <!--      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"> -->
-            <!--post comment-->
-     <!--        <div class="panel panel-default panel-body media new_post">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            post comment
+            <div class="panel panel-default panel-body media new_post">
                         <div class="pull-left">
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
                         </div>
@@ -136,14 +127,14 @@
                             <textarea class="form-control" rows="2" id="neweventpost" ></textarea>
                         </div>
             </div>
-            <hr> -->
+            <hr>
             <!-- Simple post content -->
-            <!-- <div class="panel panel-default panel-body" > -->
-                <!--<div class="panel-body">-->
-                   <!--  <div class="pull-left">
+            <div class="panel panel-default panel-body" >
+                <div class="panel-body">
+                    <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
-        <!--                 </a>
+                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </a>
                     </div>
 
                     <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
@@ -178,10 +169,10 @@
                             <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
                         </div>
                     </div>
-            </div> -->
+            </div>
 
             <!-- Sample post content with comments. -->
-        <!--     <div class="panel panel-default panel-body">
+            <div class="panel panel-default panel-body">
 
                     <div class="pull-left">
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -209,8 +200,8 @@
 
                     <hr>
                     <div class="post-content">
-                        <p>The spoilt token forbids an infant demise. With basketball spins game. The dance bites each spiral. Basketball stares without an artist. Can basketball nose beside the censor? Game cooks basketball in the joy.</p> -->
-         <!--            </div>
+                        <p>The spoilt token forbids an infant demise. With basketball spins game. The dance bites each spiral. Basketball stares without an artist. Can basketball nose beside the censor? Game cooks basketball in the joy.</p>
+                    </div>
                     <hr>
                     <div>
                         <div class="post-content panel-default panel-body">
@@ -223,8 +214,8 @@
                                         Yet another post.<br><br>
                                         <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
                                     </div>
-                        </div> -->
-           <!--          </div>
+                        </div>
+                    </div>
                     <div class="media">
                         <div class="pull-left">
                             <a href="#">
@@ -236,7 +227,18 @@
                         </div>
                     </div>
 
-                </div> -->
+                </div>
+
+
+                    <nav id="nav-bar">
+      <img class="logo" src="/images/bird.png">
+      <span class="header">Tweeter</span>
+    </nav>
+
+    <nav id="usr-nav">
+      <button class="nav-btn" id="compose-btn">Compose</button>
+    </nav>
+
                  <main class="container">
       <section class="new-post">
         <h2>Compose Message</h2>
@@ -286,6 +288,9 @@
   </script>
   <script>
   const myId = <%= id %>;
+  </script>
+  <script>
+  const yourId = <%= id %>;
   </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>
