@@ -79,6 +79,7 @@ module.exports = (knex) => ({
     })
     .catch(err => {
       console.log("this is catching error in promise.all query", err);
+      return err;
     });
 	}
 });
