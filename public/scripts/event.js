@@ -1,3 +1,5 @@
+
+
 function loadPage(id){
     console.log('loadPage called');
   $.ajax({
@@ -25,6 +27,7 @@ function loadPage(id){
 
 // };
 
-// function createMembersElement(){
-
-// }
+function createMembersElement(item){
+  let $members = $('<div>').addClass('list-group')
+  .append($('<a>').attr('href', '/profile/' + item.id).addClass('list-group-item'))
+}

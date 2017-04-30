@@ -113,9 +113,24 @@ app.get('/event/:id', (req, res) => {
     res.status(401).send('Please log in first');
     return;
   } else {
-    res.render('event', {id: url});
-  }
+    return profileData.queryUserGames(Number(id))
+      .then(data => {
+        // res.json(data);
+        console.log('THIS IS THE DATAAAAAA', data);
+        let templateVars = {
+          id: url,
+          first_name: data.user.first_name,
+          last_name: data.user.last_name,
+          img: data.user.img,
+          equipment: data.user.equipment,
+          partUserId: data.user.partUserId
+        }
+        console.log('THIS IS THE TEMPLATE VARS:', templateVars);
+    res.render('event', templateVars);
+      })
+  };
 });
+
 
 app.post("/create_game/:id", (req, res) => {
   res.redirect('/events/' + data);

@@ -25,6 +25,7 @@ $(() => {
       lat,
       lng
     };
+
     $.ajax({
       method:'POST',
       url: '/api/games/new',

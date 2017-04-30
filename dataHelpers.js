@@ -29,7 +29,22 @@ module.exports = (db) => {
     });
   };
 
-// function getGameInfo(id, callback) {
+  // function findUsersInGame(userId){
+  //   return knex('users')
+  //     .select('users.first_name', 'users.last_name')
+  //     .leftOuterJoin('participations', 'users.id', 'participations.user_id')
+  //     .where('users.id', '=', userId)
+  //     .then(rows => {
+  //       const result = {
+  //         user: {
+  //           first_name: '',
+  //         }
+  //       }
+  //     })
+
+  // }
+
+// function getGameInfo(id, callback {
 //   db("games")
 //   .select('location', 'start_time', 'end_time', 'description', 'number_of_players')
 //   .where({

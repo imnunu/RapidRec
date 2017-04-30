@@ -95,16 +95,25 @@
             <div class="panel-group">
 
                 <div class="panel panel-default">
+                <% if (!partUserId) { %>
                     <div class="panel-heading">
-                        <a class="event_join_button" role="button" style="text-decoration:none;" href="/event">
-                            <h4 class="panel-title" id= "joinGame" data=>Join</h4>
-                        </a>
+                        <span class="event_join_button" role="button" style="text-decoration:none;">
+                            <h4 class="panel-title" id= "joinGame">Join</h4>
+                        </span>
+                        <div id= "joinToggle" style="display: none">
+                          <label>
+                            <input type="checkbox" class="join_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+                          </label>
+                        <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
+                        </div>
                     </div>
+                    <% } else  {%>
                     <div class="panel-heading">
                         <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
                             <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
                         </a>
                     </div>
+                       <% } %>
                 </div>
             </div>
             <h3>Player List </h3>
@@ -277,9 +286,6 @@
   </script>
   <script>
   const myId = <%= id %>;
-  </script>
-  <script>
-  const yourId = <%= id %>;
   </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>

@@ -1,10 +1,15 @@
+$(() => {
 
 function joinEvent(eventID) {
+  let equipment = $('.join_event_equipment').val();
+  let data = equipment
+
+  console.log(data);
   $.ajax({
     method: 'POST',
     url: '/api/event/' + eventID+ '/join',
     dataType: 'JSON',
-    data: {},
+    data: {data},
     success: function(data) {
       window.location.reload();
     },
@@ -17,29 +22,34 @@ function joinEvent(eventID) {
 function dropEvent(eventID) {
   $.ajax({
     method: "POST",
-    url: "/index",
+    url: '/api/event/' + eventID+ '/drop',
     dataType: "JSON",
-    data: data,
+    data: {},
     success: function(data) {
-      window.location.href = "/event/" + event.id;
+      window.location.reload();
     },
     error: function(data) {
-      console.log(error);
+      console.log('THIS IS THE ERROR IN DROPEVENT FUNCTION', error);
     }
  });
 }
 
 
-$(() => {
-$('#joinGame').on('click', function(e) {
-  e.preventDefault();
-  joinEvent(myId);
-})
+
+ $('#joinGame').on('click', function(e) {
+    e.preventDefault();
+    $('#joinToggle').slideToggle(200).css("display", "block");
+  })
+
+ $('.join_event_submit_button').on('click', function(e) {
+    e.preventDefault();
+    joinEvent(myId);
+  });
+
+  $('#dropGame').on('click', function(e) {
+    e.preventDefault();
+    dropEvent(myId);
+  })
 });
 
-$(() => {
-$('#dropGame').on('click', function(e) {
-  e.preventDefault();
-  dropEvent(yourId);
-})
-});
+
