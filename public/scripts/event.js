@@ -24,9 +24,9 @@ function loadPage(id){
   });
 }
 
-function loadGameMembers(){
+// function loadGameMembers(){
 
-};
+// };
 
 function createMembersElement(item){
   let $members = $('<div>').addClass('list-group')
