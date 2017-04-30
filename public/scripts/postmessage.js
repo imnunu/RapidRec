@@ -10,18 +10,18 @@ $(document).ready(function() {
     return $('<article>', {
       class: "post",
       html: [
-        //createHeader(post),
+        createHeader(post),
         createBody(post),
-        //createFooter(post)
+        createFooter(post)
       ]
     })
 }
 
-// function createHeader(data) {
-//   var $header = $('<header></header>')
-//   $header.append($('<h3></h3>').text(data.first_name))
-//   return $header;
-// }
+function createHeader(data) {
+  var $header = $('<header></header>')
+  $header.append($('<h3></h3>').text(data.first_name))
+  return $header;
+}
 
 
 function createBody(data) {
@@ -30,11 +30,11 @@ function createBody(data) {
   return $body;
 }
 
-// function createFooter(data) {
-//   var $footer = $('<footer>')
-//   $footer.append($('<p>').text(data.created_at));
-//   return $footer;
-// }
+function createFooter(data) {
+  var $footer = $('<footer>')
+  $footer.append($('<p>').text(data.created_at));
+  return $footer;
+}
 
 function loadPosts() {
   $.ajax ({
@@ -54,7 +54,7 @@ function loadPosts() {
 
 $('section#comments').css("display", "none");
 $('#usr-nav').on('click', function(e){
-    $('ection#comments').slideToggle();
+    $('section#comments').slideToggle();
     $('section textarea').focus();
   });
 
