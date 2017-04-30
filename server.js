@@ -46,7 +46,7 @@ const dataHelpersFactory = require("./dataHelpers")(knex);
 const usersRoutesPicture = require('./routes/post_profile_pic');
 
 // knex queries
-const profileData = require('./profile_data.js')(knex);
+const profileData = require('./routes/profile_data.js')(knex);
 
 
 
