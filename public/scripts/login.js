@@ -1,6 +1,6 @@
 $(() => {
 
-    $('.login_submit_button').on('click', function(event){
+    $('.login_submit_button').on('click', function(event) {
     event.preventDefault();
     var email = $('#email').val()
     var password = $('#password').val()
@@ -14,12 +14,12 @@ $(() => {
       url: "/api/login",
       data: data,
       dataType: "JSON",
-      success: function(data){
+      success: function(data) {
           console.log(data);
-        if(data!="error"){
-          window.location='/';
+        if(data != "error"){
+          window.location = '/';
         }
-        else{
+        else {
         $('#login_error').html('Invalid Credentials').css('color', 'red');
         }
       },
@@ -31,15 +31,15 @@ $(() => {
   });
 
   $(() => {
-    $('.logout_button').on('click', function(event){
+    $('.logout_button').on('click', function(event) {
     event.preventDefault();
-    
+
     $.ajax({
       method: "POST",
       url: "/logout",
-      
-      success: function(){
-          window.location='/';
+
+      success: function() {
+          window.location = '/';
       },
     }); //for the ajax call
 

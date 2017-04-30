@@ -44,7 +44,7 @@ module.exports = (db) => {
 
   return {
     savePost: savePost,
-    getPosts: getPosts,
+    getPosts: getPosts
     // getGameInfo: getGameInfo
   };
 

@@ -41,8 +41,8 @@ const eventRoutes = require("./routes/event");
 const eventsRoutes = require("./routes/events");
 const gamesRoutesCreate = require("./routes/create_game");
 
-const postsRoutes = require("./routes/posts");
-//const dataHelpersFactory = require("./dataHelpers")(knex);
+const postsRoutesFactory = require("./routes/posts");
+const dataHelpersFactory = require("./dataHelpers")(knex);
 const usersRoutesPicture = require('./routes/post_profile_pic');
 const profileData = require('./profile_data.js')(knex);
 
@@ -81,7 +81,7 @@ app.use("/api/event", eventRoutes(knex));
 app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
 
-app.use("/api/posts", postsRoutes(knex));
+app.use("/posts", postsRoutesFactory(dataHelpersFactory));
 
 // Home page
 app.get("/", (req, res) => {

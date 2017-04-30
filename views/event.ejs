@@ -67,23 +67,6 @@
 
 
     <!-- create event form -->
-
-    <!--<main class="container">
-      <section class="new-post">
-      <h2>Write Post</h2>
-      <form id="form" action="/posts" method="POST">
-      <span id="error"></span>
-        <textarea name="text" placeholder="Write something..."></textarea>
-        <input type="submit" value="Post">
-        </form>
-        </section>
-
-        <section id="posts">
-        </section>
-
-          </div>
-       </div>
-    </div>-->
 <div class="container">
 <div class="mainbody container-fluid">
     <div class="row">
@@ -114,9 +97,9 @@
             </div>
 
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+   <!--      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"> -->
             <!--post comment-->
-            <div class="panel panel-default panel-body media new_post">
+     <!--        <div class="panel panel-default panel-body media new_post">
                         <div class="pull-left">
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
                         </div>
@@ -124,14 +107,14 @@
                             <textarea class="form-control" rows="2" id="neweventpost" ></textarea>
                         </div>
             </div>
-            <hr>
+            <hr> -->
             <!-- Simple post content -->
-            <div class="panel panel-default panel-body" >
+            <!-- <div class="panel panel-default panel-body" > -->
                 <!--<div class="panel-body">-->
-                    <div class="pull-left">
+                   <!--  <div class="pull-left">
                         <a href="#">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </a>
+                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;"> -->
+        <!--                 </a>
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                     <hr>
@@ -147,10 +130,10 @@
                             <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
                         </div>
                     </div>
-            </div>
+            </div> -->
 
             <!-- Sample post content with comments. -->
-            <div class="panel panel-default panel-body">
+        <!--     <div class="panel panel-default panel-body">
 
                     <div class="pull-left">
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -159,8 +142,8 @@
 
                     <hr>
                     <div class="post-content">
-                        <p>The spoilt token forbids an infant demise. With basketball spins game. The dance bites each spiral. Basketball stares without an artist. Can basketball nose beside the censor? Game cooks basketball in the joy.</p>
-                    </div>
+                        <p>The spoilt token forbids an infant demise. With basketball spins game. The dance bites each spiral. Basketball stares without an artist. Can basketball nose beside the censor? Game cooks basketball in the joy.</p> -->
+         <!--            </div>
                     <hr>
                     <div>
                         <div class="post-content panel-default panel-body">
@@ -173,8 +156,8 @@
                                         Yet another post.<br><br>
                                         <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
                                     </div>
-                        </div>
-                    </div>
+                        </div> -->
+           <!--          </div>
                     <div class="media">
                         <div class="pull-left">
                             <a href="#">
@@ -185,7 +168,21 @@
                             <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                 <main class="container">
+      <section class="new-post">
+        <h2>Compose Message</h2>
+        <form id="form" action="/posts" method="POST">
+        <span id="error"></span>
+          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <input type="submit" value="Post">
+          </form>
+        </section>
+
+      <section id="comments">
+      </section>
+
+    </main>
 
             <!--end of post with comment-->
         </div>

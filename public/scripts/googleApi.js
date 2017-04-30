@@ -88,7 +88,10 @@ function mapDrag(user_lat, user_lng, zoom) {
 
 function createCurrentGameMarker(event) {
   var placeLoc = new google.maps.LatLng(event.lat, event.lng);
-  var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+  var image = {
+    url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=+|f0652a|f0652a",
+    size: new google.maps.Size(50, 50),
+  };
 //initialize new marker
   var marker = new google.maps.Marker ({
       map: map,
