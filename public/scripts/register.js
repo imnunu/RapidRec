@@ -12,7 +12,6 @@ $(() => {
           $('#register_error').html("Passwords don't match").css('color', 'red');
         } else {
             event.preventDefault();
-            console.log("hi");
             var data = {
             first_name: first_name,
             last_name: last_name,
