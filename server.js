@@ -10,6 +10,8 @@ const cookieSession = require('cookie-session');
 const sass        = require("node-sass-middleware");
 const app         = express();
 const bcrypt      = require('bcrypt');
+const moment      = require('moment');
+const timezone    = require('moment-timezone');
 const flash       = require('connect-flash');
 app.use(flash());
 
@@ -47,6 +49,7 @@ const usersRoutesPicture = require('./routes/post_profile_pic');
 
 // knex queries
 const profileData = require('./profile_data.js')(knex);
+const gamesData = require('./separating_games_data.js')(knex);
 
 
 
@@ -128,14 +131,70 @@ app.get('/create_game/:id', (req, res) => {
 // routes used for navigating profile + edit profile
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
-    .then(data => {
+    .then(result => {
+      console.log("this is array of all games~~~~~~~~", result.user_games.games);
+      let currentTime = moment.utc().tz('America/Los_Angeles');
+      let pasts = 1;
+      let future = 1;
+      let count = 0;
+      let all_games = {
+        past_games: [],
+        upcoming_games: []
+      };
+
+      result.user_games.games.forEach(game => {
+        count = count + 1;
+        // let date = new Date();
+        let startTime = moment.utc(game.start_time).tz('America/Los_Angeles');
+        let endTime = moment.utc(game.end_time).tz('America/Los_Angeles');
+
+        // --- UPCOMING GAMES
+        if (startTime > currentTime) {
+          console.log("pushing game ", future++, "into upcoming games array");
+          all_games.upcoming_games.push({
+            id: game.id,
+            title: game.title,
+            location: game.location,
+            start_time: game.start_time,
+            end_time: game.start_time
+          });
+        }
+        // --- PAST GAMES
+        if (endTime < currentTime) {
+          console.log("pushing game ", pasts++, "into past games array");
+          all_games.past_games.push({
+            id: game.id,
+            title: game.title,
+            location: game.location,
+            start_time: game.start_time,
+            end_time: game.end_time
+          });
+        }
+      });
+      console.log("***************************************************************")
+      console.log(count + " games were sorted");
+      console.log("this is array of past games", all_games.past_games);
+      console.log("this is array of upcoming games", all_games.upcoming_games);
       // res.json(data);
+
+      // let arr = [];
+      // all_games.past_games.reduce((currentTime, game) => {
+      //   game.start_time.push(arr);
+
+      // }, currentTime);
+
+      // let pastSorted = arr.sort(function(a, b) {
+      //   return b - a;
+      // });
       let templateVars = {
         id: req.params.id,
-        profile: data
+        profile: result,
+        past_games: all_games.past_games.reverse(),
+        upcoming_games: all_games.upcoming_games.reverse(),
+        timeNow: moment().tz('America/Los_Angeles')
       }
       res.render('profile', templateVars);
-    })
+    });
 });
 
 app.get("/user/:id/edit", (req, res) => {
