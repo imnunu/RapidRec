@@ -5,3 +5,4 @@ node_modules/
 .mdown
 .DS_Store
 .md
+separating_games_data.js
