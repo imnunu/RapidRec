@@ -25,7 +25,7 @@ module.exports = (knex) => {
 
   router.post("/", (req, res) => {
     upload(req, res, (err) => {
-
+      let idIsNumb = Number(req.session.user_id);
       console.log('req files--->>>: ', req.files);
       if (err) {
         console.log("this is error message: ", err);
@@ -38,13 +38,12 @@ module.exports = (knex) => {
       console.log("success upload");
 
       knex('users')
-      .where({id: req.session.user_id})
+      .where({id: idIsNumb})
       .update({
         image: req.files[0].originalname
       })
       .then(function(){
-      res.redirect('/user/' + req.session.user_id + '/edit');
-      console.log('congrats, file uploaded');
+      res.redirect('/user/' + idIsNumb + '/edit');
       });
     });
   });

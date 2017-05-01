@@ -1,92 +1,10 @@
-vagrant [Projects]> mkdir final_proj
-vagrant [Projects]> cd final_proj/
-vagrant [final_proj]> ls
-vagrant [final_proj]> psql -U vagrant -d template1
-psql (9.5.6)
-Type "help" for help.
-
 template1=# CREATE ROLE labber WITH LOGIN password '';
 CREATE ROLE
 template1=# CREATE DATABASE final OWNER labber;
 CREATE DATABASE
-template1=# 
+template1=#
 
 db port: 5432
-
-                  <!-- profile pic upload -->
-                  <!-- get 1 right, then make scallable in action -->
-              <form enctype='multipart/form-data' action='/api/uploadID/picture' method='POST' target='../uploads'>
-                  <!-- <input type='hidden' name='MAX_FILE_SIZE' value='100000'> -->
-                Upload a Profile Picture!
-                <input type='file' name='A profile pic photo' />
-                <input type='submit' value='Upload' name='Submit' />
-              </form>
-
-			<!-- <img src=public/img/profile/<%= profilePic %> alt=<%= picName %> > -->
-
-
-
-INSIDE OF CREATE GAMES
-  function gameLimitExceeded(start, end) {
-    var hoursMinutes = start.split(/[.:]/);
-    var hours = parseInt(hoursMinutes[0], 10);
-    var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-    let start1 = hours + minutes / 60;
-    console.log((start1 - 2017) * 100 );
-
-    // console.log("number-----: ", Number(start));
-    // let maxTime = Number(start) - end;
-    // console.log("this is maxTime: ", maxTime);
-    // if (maxTime >= 5) {
-    //   return true;
-  }
-
-let tooLong = gameLimitExceeded(r.start_time, r.end_time);
-
-
-
-PUT THIS IN SCRIPTS AS 'PROFILE_PIC.JS' IF DECIDED TO USE AJAX FOR UPLOADING PHOTOS
-
-
-$(() => {
-
-  $('.profile_pic_submit_button').on('click', function(e) {
-
-    let profilePic = $('.upload_profile_photo').val();
-
-    $('#uploaded_pic').attr('src', profilePic);
-
-    e.preventDefault();
-    $.ajax({
-      method: 'POST',
-      url: '/api/profile_picture',
-      dataType: 'BLOB',
-      data: {
-        image : profilePic
-      },
-      success: function(data){
-        if(date != 'error') {
-
-          console.log('file uploaded');
-        } else {
-          console.log('error uploading file');
-        }
-      },
-      error: function(error) {
-        console.log('error happening');
-      }
-    }).done((img)=> {
-
-      });
-  });
-});
-
-
-  $('.upload_file_button').('click', function(e) {
-    $('.update_profile_picture').html();
-    document.getElementById('#update_profile_picture')
-  })
-
 
 
 
@@ -96,6 +14,6 @@ $(() => {
 <i class="fa fa-clock-o" aria-hidden="true"></i> <%= timeInHrsMinutes(Date.now) - timeInHrsMinutes(past.start_time) minutes ago %>42 minutes ago</i></a></small></small></h4>
 
 
-<%= past.start_time %>
+let tooLong = gameLimitExceeded(r.start_time, r.end_time);
 
-
+what time is in: ISO 8601
