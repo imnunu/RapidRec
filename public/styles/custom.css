@@ -122,7 +122,7 @@
     position: absolute;
 }
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
+ /*Special class on .container surrounding .navbar, used for positioning it into place.*/
 .navbar-wrapper {
   position: fixed;
   top: 0;
@@ -133,7 +133,7 @@
   margin-right: -15px;
 }
 
-/* Flip around the padding for proper display in narrow viewports */
+ /*Flip around the padding for proper display in narrow viewports */
 .navbar-wrapper .container {
   padding-left: 0;
   padding-right: 0;

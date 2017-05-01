@@ -4,6 +4,7 @@ var service;
 var markers = [];
 var createdEvents = [];
 
+
 //initializes map and centers onto Vancouver
   function initialize() {
     var center = new google.maps.LatLng(49.281422, -123.12303);
@@ -18,6 +19,12 @@ var createdEvents = [];
     type: ['park']
   };
   testFunction();
+
+  var input = document.getElementById('pac-input');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var autocomplete = new google.maps.places.Autocomplete(input, center);
+
 
   infowindow = new google.maps.InfoWindow();
   service = new google.maps.places.PlacesService(map);
@@ -88,7 +95,10 @@ function mapDrag(user_lat, user_lng, zoom) {
 
 function createCurrentGameMarker(event) {
   var placeLoc = new google.maps.LatLng(event.lat, event.lng);
-  var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+  var image = {
+    url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=+|f0652a|f0652a",
+    size: new google.maps.Size(50, 50),
+  };
 //initialize new marker
   var marker = new google.maps.Marker ({
       map: map,
@@ -99,7 +109,7 @@ function createCurrentGameMarker(event) {
 
   google.maps.event.addListener(marker, 'click', function() {
 
-      infowindow.setContent(event.location + "<br />" + event.description + "<br />" + "Need " + event.equipment + "basketballs" + "<br /><a data-toggle='modal' href='/event/:id' onclick=\"$('.create_event').val('"+ event.vicinity + "');\" >Join Game</a>");
+      infowindow.setContent(event.location + "<br />" + event.description + "<br />" + "Start:" + event.start_time + "<br />" + "End:"+ event.end_time + "<br /><a data-toggle='modal' href='/event/" + event.id + "' onclick=\"$('.create_event').val('"+ event.vicinity + "');\" >View Event</a>");
       infowindow.open(map, this);
   });
   setTimeout(function () {
@@ -121,4 +131,6 @@ function testFunction() {
     }
   });
 }
+
+
 //google.maps.event.addDomListener(window, 'load', initialize);
