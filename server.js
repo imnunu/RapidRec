@@ -26,7 +26,7 @@ const storage= multer.diskStorage({
     callback(null, './public/uploads');
   },
   filename: function(req, file, callback) {
-    callback(null, Date.now() + '-' +file.originalname );
+    callback(null, file.originalname );
   },
 });
 
@@ -44,7 +44,9 @@ const gamesRoutesCreate = require("./routes/create_game");
 const postsRoutesFactory = require("./routes/posts");
 const dataHelpersFactory = require("./dataHelpers")(knex);
 const usersRoutesPicture = require('./routes/post_profile_pic');
-const profileData = require('./profile_data.js')(knex);
+
+// knex queries
+const profileData = require('./routes/profile_data.js')(knex);
 
 
 
@@ -111,9 +113,24 @@ app.get('/event/:id', (req, res) => {
     res.status(401).send('Please log in first');
     return;
   } else {
-    res.render('event', {id: url});
-  }
+    return profileData.queryUserGames(Number(id))
+      .then(data => {
+        // res.json(data);
+        console.log('THIS IS THE DATAAAAAA', data);
+        let templateVars = {
+          id: url,
+          first_name: data.user.first_name,
+          last_name: data.user.last_name,
+          img: data.user.img,
+          equipment: data.user.equipment,
+          partUserId: data.user.partUserId
+        }
+        console.log('THIS IS THE TEMPLATE VARS:', templateVars);
+    res.render('event', templateVars);
+      })
+  };
 });
+
 
 app.post("/create_game/:id", (req, res) => {
   res.redirect('/events/' + data);
@@ -123,27 +140,30 @@ app.get('/create_game/:id', (req, res) => {
   res.render('event')
 });
 
-// routes used for testing
+// routes used for navigating profile + edit profile
 app.get('/user/:id/profile', (req, res) => {
-
-    return profileData.queryProfileData(req.params.id)
-      .then(data => {
-        // res.json(data);
-        let templateVars = {
-          id: req.params.id,
-          profile: data
-        }
-        res.render('profile', templateVars)
-      });
+  return profileData.queryProfileData(req.params.id)
+    .then(data => {
+      // res.json(data);
+      let templateVars = {
+        id: req.params.id,
+        profile: data
+      }
+      res.render('profile', templateVars);
+    })
 });
 
 app.get("/user/:id/edit", (req, res) => {
-  const userId = req.params.id;
-
-  let id = req.session.user_id;
-  res.render('profile_edit', {id: id})
+  return profileData.queryProfileData(req.params.id)
+    .then(data => {
+      // res.json(data);
+      let templateVars = {
+        id: req.session.user_id,
+        profile: data
+      }
+    res.render('profile_edit', templateVars);
+  })
 });
-// finished testing routes
 
 app.post("/logout", (req, res) => {
   delete req.session.user_id;

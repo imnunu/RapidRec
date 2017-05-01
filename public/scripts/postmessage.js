@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   function renderPosts(posts) {
     $('#posts').empty();
     for (let newpost in posts){
@@ -13,7 +12,7 @@ $(document).ready(function() {
       html: [
         createHeader(post),
         createBody(post),
-        //createFooter(post)
+        createFooter(post)
       ]
     })
 }
@@ -23,6 +22,7 @@ function createHeader(data) {
   $header.append($('<h3></h3>').text(data.first_name))
   return $header;
 }
+
 
 function createBody(data) {
   var $body = $('<div>')
@@ -36,10 +36,10 @@ function createFooter(data) {
   return $footer;
 }
 
-function loadPosts(game_id) {
+function loadPosts() {
   $.ajax ({
     method: 'GET',
-    url: `/posts/${game_id}`,
+    url: '/event/posts',
     success: function(posts) {
       renderPosts(posts);
       $("main textarea").val("");
@@ -52,26 +52,26 @@ function loadPosts(game_id) {
 }
 //event handlers
 
-// $('section.posts').css("display", "none");
-// $('#usr-nav').on('click', function(e){
-//     $('section.post').slideToggle();
-//     $('section textarea').focus();
-//   });
+$('section.new-post').css("display", "none");
+$('#usr-nav').on('click', function(e){
+    $('section.new-post').slideToggle();
+    $('section textarea').focus();
+  });
 
 $('.new-post form').on('submit', function (e) {
   e.preventDefault();
 
   $('#error').text("");
-  var newPost = $('.new-post textarea');
-  var newPostText = newPost.val().trim();
-  if (newPostText.length === 0) {
+  var $newPost = $('.new-post textarea');
+  var $newPostText = $newPost.val().trim();
+  if ($newPostText.length === 0) {
     $('#error').text("Cannot post empty message.");
   } else {
     $.ajax ({
       method: 'POST',
       url: '/posts',
       data: {
-        content: newPostText
+        content: $newPostText
       },
       success: function() {
         loadPosts();

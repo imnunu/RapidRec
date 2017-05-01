@@ -1,3 +1,5 @@
+
+
 function loadPage(id){
     console.log('loadPage called');
   $.ajax({
@@ -8,7 +10,6 @@ function loadPage(id){
     console.log('THE INFO', JSON.stringify(info, null, 2));
     console.log('items found in INFO');
     info.forEach(function (item) {
-      console.log(item);
       $('#intro .event_title').text(item.title);
       $('#intro .description').text('Description: ' + item.description);
       $('#intro .event_location').text('Location: ' + item.location);
@@ -22,10 +23,11 @@ function loadPage(id){
   });
 }
 
-function loadGameMembers(){
+// function loadGameMembers(){
 
-};
+// };
 
-function createMembersElement(){
-
+function createMembersElement(item){
+  let $members = $('<div>').addClass('list-group')
+  .append($('<a>').attr('href', '/profile/' + item.id).addClass('list-group-item'))
 }

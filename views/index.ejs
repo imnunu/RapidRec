@@ -40,7 +40,7 @@
               <ul class="nav navbar-nav navbar-right">
                   <% if (id) { %>
                   <li><a class="logout_button">Log Out</a></li>
-
+                  <li><a href="/user/<%= id %>/profile" >Profile Page</a></li>
                     <%  } else { %>
                      <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
                     <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
@@ -122,6 +122,7 @@
 <div class="container google_map">
   <div class="col-sm-12 col-lg-12">
     <div class="row">
+    <input id="pac-input" class="controls" type="text" placeholder="Start typing here">
       <div id="map"></div>
     </div>
   </div>
@@ -138,7 +139,7 @@
           <%  } else { %>
           <h3>Please Login to create your own game</h3>
           <% } %>
-          
+
           <div class="col-sm-8 col-lg-8">
 
              <!-- sample modal content -->

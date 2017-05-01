@@ -15,17 +15,17 @@ $(() => {
 
 
     let data = {
-      title: title,
-      location: location,
-      start_time: start_time,
-      end_time: end_time,
-      equipment: equipment,
-      description: description,
+      title,
+      location,
+      start_time,
+      end_time,
+      equipment,
+      description,
       number_of_players: numb_players,
       lat,
       lng
     };
-    console.log("data", data);
+
     $.ajax({
       method:'POST',
       url: '/api/games/new',

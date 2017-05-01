@@ -22,7 +22,6 @@ module.exports = function(dbHelpers) {
       return;
     }
 
-    // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     const post = {
     game_id: req.body.game_id,
     user_id: req.body.user_id,
