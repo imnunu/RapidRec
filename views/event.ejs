@@ -107,15 +107,32 @@
 
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            <h2>Post comment</h2>
-            <div class="panel panel-default panel-body media">
-                        <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
-                        </div>
-                        <div class="media-body">
-                            <textarea class="form-control" rows="2"></textarea>
-                        </div>
+            
+            <nav id="usr-nav">
+                <button class="nav-btn" id="compose-btn">Post comment</button>
+            </nav>
+
+        <div class="panel panel-default panel-body media">
+             <section class="new-post">
+            <div class="pull-left">
+                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
             </div>
+            <div class="media-body">
+                <form id="form" action="/posts" method="POST">
+                <span id="error"></span>
+             <textarea class="form-control" rows="2" name="text"></textarea>
+             <input type="submit" value="Post">
+             </form>
+             </div>
+            
+            </section>
+
+            <section id="posts">
+            </section>
+
+        </div>
+
+         
             <hr>
             <!-- Simple post content -->
             <div class="panel panel-default panel-body" >
@@ -125,10 +142,7 @@
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
-
-                    <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-
-
+                    <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                     <hr>
                     <div class="post-content">
                         <p>We'll be meeting a bit earlier than planned. If anyone is nearby come over!</p>
@@ -186,33 +200,14 @@
                 </div>
 
 
-    <nav id="usr-nav">
-      <button class="nav-btn" id="compose-btn">Compose</button>
-    </nav>
+    
 
-                 <main class="container">
-      <section class="new-post">
-        <h2>new msg</h2>
-        <form id="form" action="/posts" method="POST">
-        <span id="error"></span>
-          <textarea name="text" placeholder="..."></textarea>
-          <input type="submit" value="Post">
-          </form>
-        </section>
-
-      <section id="posts">
-      </section>
-
-    </main>
+   
 
             <!--end of post with comment-->
 
                 </div>
             </div>
-            <!-- Sample post content with picture. -->
-
-            <!-- Sample post content with comments. -->
-
 
         </div>
     </div>

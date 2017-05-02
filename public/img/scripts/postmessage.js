@@ -42,8 +42,8 @@ function loadPosts() {
     url: '/event/posts',
     success: function(posts) {
       renderPosts(posts);
-      $("main textarea").val("");
-      $("main textarea").focus();
+      $("div textarea").val("");
+      $("div textarea").focus();
     },
     error: function(err) {
       console.error("oh no!!!", err);
