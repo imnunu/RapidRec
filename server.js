@@ -43,8 +43,7 @@ const eventRoutes = require("./routes/event");
 const eventsRoutes = require("./routes/events");
 const gamesRoutesCreate = require("./routes/create_game");
 
-const postsRoutesFactory = require("./routes/posts");
-const dataHelpersFactory = require("./dataHelpers")(knex);
+//const postsRoutes = require("./routes/posts");
 const usersRoutesPicture = require('./routes/post_profile_pic');
 
 // knex queries
@@ -87,7 +86,7 @@ app.use("/api/event", eventRoutes(knex));
 app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
 
-app.use("/posts", postsRoutesFactory(dataHelpersFactory));
+//app.use("/api/posts", postsRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
@@ -113,25 +112,54 @@ app.get('/create_event', (req, res) => {
 app.get('/event/:id', (req, res) => {
   let id = req.session.user_id;
   let url = req.params.id;
+  console.log("this is req params id", req.params.id);
   if (!id) {
     res.status(401).send('Please log in first');
     return;
   } else {
-    return profileData.queryUserGames(Number(id))
-      .then(data => {
-        // res.json(data);
-        console.log('THIS IS THE DATAAAAAA', data);
-        let templateVars = {
-          id: url,
-          first_name: data.user.first_name,
-          last_name: data.user.last_name,
-          img: data.user.img,
-          equipment: data.user.equipment,
-          partUserId: data.user.partUserId
-        }
-        console.log('THIS IS THE TEMPLATE VARS:', templateVars);
-    res.render('event', templateVars);
-      })
+    Promise.all([
+      profileData.queryUserGames(Number(id)),
+      knex('posts').select('*').where({ game_id: url })
+        .then(posts => {
+          const postIds = posts.map(post => post.id);
+          return knex('comments').select('*').whereIn('post_id', postIds)
+            .then(comments => {
+              comments.forEach(comment => {
+                const post = posts.find(post => post.id === comment.post_id);
+                post.comments = post.comment || [];
+                post.comments.push(comment)
+              });
+              return posts;
+            })
+        })
+    ]).then(([profile, posts]) => {
+      const templateVars = {
+        id: url,
+        profile: '',
+        posts: '',
+        partUserId: '',
+        gameId: req.params.id
+      };
+      // res.render('event', templateVars);
+      res.render('event', templateVars);
+    }).catch(error => {
+      res.status(500).json({ error: error.message });
+    })
+    // return profileData.queryUserGames(Number(id))
+    //   .then(data => {
+    //     // res.json(data);
+    //     console.log('THIS IS THE DATAAAAAA', data);
+    //     let templateVars = {
+    //       id: url,
+    //       first_name: data.user.first_name,
+    //       last_name: data.user.last_name,
+    //       img: data.user.img,
+    //       equipment: data.user.equipment,
+    //       partUserId: data.user.partUserId
+    //     }
+    //     console.log('THIS IS THE TEMPLATE VARS:', templateVars);
+    //     res.render('event', templateVars);
+    //   })
   };
 });
 
@@ -223,6 +251,20 @@ app.get("/user/:id/edit", (req, res) => {
       }
     res.render('profile_edit', templateVars);
   })
+});
+
+app.post("/addComment", (req, res) => {
+  console.log("posting to addd comment");
+  knex.insert({
+    post_id: '',
+    user_id: '',
+    content: '',
+    created_at: new Date()
+  })
+  .into('comments')
+  .then(() =>{
+    console.log("you're done");
+  });
 });
 
 app.post("/logout", (req, res) => {

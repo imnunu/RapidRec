@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  let gameId = $('meta[name = "game_id"]').attr('content');
+  console.log("this is in AJAAX", gameId);
+
+
   function renderPosts(posts) {
     $('#posts').empty();
     for (let newpost in posts){
@@ -7,39 +11,12 @@ $(document).ready(function() {
   }
 
   function createPostElement(post) {
-    return $('<article>', {
-      class: "post",
-      html: [
-        createHeader(post),
-        createBody(post),
-        createFooter(post)
-      ]
-    })
-}
-
-function createHeader(data) {
-  var $header = $('<header></header>')
-  $header.append($('<h3></h3>').text(data.first_name))
-  return $header;
-}
-
-
-function createBody(data) {
-  var $body = $('<div>')
-  $body.append($('<p>').text(data.content));
-  return $body;
-}
-
-function createFooter(data) {
-  var $footer = $('<footer>')
-  $footer.append($('<p>').text(data.created_at));
-  return $footer;
 }
 
 function loadPosts() {
   $.ajax ({
     method: 'GET',
-    url: '/event/posts',
+    url: '/event/' + gameId,
     success: function(posts) {
       renderPosts(posts);
       $("main textarea").val("");
@@ -62,16 +39,15 @@ $('.new-post form').on('submit', function (e) {
   e.preventDefault();
 
   $('#error').text("");
-  var $newPost = $('.new-post textarea');
-  var $newPostText = $newPost.val().trim();
-  if ($newPostText.length === 0) {
+  var newPost = $('.new-post textarea').val().trim();
+  if (newPost.length === 0) {
     $('#error').text("Cannot post empty message.");
   } else {
     $.ajax ({
       method: 'POST',
-      url: '/posts',
+      url: '/addComment',
       data: {
-        content: $newPostText
+        content: newPost
       },
       success: function() {
         loadPosts();

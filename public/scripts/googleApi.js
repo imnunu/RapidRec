@@ -3,6 +3,7 @@ var infowindow;
 var service;
 var markers = [];
 var createdEvents = [];
+var autocomplete;
 
 
 //initializes map and centers onto Vancouver
@@ -13,18 +14,18 @@ var createdEvents = [];
       zoom: 14
     });
 
-  var request = {
-    location: center,
-    radius: 400,
-    type: ['park']
-  };
+    var request = {
+      location: center,
+      radius: 400,
+      type: ['park']
+    };
   testFunction();
 
   var input = document.getElementById('pac-input');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  var autocomplete = new google.maps.places.Autocomplete(input, center);
-
+  autocomplete = new google.maps.places.Autocomplete(input, center);
+  autocomplete.addListener('place_changed',moveMapToLocation);
 
   infowindow = new google.maps.InfoWindow();
   service = new google.maps.places.PlacesService(map);
@@ -64,9 +65,16 @@ function createMarker(place) {
       const $loc = $('.location');
       $loc.data('lat', lat);
       $loc.data('lng', lng);
+
   infowindow = new google.maps.InfoWindow();
 
-      infowindow.setContent(place.name + "<br />" + place.vicinity + "<br />" + "Rating: " + place.rating + "<br /><a data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+ place.vicinity + "');\" >Create Game</a>");
+      infowindow.setContent(
+        '<div id="iw-container">' + '<div class="iw-title">' + place.name + '</div>' + "<br />" +
+        '<div class="iw-content">'+ '<div class="iw-subTitle">' + place.vicinity + '</div>'+ "<br />" + '<div class="iw-subTitle">' +
+        "Rating: " + '</div>'+ place.rating +
+        '<div class="iw-title">' + "<br /><a data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+
+        place.vicinity + "');\" >Create Game</a>") + '</div>';
+
       infowindow.open(map, this);
   });
 }
@@ -95,21 +103,30 @@ function mapDrag(user_lat, user_lng, zoom) {
 
 function createCurrentGameMarker(event) {
   var placeLoc = new google.maps.LatLng(event.lat, event.lng);
-  var image = {
-    url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=+|f0652a|f0652a",
-    size: new google.maps.Size(50, 50),
-  };
+  var image = gameMarker(marker);
 //initialize new marker
   var marker = new google.maps.Marker ({
       map: map,
       position: placeLoc,
       icon: image,
-      animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.BOUNCE
     });
+  setTimeout(function() {
+        marker.setAnimation(null)
+    }, 3000);
 
   google.maps.event.addListener(marker, 'click', function() {
 
-      infowindow.setContent(event.location + "<br />" + event.description + "<br />" + "Start:" + event.start_time + "<br />" + "End:"+ event.end_time + "<br /><a data-toggle='modal' href='/event/" + event.id + "' onclick=\"$('.create_event').val('"+ event.vicinity + "');\" >View Event</a>");
+      infowindow.setContent(
+        '<div id="iw-container">' + '<div class="iw-title">' + event.location + '</div>' + "<br />" +
+        '<div class="iw-content">'+ '<div class="iw-subTitle">' + event.description + '</div>'+ "<br />" +
+        '<div class="iw-subTitle">' + "Start:" + '</div>' +
+        event.start_time + "<br />" + '<div class="iw-subTitle">' + "End:" + '</div>' +
+        event.end_time + '<div class="iw-title">' + "<br /><a data-toggle='modal' href='/event/" +
+        event.id + "' onclick=\"$('.create_event').val('"+
+        event.vicinity + "');\" >View Event</a>") + '</div>' + '</div>';
+
+
       infowindow.open(map, this);
   });
   setTimeout(function () {
@@ -117,6 +134,16 @@ function createCurrentGameMarker(event) {
         delete marker;
     }, 259200000);
     return marker;
+}
+
+//custom marker for created game
+function gameMarker(marker) {
+  var imagePath = "/img/32basketball.png";
+  var image = {
+    url: imagePath,
+    size: new google.maps.Size(45, 45)
+  };
+  return image;
 }
 
 function testFunction() {
@@ -132,5 +159,11 @@ function testFunction() {
   });
 }
 
+function moveMapToLocation() {
+  var place = autocomplete.getPlace();
+  map.setCenter(place.geometry.location)
+  map.setZoom(10);
+
+}
 
 //google.maps.event.addDomListener(window, 'load', initialize);
