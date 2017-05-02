@@ -4,10 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="game_id" content="<%= gameId %>">
+
+
     <title>RapidRec</title>
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/vendor/typeahead.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="/vendor/typeahead.min.css" rel="stylesheet" type="text/css">-->
     <!-- Fonts -->
     <!-- Website Font style -->
 	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
@@ -53,12 +56,13 @@
     <section id="intro" class="intro">
       <div class="slogan">
 
-        <h2 class="event_title">event tile here</h2>
-        <div class='event_details'><br />
-            <h4 class="event_location">event location here</h4>
-            <h4 class="number_of_players">Player needed: </h4>
-            <h4 class="event_start_time">start time</h4>
-            <h4 class="event_end_time">end time</h4>
+        <h2 class="event_title"></h2>
+        <div class="event_details"><br />
+            <h4 class="event_description"></h4>
+            <h4 class="event_location"></h4>
+            <h4 class="number_of_players"></h4>
+            <h4 class="event_start_time"></h4>
+            <h4 class="event_end_time"></h4>
         </div>
       </div>
 
@@ -68,41 +72,34 @@
 
     <!-- create event form -->
 
-    <!--<main class="container">
-      <section class="new-post">
-      <h2>Write Post</h2>
-      <form id="form" action="/posts" method="POST">
-      <span id="error"></span>
-        <textarea name="text" placeholder="Write something..."></textarea>
-        <input type="submit" value="Post">
-        </form>
-        </section>
 
-        <section id="posts">
-        </section>
-
-          </div>
-       </div>
-    </div>-->
 <div class="container">
 <div class="mainbody container-fluid">
     <div class="row">
 
-        <div style="padding-top:50px;"> </div>
+        <div style="padding-top:50px;"> </div>
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel-group">
-
                 <div class="panel panel-default">
+                <% if (!partUserId) { %>
                     <div class="panel-heading">
-                        <a class="event_join_button" role="button" style="text-decoration:none;" href="/event">
-                            <h4 class="panel-title">Join</h4>
-                        </a>
+                        <span class="event_join_button" role="button" style="text-decoration:none;">
+                            <h4 class="panel-title" id= "joinGame">Join</h4>
+                        </span>
+                        <div id= "joinToggle" style="display: none">
+                          <label>
+                            <input type="checkbox" class="join_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+                          </label>
+                        <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
+                        </div>
                     </div>
+                    <% } else  {%>
                     <div class="panel-heading">
                         <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
-                            <h4 class="panel-title">Drop</h4>
+                            <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
                         </a>
                     </div>
+                       <% } %>
                 </div>
             </div>
             <h3>Player List </h3>
@@ -116,47 +113,45 @@
 
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            <!--post comment-->
-            <div class="panel panel-default panel-body media new_post">
-                        <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
-                        </div>
-                        <div class="media-body">
-                            <textarea class="form-control" rows="2" ></textarea>
-                        </div>
+
+            <nav id="usr-nav">
+                <button class="nav-btn" id="compose-btn">Post comment</button>
+            </nav>
+
+        <div class="panel panel-default panel-body media">
+             <section class="new-post">
+            <div class="pull-left">
+                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
             </div>
+            <div class="media-body">
+                <form id="form" action="/posts" method="POST">
+                <span id="error"></span>
+             <textarea class="form-control" rows="2" name="text"></textarea>
+             <input type="submit" value="Post">
+             </form>
+             </div>
+
+            </section>
+
+            <section id="posts">
+            </section>
+
+        </div>
+
+
             <hr>
             <!-- Simple post content -->
             <div class="panel panel-default panel-body" >
-                <!--<div class="panel-body">-->
+                <div class="panel-body">
                     <div class="pull-left">
                         <a href="#">
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                         </a>
                     </div>
-<<<<<<< HEAD
-                    <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-=======
-                    <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-                    <span>
-                        <div class="navbar-right">
-                            <div class="dropdown">
-
-                                <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
-                                    <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </span>
->>>>>>> clean/profile_page_routing
+                    <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                     <hr>
                     <div class="post-content">
-                        <p>The terrified arch encodes basketball beneath the ready tile. Before a banana dresses the disorder. Basketball pardons the insult inside a painful scanner. How will the fur walk? The mist hangs the crushing giant opposite a rival.</p>
+                        <p>We'll be meeting a bit earlier than planned. If anyone is nearby come over!</p>
                     </div>
                     <hr>
                     <div class="media">
@@ -164,7 +159,7 @@
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                         </div>
                         <div class="media-body">
-                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+                            <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
                         </div>
                     </div>
             </div>
@@ -177,9 +172,10 @@
                     </div>
                     <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
 
+
                     <hr>
                     <div class="post-content">
-                        <p>The spoilt token forbids an infant demise. With basketball spins game. The dance bites each spiral. Basketball stares without an artist. Can basketball nose beside the censor? Game cooks basketball in the joy.</p>
+                        <p>Excited!</p>
                     </div>
                     <hr>
                     <div>
@@ -190,7 +186,7 @@
                                     <h4><a href="#" style="text-decoration:none;"><strong>HoHo Meow</strong></a></h4>
                                     <hr>
                                     <div class="post-content">
-                                        Yet another post.<br><br>
+                                        Same! I'll be bringing an extra ball with me<br><br>
                                         <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
                                     </div>
                         </div>
@@ -205,9 +201,13 @@
                             <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
                         </div>
                     </div>
+
                 </div>
 
             <!--end of post with comment-->
+
+                </div>
+            </div>
 
         </div>
     </div>
@@ -227,10 +227,17 @@
   <script src="/scripts/postmessage.js"></script>
   <script src="/scripts/event.js"></script>
   <script src="/scripts/login.js"></script>
+  <script src="/scripts/eventjoin.js"></script>
   <script>
     $(() => {
       loadPage(<%= id %>);
     });
+  </script>
+  <script>
+  const myId = <%= id %>;
+  </script>
+  <script>
+  const yourId = <%= id %>;
   </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>

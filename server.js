@@ -10,6 +10,8 @@ const cookieSession = require('cookie-session');
 const sass        = require("node-sass-middleware");
 const app         = express();
 const bcrypt      = require('bcrypt');
+const moment      = require('moment');
+const timezone    = require('moment-timezone');
 const flash       = require('connect-flash');
 app.use(flash());
 
@@ -42,12 +44,13 @@ const eventsRoutes = require("./routes/events");
 const gamesRoutesCreate = require("./routes/create_game");
 // const friendRoutesAdd = require("./routes/add_friend");
 
-const postsRoutesFactory = require("./routes/posts");
-const dataHelpersFactory = require("./dataHelpers")(knex);
+//const postsRoutes = require("./routes/posts");
 const usersRoutesPicture = require('./routes/post_profile_pic');
 
 // knex queries
-const profileData = require('./profile_data.js')(knex);
+
+const profileData = require('./routes/profile_data.js')(knex);
+
 
 
 
@@ -85,7 +88,7 @@ app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
 // app.use("/api/user/friend", friendRoutesAdd(knex));
 
-app.use("/posts", postsRoutesFactory(dataHelpersFactory));
+//app.use("/api/posts", postsRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
@@ -111,13 +114,57 @@ app.get('/create_event', (req, res) => {
 app.get('/event/:id', (req, res) => {
   let id = req.session.user_id;
   let url = req.params.id;
+  console.log("this is req params id", req.params.id);
   if (!id) {
     res.status(401).send('Please log in first');
     return;
   } else {
-    res.render('event', {id: url});
-  }
+    Promise.all([
+      profileData.queryUserGames(Number(id)),
+      knex('posts').select('*').where({ game_id: url })
+        .then(posts => {
+          const postIds = posts.map(post => post.id);
+          return knex('comments').select('*').whereIn('post_id', postIds)
+            .then(comments => {
+              comments.forEach(comment => {
+                const post = posts.find(post => post.id === comment.post_id);
+                post.comments = post.comment || [];
+                post.comments.push(comment)
+              });
+              return posts;
+            })
+        })
+    ]).then(([profile, posts]) => {
+      const templateVars = {
+        id: url,
+        profile: '',
+        posts: '',
+        partUserId: '',
+        gameId: req.params.id
+      };
+      // res.render('event', templateVars);
+      res.render('event', templateVars);
+    }).catch(error => {
+      res.status(500).json({ error: error.message });
+    })
+    // return profileData.queryUserGames(Number(id))
+    //   .then(data => {
+    //     // res.json(data);
+    //     console.log('THIS IS THE DATAAAAAA', data);
+    //     let templateVars = {
+    //       id: url,
+    //       first_name: data.user.first_name,
+    //       last_name: data.user.last_name,
+    //       img: data.user.img,
+    //       equipment: data.user.equipment,
+    //       partUserId: data.user.partUserId
+    //     }
+    //     console.log('THIS IS THE TEMPLATE VARS:', templateVars);
+    //     res.render('event', templateVars);
+    //   })
+  };
 });
+
 
 app.post("/create_game/:id", (req, res) => {
   res.redirect('/events/' + data);
@@ -130,36 +177,77 @@ app.get('/create_game/:id', (req, res) => {
 // routes used for navigating profile + edit profile
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
-    .then(data => {
+    .then(result => {
+      console.log("this is array of all games~~~~~~~~", result.user_games.games);
       let loggedInId = req.session.user_id[0];
       let friendsArr = req.session.friends
-      console.log("this is req.sessionid[0]: ", req.session.user_id[0]);
-      console.log("this is req.sessionid.friends: ", req.session.friends);
-      // console.log("loggedIn Id", loggedInId);
-      // console.log("this is usr friends dataaa: ", data.user_friends.friends);
-      // let idsOfFriends = [];
+      let startTime = moment.utc(game.start_time).tz('America/Los_Angeles');
+      let endTime = moment.utc(game.end_time).tz('America/Los_Angeles');
+      let currentTime = moment.utc().tz('America/Los_Angeles');
+      let pasts = 1;
+      let future = 1;
+      let count = 0;
 
-      // for (let friend of data.user_friends.friends) {
-      //   // if (loggedInId === friend.user_id) {
-      //     idsOfFriends.push(friend.other_id);
-      //   // }
-      // }
+      let all_games = {
+        past_games: [],
+        upcoming_games: []
+      };
 
-      // req.session.friends = idsOfFriends;
-      // console.log("this is req.session.friends: ", req.session.friends);
+      result.user_games.games.forEach(game => {
+        count = count + 1;
+        // let date = new Date();
 
-      // console.log(idsOfFriends);
+
+        // --- UPCOMING GAMES
+        if (startTime > currentTime) {
+          console.log("pushing game ", future++, "into upcoming games array");
+          all_games.upcoming_games.push({
+            id: game.id,
+            title: game.title,
+            location: game.location,
+            start_time: game.start_time,
+            end_time: game.start_time
+          });
+        }
+        // --- PAST GAMES
+        if (endTime < currentTime) {
+          console.log("pushing game ", pasts++, "into past games array");
+          all_games.past_games.push({
+            id: game.id,
+            title: game.title,
+            location: game.location,
+            start_time: game.start_time,
+            end_time: game.end_time
+          });
+        }
+      });
+      console.log("***************************************************************")
+      console.log(count + " games were sorted");
+      console.log("this is array of past games", all_games.past_games);
+      console.log("this is array of upcoming games", all_games.upcoming_games);
       // res.json(data);
-      console.log("this is data:", data.user_friends.friends);
+
+      // let arr = [];
+      // all_games.past_games.reduce((currentTime, game) => {
+      //   game.start_time.push(arr);
+
+      // }, currentTime);
+
+      // let pastSorted = arr.sort(function(a, b) {
+      //   return b - a;
+      // });
       let templateVars = {
         seshId: loggedInId,
-        // id: req.params.id,
-        profile: data,
         urlId: req.params.id,
         friendsArr: friendsArr
+        // id: req.params.id,
+        profile: result,
+        past_games: all_games.past_games.reverse(),
+        upcoming_games: all_games.upcoming_games.reverse(),
+        timeNow: moment().tz('America/Los_Angeles')
       }
       res.render('profile', templateVars);
-    })
+    });
 });
 
 app.get("/user/:id/edit", (req, res) => {
@@ -172,6 +260,20 @@ app.get("/user/:id/edit", (req, res) => {
       }
     res.render('profile_edit', templateVars);
   })
+});
+
+app.post("/addComment", (req, res) => {
+  console.log("posting to addd comment");
+  knex.insert({
+    post_id: '',
+    user_id: '',
+    content: '',
+    created_at: new Date()
+  })
+  .into('comments')
+  .then(() =>{
+    console.log("you're done");
+  });
 });
 
 app.post("/logout", (req, res) => {

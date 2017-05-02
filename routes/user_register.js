@@ -14,7 +14,7 @@ module.exports = (knex) => {
       .where({email: email})
       .limit(1)
       .then((results) => {
-        if (results.length){
+        if (results.length) {
           return Promise.resolve(email);
         } else {
           return Promise.resolve();
@@ -44,7 +44,6 @@ module.exports = (knex) => {
         .into('users')
         .returning('id')
         .then(function(id){
-          console.log(id)
           req.session.user_id = id;
 
           // return profileData.queryProfileData(req.params.id)

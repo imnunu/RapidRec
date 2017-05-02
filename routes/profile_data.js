@@ -4,16 +4,20 @@ module.exports = (knex) => ({
 
   queryUserGames: function(userId) {
     return knex('users')
-      .select('games.id', 'games.title', 'games.location', 'games.start_time', 'users.first_name', 'users.last_name', 'users.image')
+
+      .select('games.id', 'games.title', 'games.location', 'games.start_time', 'users.first_name', 'users.last_name', 'users.image', 'participations.user_id', 'participations.equipment')
       .leftOuterJoin('participations', 'users.id', 'participations.user_id')
       .leftOuterJoin('games', 'participations.game_id', 'games.id')
       .where('users.id', '=', userId)
       .then(rows => {
+        console.log('THESE ARE THE ROWS IN QUERY USER GAME: ', rows);
         const result = {
           user: {
             first_name: '',
             last_name: '',
             image: '',
+            equipment: '',
+            partUserId: '',
           },
           games: []
         }
@@ -21,17 +25,23 @@ module.exports = (knex) => ({
           result.user.first_name = row.first_name;
           result.user.last_name = row.last_name;
           result.user.image = row.image;
+          result.user.equipment = row.equipment;
+          result.user.partUserId = row.user_id;
           if(row.id) {
             result.games.push({
               id: row.id,
               title: row.title,
               location: row.location,
-              start_time: row.start_time
+              start_time: row.start_time,
+              end_time: row.end_time
             });
           }
         });
         return result;
-      });
+      })
+      .catch(err => {
+      console.log("this is THE ERROR", err);
+    });
     },
 
 
