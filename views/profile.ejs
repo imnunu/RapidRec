@@ -23,8 +23,7 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
                             <li><a href="/user/<%= id %>/edit" >Edit Profile</a></li>
-                                <li><a href="#">Logout</a></li>
-                                
+                                 <li><a class="logout_button" >Log Out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -39,7 +38,7 @@
                 <div class="panel-body">
                     <div class="media">
                         <div align="center">
-                            <img class="thumbnail img-responsive" src="http://localhost:8080/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
+                            <img class="thumbnail img-responsive" src="/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
                         </div>
                         <div class="media-body">
                             <button class="add_friend_button" type="">Add Friend</button>
@@ -62,7 +61,7 @@
             <hr>
             <!-- Upcoming Events. -->
             <h2>Upcoming Events:</h2>
-            <% for (let game of profile.user_games.games) { %>
+            <% for (let game of upcoming_games) { %>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="pull-left">
@@ -72,10 +71,10 @@
                     <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
                     <hr>
                     <div class="post-content" >
-                        <a href="#" style="text-decoration:none;">
-                        <p><strong>Location: </strong> <%= game.location %></p>
-                        <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                        </a>
+                      <a href="#" style="text-decoration:none;">
+                      <p><strong>Location: </strong> <%= game.location %></p>
+                      <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                      </a>
                     </div>
                     <hr>
                 </div>
@@ -83,24 +82,24 @@
             <% } %>
             <!-- Past Events -->
             <h2>Past Events:</h2>
-
-
-              <div class="panel panel-default">
-                  <div class="panel-body">
-                      <div class="pull-left">
-                              <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+              <% for (let game of past_games) { %>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                          <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                       </div>
-                      <h4 class="event_title"><strong></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                      <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
                       <hr>
                       <div class="post-content" >
-                          <a href="#" style="text-decoration:none;">
-                          <p><strong>Location: </strong></p>
-                          <p><strong>Date/Time: </strong></p>
-                          </a>
+                        <a href="#" style="text-decoration:none;">
+                        <p><strong>Location: </strong><%= game.location %></p>
+                        <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                        </a>
                       </div>
                       <hr>
                   </div>
-              </div>
+                </div>
+            <% } %>
 
 
         </div>
@@ -109,8 +108,8 @@
   </div>
      </div>
 
-
-    <script src="scripts/main.js"></script>
+    <script src="/scripts/login.js"></script>
+    <script src="/scripts/main.js"></script>
 
 </body>
 

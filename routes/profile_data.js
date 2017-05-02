@@ -4,6 +4,7 @@ module.exports = (knex) => ({
 
   queryUserGames: function(userId) {
     return knex('users')
+
       .select('games.id', 'games.title', 'games.location', 'games.start_time', 'users.first_name', 'users.last_name', 'users.image', 'participations.user_id', 'participations.equipment')
       .leftOuterJoin('participations', 'users.id', 'participations.user_id')
       .leftOuterJoin('games', 'participations.game_id', 'games.id')
@@ -32,7 +33,8 @@ module.exports = (knex) => ({
               id: row.id,
               title: row.title,
               location: row.location,
-              start_time: row.start_time
+              start_time: row.start_time,
+              end_time: row.end_time
             });
           }
         });
@@ -82,8 +84,8 @@ module.exports = (knex) => ({
         user_games: values[0],
         user_friends: values[1]
       }
-      console.log("this is results obj >>>>>>", results);
-      console.log("this is results.user_games.games array", results.user_games.games);
+      // console.log("this is results obj >>>>>>", results);
+      // console.log("this is results.user_games.games array", results.user_games.games);
       return results;
     })
     .catch(err => {

@@ -27,6 +27,7 @@ module.exports = (knex) => {
 
   router.post('/:game_id/addComment', (req, res) => {
     const { game_id } = req.params;
+
   });
 
   return router;
