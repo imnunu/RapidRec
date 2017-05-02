@@ -92,14 +92,16 @@
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel-group">
                 <div class="panel panel-default">
-                <% if (!partUserId) { %>
+                <% if (info.users.every(someUser => { %>%>
+                <%  return (someUser.partUserId !== user) %>
+                <%   })) { %>
                     <div class="panel-heading">
                         <span class="event_join_button" role="button" style="text-decoration:none;">
                             <h4 class="panel-title" id= "joinGame">Join</h4>
                         </span>
                         <div id= "joinToggle" style="display: none">
                           <label>
-                            <input type="checkbox" class="join_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+                            <input type="checkbox" class="join_event_equipment"></input>Bring a basketball?<span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
                           </label>
                         <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
                         </div>
@@ -115,11 +117,15 @@
             </div>
             <h3>Player List </h3>
             <div class="list-group">
-                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span> Player 1 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>Player 2 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"></span>Player 3 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"></span>Player 4 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>Player 5 Name</a>
+              <% if (info.users.length) { %>
+                <% info.users.forEach((user) => { %>
+                <a href="#" class="list-group-item"><span class="pull-right">
+                <% if (user.equipment) { %>
+                <img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
+                <% } %>
+                </span> <%= (user.first_name + ' ' + user.last_name)%></a>
+                <% }); %>
+                <% } %>
             </div>
 
         </div>
