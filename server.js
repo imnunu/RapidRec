@@ -253,16 +253,18 @@ app.get("/user/:id/edit", (req, res) => {
   })
 });
 
-app.post("/addComment", (req, res) => {
-  console.log("posting to addd comment");
+app.post("/event/:id/addPosts", (req, res) => {
+  console.log("posting to addd comment", req.body);
+  console.log("this is the id of the page", req.params.id)
   knex.insert({
-    post_id: '',
-    user_id: '',
-    content: '',
+    game_id: req.params.id,
+    user_id: req.session.user_id,
+    content: req.body.content,
     created_at: new Date()
   })
-  .into('comments')
+  .into('posts')
   .then(() =>{
+    res.json('success');
     console.log("you're done");
   });
 });

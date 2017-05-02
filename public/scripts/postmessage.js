@@ -45,7 +45,7 @@ $('.new-post form').on('submit', function (e) {
   } else {
     $.ajax ({
       method: 'POST',
-      url: '/addComment',
+      url: '/event/' + gameId + '/addPosts',
       data: {
         content: newPost
       },
