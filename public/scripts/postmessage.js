@@ -18,22 +18,22 @@ $(document).ready(function() {
 }
 
 function createHeader(data) {
-  var $header = $('<header></header>')
-  $header.append($('<h3></h3>').text(data.first_name))
-  return $header;
+  var header = $('<header></header>')
+  header.append($('<h3></h3>').text(data.first_name))
+  return header;
 }
 
 
 function createBody(data) {
-  var $body = $('<div>')
-  $body.append($('<p>').text(data.content));
-  return $body;
+  var body = $('<div>')
+  body.append($('<p>').text(data.content));
+  return body;
 }
 
 function createFooter(data) {
-  var $footer = $('<footer>')
-  $footer.append($('<p>').text(data.created_at));
-  return $footer;
+  var footer = $('<footer>')
+  footer.append($('<p>').text(data.created_at));
+  return footer;
 }
 
 function loadPosts() {
@@ -62,16 +62,15 @@ $('.new-post form').on('submit', function (e) {
   e.preventDefault();
 
   $('#error').text("");
-  var $newPost = $('.new-post textarea');
-  var $newPostText = $newPost.val().trim();
-  if ($newPostText.length === 0) {
+  var newPost = $('.new-post textarea').val().trim();
+  if (newPost.length === 0) {
     $('#error').text("Cannot post empty message.");
   } else {
     $.ajax ({
       method: 'POST',
-      url: '/posts',
+      url: 'addComent',
       data: {
-        content: $newPostText
+        content: newPost
       },
       success: function() {
         loadPosts();
