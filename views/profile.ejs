@@ -5,11 +5,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RapidRec</title>
+
+
+    <!-- used in scripts/add_friend.js file (this makes data available in the dom for available use)-->
+    <meta name='urlId' content='<%= urlId %>'>
+    <meta name='firstName' content='<%= profile.user_games.user.first_name %>'>
+    <meta name='lastName' content='<%= profile.user_games.user.last_name %>'>
+    <meta name='session_id' content='<%= seshId %>'>
+    <meta name='friends_array' content='<%= friendsArr %>'>
+
+
+    <link href="http://localhost:8080/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+       <link href="http://localhost:8080/vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+    <link href="http://localhost:8080/vendor/animate.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="http://localhost:8080/styles/style.css" rel="stylesheet">
+    <link href="http://localhost:8080/styles/default.css" rel="stylesheet">
+    <link href="http://localhost:8080/styles/custom.css" rel="stylesheet">
+    <!-- <link href="styles/reset.css" rel="stylesheet"> -->
+
+
+
+
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
 </head>
-<body>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <!-- nav bar -->
 <div class="mainbody container-fluid">
     <div class="row">
@@ -22,9 +47,9 @@
                         </div>
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/user/<%= id %>/edit" >Edit Profile</a></li>
+                            <li><a href="/user/<%= seshId %>/edit" >Edit Profile</a></li>
                                 <li><a href="#">Logout</a></li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -42,12 +67,18 @@
                             <img class="thumbnail img-responsive" src="http://localhost:8080/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
                         </div>
                         <div class="media-body">
-                            <button class="add_friend_button" type="">Add Friend</button>
+                          <form>
+                            <div class="form-group">
+                              <input type="submit" class="btn add-friend-submit-button" value="Add Friend">
+                            </div>
+                          </form>
                             <hr>
                             <h3><strong>Friends</strong></h3>
+                            <span class="validation" id="add_friend_popup"></span>
                             <ul>
                             <% for (let friend of profile.user_friends.friends) { %>
                                 <li><%= friend.first_name %> <%= friend.last_name %></li>
+                                <img class="media-object img-circle"  src="http://localhost:8080/uploads/<%= friend.image %>"  width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             <% } %>
                             </ul>
                             <hr>
@@ -108,9 +139,20 @@
       </div>
   </div>
      </div>
-
-
-    <script src="scripts/main.js"></script>
+<!-- Core JavaScript Files -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="http://localhost:8080/vendor/bootstrap.min.js"></script>
+  <script src="http://localhost:8080/vendor/jquery.easing.min.js"></script>
+  <script src="http://localhost:8080/vendor/jquery.scrollTo.js"></script>
+  <script src="http://localhost:8080/vendor/jquery.js"></script>
+  <script src="http://localhost:8080/vendor/jquery.simple-dtpicker.js"></script>
+  <script src="http://localhost:8080/vendor/wow.min.js"></script>
+  <script src="http://localhost:8080/scripts/googleApi.js"></script>
+  <script src="http://localhost:8080/scripts/main.js"></script>
+  <script src="http://localhost:8080/scripts/login.js"></script>
+  <script src="http://localhost:8080/scripts/register.js"></script>
+  <script src="http://localhost:8080/scripts/create_game.js"></script>
+  <script src="http://localhost:8080/scripts/add_friend.js"></script>
 
 </body>
 

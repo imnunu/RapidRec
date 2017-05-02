@@ -1,5 +1,6 @@
 "use strict";
 
+const profileData = require('../profile_data.js');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -33,6 +34,26 @@ module.exports = (knex) => {
 
         else{
           req.session.user_id = user.id;
+
+          return profileData.queryProfileData(req.params.id)
+            .then(data => {
+            console.log("inside user login handler<<<<<<<<<<<<<");
+            let loggedInId = req.session.user_id[0];
+            console.log("user logged id is >>>>>>>>", loggedInId);
+            console.log("this is logged in friends dataaa: ", data.user_friends.friends);
+            let idsOfFriends = [];
+
+            for (let friend of data.user_friends.friends) {
+                idsOfFriends.push(friend.other_id);
+            }
+            console.log("id's of my friends:",idsOfFriends);
+
+            req.session.friends = idsOfFriends;
+            console.log("this is req.session.friends id's: ", req.session.friends);
+            console.log(idsOfFriends);
+          });
+
+
           res.json(results)
         }
 
