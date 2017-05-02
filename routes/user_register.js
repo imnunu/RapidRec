@@ -47,23 +47,23 @@ module.exports = (knex) => {
           console.log(id)
           req.session.user_id = id;
 
-          return profileData.queryProfileData(req.params.id)
-            .then(data => {
-            console.log("inside user registration handler<<<<<<<<<<<<<");
-            let loggedInId = req.session.user_id[0];
-            console.log("user logged id is >>>>>>>>", loggedInId);
-            console.log("this is logged in friends dataaa: ", data.user_friends.friends);
-            let idsOfFriends = [];
+          // return profileData.queryProfileData(req.params.id)
+          //   .then(data => {
+          //   console.log("inside user registration handler<<<<<<<<<<<<<");
+          //   let loggedInId = req.session.user_id[0];
+          //   console.log("user logged id is >>>>>>>>", loggedInId);
+          //   console.log("this is logged in friends dataaa: ", data.user_friends.friends);
+          //   let idsOfFriends = [];
 
-            for (let friend of data.user_friends.friends) {
-                idsOfFriends.push(friend.other_id);
-            }
-            console.log("id's of my friends:",idsOfFriends);
+          //   for (let friend of data.user_friends.friends) {
+          //       idsOfFriends.push(friend.other_id);
+          //   }
+          //   console.log("id's of my friends:",idsOfFriends);
 
-            req.session.friends = idsOfFriends;
-            console.log("this is req.session.friends id's: ", req.session.friends);
-            console.log(idsOfFriends);
-          });
+          //   req.session.friends = idsOfFriends;
+          //   console.log("this is req.session.friends id's: ", req.session.friends);
+          //   console.log(idsOfFriends);
+          // });
 
 
 
