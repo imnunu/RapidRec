@@ -131,7 +131,7 @@ app.get('/event/:id', (req, res) => {
       const templateVars = {
         id: url,
         profile,
-        posts,
+        posts
       };
       // res.render('event', templateVars);
       res.json(templateVars);
