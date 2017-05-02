@@ -1,16 +1,35 @@
 $(document).ready(function() {
   let gameId = $('meta[name = "game_id"]').attr('content');
-  console.log("this is in AJAAX", gameId);
-
 
   function renderPosts(posts) {
     $('#posts').empty();
     for (let newpost in posts){
-      $(createPostElement(posts[newpost])).prependTo('#posts');
+      $(createBody(posts[newpost])).prependTo('#posts');
     }
   }
 
-  function createPostElement(post) {
+function createPostElement(newpost) {
+  let post = $('<article>', {
+    class: "post-content",
+    html: [
+    //createHeader(newpost),
+    createBody(newpost),
+    //createFooter(newpost)
+    ]
+  });
+}
+
+function createHeader(data) {
+}
+
+function createBody(data) {
+  var body = $('<div>')
+  body.append($('<p>').text(data.content));
+  return body;
+}
+
+function createFooter(data) {
+
 }
 
 function loadPosts() {
@@ -19,8 +38,7 @@ function loadPosts() {
     url: '/event/' + gameId,
     success: function(posts) {
       renderPosts(posts);
-      $("main textarea").val("");
-      $("main textarea").focus();
+      $("main textarea").val("").focus();
     },
     error: function(err) {
       console.error("oh no!!!", err);
@@ -28,12 +46,6 @@ function loadPosts() {
   })
 }
 //event handlers
-
-$('section.new-post').css("display", "none");
-$('#usr-nav').on('click', function(e){
-    $('section.new-post').slideToggle();
-    $('section textarea').focus();
-  });
 
 $('.new-post form').on('submit', function (e) {
   e.preventDefault();

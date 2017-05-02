@@ -40,14 +40,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
-
-                <% if (id) { %>
+                <% if (user_id) { %>
                 <li><a href="/user/<%=id%>/profile">Profile</a></li>
-                  <li><a class="logout_button">Log Out</a></li>
-                    <%  } else { %>
-                     <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
-                    <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-                    <% } %>
+                <li><a class="logout_button">Log Out</a></li>
+                <%  } else { %>
+                <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+                <% } %>
                </ul>
             </div>
         </div>
@@ -93,13 +92,13 @@
                         <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
                         </div>
                     </div>
-                    <% } else  {%>
+                    <% } else {%>
                     <div class="panel-heading">
                         <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
                             <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
                         </a>
                     </div>
-                       <% } %>
+                   <% } %>
                 </div>
             </div>
             <h3>Player List </h3>
@@ -113,10 +112,6 @@
 
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-
-            <nav id="usr-nav">
-                <button class="nav-btn" id="compose-btn">Post comment</button>
-            </nav>
 
         <div class="panel panel-default panel-body media">
              <section class="new-post">
@@ -151,7 +146,6 @@
                     <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                     <hr>
                     <div class="post-content">
-                        <p>We'll be meeting a bit earlier than planned. If anyone is nearby come over!</p>
                     </div>
                     <hr>
                     <div class="media">
@@ -159,7 +153,10 @@
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                         </div>
                         <div class="media-body">
+                        <form id="form" action="/posts" method="POST">
                             <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
+                            <input type="submit" value="Post">
+                            </form>
                         </div>
                     </div>
             </div>

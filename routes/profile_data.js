@@ -93,4 +93,22 @@ module.exports = (knex) => ({
       return err;
     });
 	}
+
+  getPostsAndCommentsForGame(game_id) {
+    return knex('posts')
+      .select('*')
+      .where({ game_id })
+      .then(posts => {
+        const postIds = posts.map(post => post.id);
+        return knex('comments').select('*').whereIn('post_id', postIds)
+          .then(comments => {
+            comments.forEach(comment => {
+              const post = posts.find(post => post.id === comment.post_id);
+              post.comments = post.comment || [];
+              post.comments.push(comment)
+            });
+            return posts;
+          })
+      })
+  }
 });
