@@ -126,7 +126,7 @@ app.get('/event/:id', (req, res) => {
         game_id,
         user_id,
         profile,
-        posts,
+        posts
       };
       // res.render('event', templateVars);
       res.render('event', templateVars);
