@@ -2,6 +2,51 @@
 
 module.exports = (knex) => ({
 
+    queryPartPlayers: function(gameId) {
+      return knex('users')
+      .select('users.first_name', 'users.last_name', 'participations.equipment', 'participations.user_id')
+      .innerJoin('participations', 'users.id', '=', 'participations.user_id')
+      .where('participations.game_id', '=', gameId)
+      .orderBy('participations.created_at', 'desc')
+      .then(rows => {
+        console.log('THESE ARE THE ROWS IN QUERY USER GAME: ', rows);
+        const result = {
+          users: rows.map(row => {
+            return {
+              first_name: row.first_name,
+              last_name: row.last_name,
+              equipment: row.equipment,
+              partUserId: row.user_id
+            };
+          })/*,
+          games: []*/
+        };
+        // rows.forEach(row => {
+        //   console.log("this is each row: ", row);
+        //   result.user.first_name = row.first_name;
+        //   result.user.last_name = row.last_name;
+        //   result.user.image = row.image;
+        //   result.user.equipment = row.equipment;
+        //   result.user.partUserId = row.user_id;
+        //   if(row.id) {
+        //     result.games.push({
+        //       id: row.id,
+        //       title: row.title,
+        //       location: row.location,
+        //       start_time: row.start_time
+        //     });
+        //   }
+        // });
+
+        console.log("this is finished result USERSGAMES>>>>>: ", result)
+        return result;
+      })
+      .catch(err => {
+      console.log("this is THE ERROR", err);
+    });
+    },
+
+
   queryUserGames: function(userId) {
     return knex('users')
 
@@ -10,7 +55,6 @@ module.exports = (knex) => ({
       .leftOuterJoin('games', 'participations.game_id', 'games.id')
       .where('users.id', '=', userId)
       .then(rows => {
-        console.log('THESE ARE THE ROWS IN QUERY USER GAME: ', rows);
         const result = {
           user: {
             first_name: '',
@@ -22,7 +66,6 @@ module.exports = (knex) => ({
           games: []
         }
         rows.forEach(row => {
-          console.log("this is each row: ", row);
           result.user.first_name = row.first_name;
           result.user.last_name = row.last_name;
           result.user.image = row.image;
@@ -39,7 +82,6 @@ module.exports = (knex) => ({
           }
         });
 
-        console.log("this is finished result USERSGAMES>>>>>: ", result)
         return result;
       })
       .catch(err => {
@@ -92,9 +134,9 @@ module.exports = (knex) => ({
       console.log("this is catching error in promise.all query", err);
       return err;
     });
-	}
+	},
 
-  getPostsAndCommentsForGame(game_id) {
+  getPostsAndCommentsForGame: function(game_id) {
     return knex('posts')
       .select('*')
       .where({ game_id })
@@ -112,3 +154,5 @@ module.exports = (knex) => ({
       })
   }
 });
+
+

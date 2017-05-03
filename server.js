@@ -111,28 +111,31 @@ app.get('/create_event', (req, res) => {
 
 app.get('/event/:id', (req, res) => {
   let user_id = Number(req.session.user_id);
-  let game_id = req.params.id;
+  let game_id = Number(req.params.id);
   console.log("this is req params id", req.params.id);
-  if (!id) {
+
+  if (!user_id) {
     res.status(401).send('Please log in first');
     return;
   } else {
     Promise.all([
       profileData.queryUserGames(user_id),
       profileData.getPostsAndCommentsForGame(game_id),
+      profileData.queryPartPlayers(game_id)
       // profileData.someOtherQuery(whatever)
-    ]).then(([profile, posts/*, whatverResult*/]) => {
+    ]).then(([profile, posts, info]) => {
       const templateVars = {
         game_id,
         user_id,
         profile,
-        posts
+        posts,
+        info
       };
       // res.render('event', templateVars);
       res.render('event', templateVars);
     }).catch(error => {
       res.status(500).json({ error: error.message });
-    })
+    });
     // return profileData.queryUserGames(Number(id))
     //   .then(data => {
     //     // res.json(data);
@@ -148,7 +151,7 @@ app.get('/event/:id', (req, res) => {
     //     console.log('THIS IS THE TEMPLATE VARS:', templateVars);
     //     res.render('event', templateVars);
     //   })
-  };
+  }
 });
 
 
