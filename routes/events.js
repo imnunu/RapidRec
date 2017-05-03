@@ -2,16 +2,20 @@
 
 const express = require('express');
 const router  = express.Router();
+const moment = require('moment');
 
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
-    knex
+    var currentDate = moment().tz("America/Los_Angeles").format();
+    //var startTime = moment(games.start_time).tz("America/Los_Angeles").format();
+    knex('games')
+      .where('games.start_time', '>', currentDate)
       .select("*")
-      .from("games")
       .then((results) => {
         res.json(results);
     });
+      return router;
   });
 
   router.get('/:game_id/comments', (req, res) => {

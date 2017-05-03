@@ -122,7 +122,6 @@ app.get('/event/:id', (req, res) => {
       profileData.queryUserGames(user_id),
       profileData.getPostsAndCommentsForGame(game_id),
       profileData.queryPartPlayers(game_id)
-      // profileData.someOtherQuery(whatever)
     ]).then(([profile, posts, info]) => {
       const templateVars = {
         game_id,
@@ -167,7 +166,6 @@ app.get('/create_game/:id', (req, res) => {
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
-      console.log("this is array of all games~~~~~~~~", result.user_games.games);
       let currentTime = moment.utc().tz('America/Los_Angeles');
       let pasts = 1;
       let future = 1;
@@ -179,13 +177,8 @@ app.get('/user/:id/profile', (req, res) => {
 
       result.user_games.games.forEach(game => {
         count = count + 1;
-        // let date = new Date();
-        let startTime = moment.utc(game.start_time).tz('America/Los_Angeles');
-        let endTime = moment.utc(game.end_time).tz('America/Los_Angeles');
-
         // --- UPCOMING GAMES
         if (startTime > currentTime) {
-          console.log("pushing game ", future++, "into upcoming games array");
           all_games.upcoming_games.push({
             id: game.id,
             title: game.title,
@@ -196,7 +189,6 @@ app.get('/user/:id/profile', (req, res) => {
         }
         // --- PAST GAMES
         if (endTime < currentTime) {
-          console.log("pushing game ", pasts++, "into past games array");
           all_games.past_games.push({
             id: game.id,
             title: game.title,
@@ -206,21 +198,6 @@ app.get('/user/:id/profile', (req, res) => {
           });
         }
       });
-      console.log("***************************************************************")
-      console.log(count + " games were sorted");
-      console.log("this is array of past games", all_games.past_games);
-      console.log("this is array of upcoming games", all_games.upcoming_games);
-      // res.json(data);
-
-      // let arr = [];
-      // all_games.past_games.reduce((currentTime, game) => {
-      //   game.start_time.push(arr);
-
-      // }, currentTime);
-
-      // let pastSorted = arr.sort(function(a, b) {
-      //   return b - a;
-      // });
       let templateVars = {
         id: req.params.id,
         profile: result,
