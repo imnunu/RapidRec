@@ -179,6 +179,7 @@
 
 
 <!-- Modal / Basic Create Game-->
+
 <div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -186,7 +187,9 @@
 			<div class="modal-body">
 				<div class="row">
 				<div class="col-lg-8 col-lg-push-2">
+					<% if (id) { %>
 					<div class="text-center">
+						
 						<h3>Create Your Own Game</h3>
 					</div>
 					<!-- Input -->
@@ -205,14 +208,15 @@
     								<label>End Time</label>
     								<input type="text" placeholder="Select end time" class="form-control create_event_end_date_time" id="create_event_end_date_time" name="end_time" required>
     							</div>
-    						</div>
-
-    						<div class="row">
-    							<div class="col-sm-4 form-group location">
+								<div class="col-sm-12 form-group location">
     								<label>Location</label>
     								<input type="text" placeholder="location" class="form-control create_event_location" required>
     							</div>
-    							<div class="col-sm-4 form-group">
+    						</div>
+
+    						<div class="row">
+    							
+    							<div class="col-sm-6 form-group">
     								<label>Number of Players</label>
 										<select class="form-control create_event_number_of_players" required>
 										<option>2</option>
@@ -226,10 +230,11 @@
 										<option>10</option>
 										</select>
     							</div>
-    							<div class="col-sm-4 form-group">
-									<div class="checkbox">
-										<label>
-										<input type="checkbox" class="create_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+    							<div class="col-sm-6 form-group">
+									<div class="checkbox form-check form-check-inline">
+										<label class="form-check-label">
+										<input type="checkbox" class="form-check-input create_event_equipment">Bring a basketball?</input>
+										<span class="pull-right"><img src="img/32basketball.png" class="basketball" width="24px" height="24px"></span>
 										</label>
 									</div>
     							</div>
@@ -252,6 +257,17 @@
 		</div>
 	</div>
 </div>
+					<%  } else { %>
+							<div class="text-center">
+						<h3>Please Login first to create your own game</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+          <% } %>
 <!-- Footer -->
 
 <!-- Footer / End -->
