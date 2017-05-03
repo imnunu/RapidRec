@@ -1643,7 +1643,7 @@ pre { tab-size: 4; }
 .page-title h1 { color: white; font-size: 42px; letter-spacing: 0.2em; margin-bottom: 0; text-transform: uppercase; font-family: "Montserrat", Helvetica, Arial, sans-serif; }
 @media only screen and (max-width: 767px) { .page-title h1 { font-size: 28px; } }
 .page-title h1 > i { position: relative; top: 3px; margin-right: 5px; }
-.page-title.page-title-1 { padding-top: 86px; padding-bottom: 86px; background-image: url("/img/basketball_banner.jpg")}
+.page-title.page-title-1 { padding-top: 86px; padding-bottom: 86px; background-image: url("/img/banner.jpeg")}
 .page-title.page-title-1 .breadcrumb { float: right; margin-top: 10px; }
 @media only screen and (max-width: 991px) { .page-title.page-title-1 .breadcrumb { float: none; } }
 .page-title.page-title-2 { padding-top: 156px; padding-bottom: 156px; }

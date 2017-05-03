@@ -1,13 +1,3 @@
-/* -----------------------------------------------------------------------------
-
-The Okno - Ultimate Multipurpose HTML5 Template
-
-File:           JS Core
-Version:        1.1
-Last change:    10/06/15 
-Author:         Suelo
-
--------------------------------------------------------------------------------- */
 
 "use strict";
 
@@ -55,8 +45,8 @@ var Okno = {
     init: function() {
 
         this.Basic.init();
-        this.Component.init(); 
-        
+        this.Component.init();
+
     },
     Basic: {
         init: function() {
@@ -106,12 +96,12 @@ var Okno = {
                 $(this).css('background-image','url('+src+')').children('img').hide();
             });
 
-            // Parallax 
+            // Parallax
             $('.bg-parallax').parallax({
                 zIndex: 0
             });
 
-            // Slideshow 
+            // Slideshow
             $('.bg-slideshow').owlCarousel({
                 singleItem: true,
                 autoPlay: 4000,
@@ -124,7 +114,7 @@ var Okno = {
                 touchDrag: false
             });
 
-            // Video 
+            // Video
             var $bgVideo = $('.bg-video');
             if($bgVideo) {
                 $bgVideo.YTPlayer();
@@ -137,9 +127,9 @@ var Okno = {
         },
         animations: function() {
 
-            // Animation - appear 
+            // Animation - appear
             $('.animated').appear(function() {
-                $(this).each(function(){ 
+                $(this).each(function(){
                         var $target =  $(this);
                         var delay = $(this).data('animation-delay');
                         setTimeout(function() {
@@ -286,7 +276,7 @@ var Okno = {
                         $filterBar.removeClass('fixed');
                     }
                 }
-         
+
                 var $selector = $filterBar.find('.selector');
 
                 window.setFilterSelector = function() {
@@ -297,7 +287,7 @@ var Okno = {
                     });
                 }
 
-                setFilterSelector(); 
+                setFilterSelector();
 
             }
 
@@ -331,7 +321,7 @@ var Okno = {
                 $(this).parents('ul').find('.active').removeClass('active');
                 $(this).parent('li').addClass('active');
 
-                setFilterSelector(); 
+                setFilterSelector();
 
                 return false;
             });
@@ -357,13 +347,13 @@ var Okno = {
             var $googleMap = $('#google-map');
 
             if($googleMap.length>0) {
-                var yourLatitude = $googleMap.data('latitude');   
-                var yourLongitude = $googleMap.data('longitude');  
-                var pickedStyle = $googleMap.data('style');     
+                var yourLatitude = $googleMap.data('latitude');
+                var yourLongitude = $googleMap.data('longitude');
+                var pickedStyle = $googleMap.data('style');
                 var dark = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}];
                 var light = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}];
 
-                var pickedStyle = $googleMap.data('style');   
+                var pickedStyle = $googleMap.data('style');
 
                 var myOptions = {
                     zoom: 14,
@@ -401,12 +391,12 @@ var Okno = {
                     return false;
                 }
             })
-        },  
+        },
     },
     Component: {
-        init: function() {  
+        init: function() {
 
-            this.carousel(); 
+            this.carousel();
             this.counter();
             this.counterdown();
             this.lightbox();
@@ -432,7 +422,7 @@ var Okno = {
 
                 $(this).owlCarousel({
                     items: items,
-                    itemsDesktop: [1199,Math.ceil(items*0.6)], 
+                    itemsDesktop: [1199,Math.ceil(items*0.6)],
                     itemsDesktopSmall: [991,Math.ceil(items*0.5)],
                     itemsTablet: [768,Math.ceil(items*0.4)],
                     itemsMobile: [479,Math.ceil(items*0.2)],
@@ -450,7 +440,7 @@ var Okno = {
                 });
 
             });
-            
+
         },
         cookiePopup: function() {
 
@@ -623,7 +613,7 @@ var Okno = {
             var $signUpForm  = $('.sign-up-form');
 
             if($signUpForm.length>0) {
-            
+
                 $signUpForm.submit(function() {
                     var $btn = $(this).find('.btn-submit'),
                         $form = $(this),
@@ -674,7 +664,7 @@ var Okno = {
 
                 var $recaptcha = $contactForm.find('.g-recaptcha'),
                     recaptchaValid;
-            
+
                 $contactForm.submit(function() {
                     var $btn = $(this).find('.btn-submit'),
                         $form = $(this),
@@ -768,7 +758,7 @@ $(document).ready(function (){
 });
 
 $(document).keyup(function(e) {
-    if (e.keyCode == 27) { 
+    if (e.keyCode == 27) {
         $body.removeClass('search-bar-open');
     }
 });
@@ -781,17 +771,16 @@ $(window).scroll(function(){
 
 $(window).resize(function(){
     setNavPrimary();
-    if($('#filter-bar').length > 0) setFilterSelector(); 
+    if($('#filter-bar').length > 0) setFilterSelector();
 })
 
 $(window).load(function(){
     Okno.Component.typing();
     $('#page-loader').fadeOut(500, function(){
         Okno.Basic.animations();
-        Okno.Component.modal(); 
+        Okno.Component.modal();
         if($html.data('cookies-popup') == true) {
-            Okno.Component.cookiePopup(); 
+            Okno.Component.cookiePopup();
         };
     });
 });
-

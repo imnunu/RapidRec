@@ -1,116 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-cookies-popup="false">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RapidRec</title>
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+
+<!-- Meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Title -->
+<title>RapidRec</title>
+
+<!-- Google Web Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
+
+<!-- CSS Styles -->
+<link rel="stylesheet" href="/styles/styles.css" />
+
+<!-- CSS Base -->
+<link id="theme" rel="stylesheet" href="/styles/theme-classic.css" />
+
 </head>
+
 <body>
-<!-- nav bar -->
-<div class="mainbody container-fluid">
-    <div class="row">
-        <div class="navbar-wrapper">
-            <div class="container-fluid">
-                <div class="navbar navbar-default navbar-static-top" id="navbar-profile" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="/index">RapidRec</a>
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/user/<%= id %>/edit" >Edit Profile</a></li>
-                                 <li><a class="logout_button" >Log Out</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
- <div class="container">
-        <!--left side pic etc..-->
-        <div style="padding-top:50px;"> </div>
-        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="media">
-                        <div align="center">
-                            <img class="thumbnail img-responsive" src="/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
-                        </div>
-                        <div class="media-body">
-                            <button class="add_friend_button" type="">Add Friend</button>
-                            <hr>
-                            <h3><strong>Friends</strong></h3>
-                            <ul>
-                            <% for (let friend of profile.user_friends.friends) { %>
-                                <li><%= friend.first_name %> <%= friend.last_name %></li>
+
+<!-- Loader -->
+<div id="page-loader"><svg class="loader-1 loader-primary" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>
+<!-- Loader / End -->
+
+<!-- Header -->
+<header id="header" class="absolute fullwidth transparent">
+	
+	<!-- Navigation Bar -->
+	<div id="nav-bar">
+		<nav class="module-group right">
+			<div class="module menu left">
+				<ul id="nav-primary" class="nav nav-primary">
+					<li><a href="/index">Home</a></li>
+					<li><a href="/user/<%= id %>/profile">Profile</a></li>
+					<li><a href="/user/<%= id %>/edit">Profile Edit</a></li>
+					<li><a class="logout_button">Sign Out</a></li>
+					
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Notification Bar -->
+	<div id="notification-bar"></div>
+
+	<!-- Search Bar -->
+
+
+</header>
+<!-- Header / End -->
+
+<!-- Page Title -->
+<div id="page-title" class="page-title page-title-1 bg-grey">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><%= profile.user_games.user.first_name %> <%= profile.user_games.user.last_name %></h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Page Title / End -->
+
+<!-- Content -->
+<div id="content">
+
+	<section>
+
+		<div class="container">
+			<div class="row">
+
+				
+
+				<!-- Sidebar #2 left-->
+				<div class="sidebar col-md-3 clearfix">
+
+					<!-- Widget - Newsletter -->
+					<div class="widget widget-newsletter">
+						<h6 class="text-uppercase">About Me</h6>
+						<img class="img-circle mb-50" src='/img/avatars/avatar_hoody_guy.png' alt="">
+						<button type="submit" class="btn btn-primary btn-sm  btn-block"><span>Update avatar picture</span></button>
+						
+					</div>
+
+
+					<!-- Widget - Follow -->
+					<!--<div class="widget">
+						<h6 class="text-uppercase">Connect Us</h6>
+						<img class="img-circle mb-20" src='/img/avatars/avatar_hoody_guy.png' alt="">
+
+					</div>-->
+
+				</div>
+
+				<!-- Sidebar #1 left left -->
+				<div class="sidebar col-md-3 clearfix">
+					<!-- Widget - Twitter -->
+					<div class="widget">
+						<!--<h6 class="text-uppercase text-muted">Latest Tweets</h6>-->
+						<button type="submit" class="btn btn-primary btn-sm btn-block add_friend_button"><span>Add Friend</span></button>
+						<!--<button class="add_friend_button" type="">Add Friend</button>-->
+					</div>
+					
+					<!-- Widget - Recent posts -->
+					<div class="widget widget-recent-posts">
+						<h6 class="text-uppercase text-muted">Friend List</h6>
+						
+						<ul class="list-posts">
+							<% for (let friend of profile.user_friends.friends) { %>
+							<li><a href=""><%= friend.first_name %> <%= friend.last_name %></a></li>
                             <% } %>
-                            </ul>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+							<!--need to delete after add friend function working-->
+							<li>
+								<a href=""></a>
+								
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				<!-- Content -->
+				<div class="content col-md-6">
+					<!-- Upcoming Events. -->
+					<h3>Upcoming Games</h3>
+					<hr>
+					<% for (let game of upcoming_games) { %>
+					<div class="testimonial testimonial-primary testimonial-2">
+								<div class="quote">
+									<p><strong>Location: </strong> <%= game.location %></p>
+                      				<p><strong>Date/Time: </strong><%= game.start_time %></p>
+								</div>
+								<div class="author">
+									<div class="name"><%= game.title %></div>
+								</div>
+							</div>
+					<% } %>
+					<br />
+					<!-- Past Events -->
+					<h3>Past Games</h3>
+					<hr>
+					<% for (let game of past_games) { %>
+					<div class="testimonial testimonial-2">
+						<div class="quote">
+							<p><strong>Location: </strong><%= game.location %></p>
+                        	<p><strong>Date/Time: </strong><%= game.start_time %></p>
+						</div>
+						<div class="author">
+							<div class="name"><%= game.title %></div>
+						</div>
+					</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- Content / End -->
 
-            <h2><strong><%= profile.user_games.user.first_name %> <%= profile.user_games.user.last_name %></strong></h2>
-            <hr>
-            <!-- Upcoming Events. -->
-            <h2>Upcoming Events:</h2>
-            <% for (let game of upcoming_games) { %>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                    </div>
-
-                    <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
-                    <hr>
-                    <div class="post-content" >
-                      <a href="#" style="text-decoration:none;">
-                      <p><strong>Location: </strong> <%= game.location %></p>
-                      <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                      </a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <% } %>
-            <!-- Past Events -->
-            <h2>Past Events:</h2>
-              <% for (let game of past_games) { %>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="pull-left">
-                          <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                      </div>
-                      <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
-                      <hr>
-                      <div class="post-content" >
-                        <a href="#" style="text-decoration:none;">
-                        <p><strong>Location: </strong><%= game.location %></p>
-                        <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                        </a>
-                      </div>
-                      <hr>
-                  </div>
-                </div>
-            <% } %>
+<!-- Footer -->
+<!-- Footer / End -->
 
 
-        </div>
+<!-- JS Libraries -->
+<script src="/vendor/js/jquery-1.12.3.min.js"></script>
 
-      </div>
-  </div>
-     </div>
+<!-- JS Plugins -->
+<script src="/scripts/plugins.js"></script>
 
-    <script src="/scripts/login.js"></script>
-    <script src="/scripts/main.js"></script>
+<!-- JS Core -->
+<script src="/scripts/core.js"></script>
 
+<script src="/scripts/register.js"></script>
+<script src="/scripts/login.js"></script>
 </body>
 
 </html>
