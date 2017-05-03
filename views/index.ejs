@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-cookies-popup="true">
+<html lang="en" data-cookies-popup="false">
 <head>
 
 <!-- Meta -->
@@ -85,31 +85,28 @@
 		</div>
 	</section>
 
-	<!-- Section -->
+	<!-- Section google map-->
 	<section class="protrude bg-grey pt-0">
 		<div class="container">
 			<div class="row pull-up-30 mb-60">
 				<div class="col-md-12">
-					<!-- Service -->
 					<div class="feature feature-1 boxed bg-white rounded animated" data-animation="fadeInUp">
-						<!--<span class="icon"><i class="ti-pie-chart text-primary"></i></span>-->
-
-						<div class="container google_map">
-  							
+						<div class="container google_map">		
     							<div class="row">
-    							<input id="pac-input" class="controls" type="text" placeholder="Start typing here">
+    								<input id="pac-input" class="form-control input-2 input-sm" type="text" placeholder="Enter Location">
 								</div>
-        						<div id="title">Enter Location</div>
-      							<div id="map"></div>
-    						
-  						</div>
+						</div>
+      					<div id="map"></div>
 					</div>
+							
 				</div>	
 			</div>
 		</div>
 	</section>
-</div>
+</div>	
 <!-- Content / End -->
+
+
 
 <!-- Modal / Basic Register-->
 <div class="modal fade" id="register-modal" role="dialog">
@@ -154,16 +151,11 @@
 <div class="modal fade" id="login-modal" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<!--<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close"></i></button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-			</div>-->
 			<div class="modal-body">
 				<div class="row">
 				<div class="col-lg-8 col-lg-push-2">
 					<div class="text-center">
 						<h3>Login to Your Account</h3>
-						<!--<p class="lead text-center">Default Input &amp; Textarea with placeholders.</p>-->
 					</div>
 					<!-- Input -->
 					<div class="form-group">
@@ -185,10 +177,12 @@
 	</div>
 </div>
 
+
 <!-- Modal / Basic Create Game-->
 <div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
+
 			<div class="modal-body">
 				<div class="row">
 				<div class="col-lg-8 col-lg-push-2">
@@ -211,14 +205,13 @@
     								<label>End Time</label>
     								<input type="text" placeholder="Select end time" class="form-control create_event_end_date_time" id="create_event_end_date_time" name="end_time" required>
     							</div>
-								<div class="col-sm-4 form-group location">
-    								<label>Location</label>
-    								<input type="text" placeholder="location" class="form-control create_event_location" required>
-    							</div>
     						</div>
 
     						<div class="row">
-    							
+    							<div class="col-sm-4 form-group location">
+    								<label>Location</label>
+    								<input type="text" placeholder="location" class="form-control create_event_location" required>
+    							</div>
     							<div class="col-sm-4 form-group">
     								<label>Number of Players</label>
 										<select class="form-control create_event_number_of_players" required>
@@ -263,11 +256,6 @@
 
 <!-- Footer / End -->
 
-
-
-
-
-
 <!-- JS Libraries -->
 <script src="vendor/js/jquery-1.12.3.min.js"></script>
 
@@ -278,7 +266,7 @@
 <script src="scripts/core.js"></script>
 
 <script src="scripts/register.js"></script>
-<script src="scripts/register.js"></script>
+<script src="scripts/login.js"></script>
 
 <script src="scripts/create_game.js"></script>
 <script src="scripts/googleApi.js"></script>
@@ -287,7 +275,5 @@
 <!-- google API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places&callback=initialize"></script>
 
-
 </body>
-
 </html>
