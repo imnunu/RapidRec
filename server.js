@@ -102,7 +102,7 @@ app.get("/index", (req, res) => {
 app.get('/create_event', (req, res) => {
   let id = req.session.user_id;
   if (!id) {
-    res.status(401).send('Please log in first');
+    res.status(401).send('<p>You have not logged in.</p><a href="/index">Login Here</a>');
     return;
   } else {
     res.render('create_event', {id: id});
@@ -115,7 +115,7 @@ app.get('/event/:id', (req, res) => {
   console.log("this is req params id", req.params.id);
 
   if (!user_id) {
-    res.status(401).send('Please log in first');
+    res.status(401).send('<p>You have not logged in.</p><a href="/index">Login Here</a>');
     return;
   } else {
     Promise.all([

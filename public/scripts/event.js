@@ -25,7 +25,7 @@ function loadPage(id){
 
 // };
 
-// function createMembersElement(item){
-//   let $members = $('<div>').addClass('list-group')
-//   .append($('<a>').attr('href', '/profile/' + item.id).addClass('btn-warning btn btn-sm btn-block'))
-// }
+function createMembersElement(item){
+  let $members = $('<div>').addClass('list-group')
+  .append($('<a>').attr('href', '/profile/' + item.id).addClass('btn-warning btn btn-sm btn-block'))
+}
