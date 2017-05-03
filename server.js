@@ -137,6 +137,7 @@ app.get('/event/:id', (req, res) => {
     ]).then(([profile, posts]) => {
       const templateVars = {
         id: url,
+        seshId: id,
         profile: '',
         posts: '',
         partUserId: '',
@@ -171,36 +172,66 @@ app.post("/create_game/:id", (req, res) => {
 });
 
 app.get('/create_game/:id', (req, res) => {
-  res.render('event')
+  console.log("create game event page loggedin user id is: ", req.session.user_id);
+  res.render('event', {id: req.session.user_id});
 });
 
 // routes used for navigating profile + edit profile
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
-      console.log("this is array of all games~~~~~~~~", result.user_games.games);
-      let loggedInId = req.session.user_id[0];
+      // console.log("this is array of all games~~~~~~~~", result.user_games.games);
+      // console.log("this is result:", result);
+      let loggedInId = req.session.user_id;
       let friendsArr = req.session.friends
-      let startTime = moment.utc(game.start_time).tz('America/Los_Angeles');
-      let endTime = moment.utc(game.end_time).tz('America/Los_Angeles');
-      let currentTime = moment.utc().tz('America/Los_Angeles');
-      let pasts = 1;
-      let future = 1;
-      let count = 0;
+      // let currentTime = moment.utc().tz('America/Los_Angeles');
+      let currentTime = moment.utc(new Date(),"YYYY/MM/DD HH:mm:ss").tz('America/Los_Angeles');
+      let gameCount = 1;
+      let totalCount = 0;
 
       let all_games = {
-        past_games: [],
-        upcoming_games: []
+        todays_games: [],
+        upcoming_games: [],
+        past_games: []
       };
 
+      // --- PRINTING OUT INDIVIDUAL GAMES
       result.user_games.games.forEach(game => {
-        count = count + 1;
-        // let date = new Date();
+        // let startTime = moment(game.start_time).tz('America/Los_Angeles');
+        // let endTime = moment(game.end_time).tz('America/Los_Angeles');
+        let startTime = moment.utc(game.start_time,"YYYY/MM/DD HH:mm:ss");
+        let endTime = moment.utc(game.end_time,"YYYY/MM/DD HH:mm:ss");
+        totalCount = totalCount + 1;
+        console.log('this is current time----:', currentTime);
+        console.log('this is start time:~~~~~', startTime);
+        console.log('this is end time:~~~~~', endTime);
+        let upcoming = startTime - currentTime;
+        let past = currentTime - endTime;
+        console.log('this is math UPCOMING: >>>', upcoming);
+        console.log('this is math PAST: >>>', past);
+        if (upcoming > - 25200000 && upcoming < 0) {
+          console.log("true");
+        } else {
+          console.log("false");
+        }
+        // console.log('this is end time:', endTime);
 
 
-        // --- UPCOMING GAMES
+        // --- TODAYS GAMES
+        if (upcoming > - 25200000 && upcoming < 0) {
+          console.log("pushing game ", gameCount++, "into todays games array");
+          all_games.todays_games.push({
+            id: game.id,
+            title: game.title,
+            location: game.location,
+            start_time: game.start_time,
+            end_time: game.start_time
+          });
+        }
+
+        // --- FUTURE GAMES
         if (startTime > currentTime) {
-          console.log("pushing game ", future++, "into upcoming games array");
+          console.log("pushing game ", gameCount++, "into upcoming games array");
           all_games.upcoming_games.push({
             id: game.id,
             title: game.title,
@@ -209,9 +240,11 @@ app.get('/user/:id/profile', (req, res) => {
             end_time: game.start_time
           });
         }
+
         // --- PAST GAMES
-        if (endTime < currentTime) {
-          console.log("pushing game ", pasts++, "into past games array");
+        // endTime <= currentTime
+        if (upcoming < - 25200000) {
+          console.log("pushing game ", gameCount++, "into past games array");
           all_games.past_games.push({
             id: game.id,
             title: game.title,
@@ -222,9 +255,10 @@ app.get('/user/:id/profile', (req, res) => {
         }
       });
       console.log("***************************************************************")
-      console.log(count + " games were sorted");
-      console.log("this is array of past games", all_games.past_games);
+      console.log(totalCount + " games were sorted");
+      console.log("this is array of todays games", all_games.todays_games);
       console.log("this is array of upcoming games", all_games.upcoming_games);
+      console.log("this is array of past games", all_games.past_games);
       // res.json(data);
 
       // let arr = [];
@@ -239,11 +273,12 @@ app.get('/user/:id/profile', (req, res) => {
       let templateVars = {
         seshId: loggedInId,
         urlId: req.params.id,
-        friendsArr: friendsArr
+        friendsArr: friendsArr,
         // id: req.params.id,
         profile: result,
-        past_games: all_games.past_games.reverse(),
+        todays_games: all_games.todays_games.reverse(),
         upcoming_games: all_games.upcoming_games.reverse(),
+        past_games: all_games.past_games.reverse(),
         timeNow: moment().tz('America/Los_Angeles')
       }
       res.render('profile', templateVars);
@@ -251,11 +286,13 @@ app.get('/user/:id/profile', (req, res) => {
 });
 
 app.get("/user/:id/edit", (req, res) => {
+  console.log("this is req.params", req.params);
   return profileData.queryProfileData(req.params.id)
     .then(data => {
+      console.log("this is edit data to work w ", data);
       // res.json(data);
       let templateVars = {
-        id: req.session.user_id,
+        seshId: req.session.user_id,
         profile: data
       }
     res.render('profile_edit', templateVars);
@@ -283,7 +320,7 @@ app.post("/logout", (req, res) => {
 
 app.post("/user/:id/friend", (req, res) => {
     knex.insert({
-      user_id: req.session.user_id[0],
+      user_id: req.session.user_id,
       other_id: req.params.id,
       status: 'Approved'
     })

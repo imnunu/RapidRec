@@ -1,6 +1,6 @@
 "use strict";
 
-const profileData = require('../profile_data.js');
+const profileData = require('./profile_data.js');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');

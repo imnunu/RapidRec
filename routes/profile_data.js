@@ -5,19 +5,19 @@ module.exports = (knex) => ({
   queryUserGames: function(userId) {
     return knex('users')
 
-      .select('games.id', 'games.title', 'games.location', 'games.start_time', 'users.first_name', 'users.last_name', 'users.image', 'participations.user_id', 'participations.equipment')
+      .select('games.id', 'games.title', 'games.location', 'games.start_time', 'games.end_time', 'users.first_name', 'users.last_name', 'users.image', 'participations.user_id', 'participations.equipment')
       .leftOuterJoin('participations', 'users.id', 'participations.user_id')
       .leftOuterJoin('games', 'participations.game_id', 'games.id')
       .where('users.id', '=', userId)
       .then(rows => {
-        console.log('THESE ARE THE ROWS IN QUERY USER GAME: ', rows);
+        // console.log('THESE ARE THE ROWS IN QUERY USER GAME: ', rows);
         const result = {
           user: {
             first_name: '',
             last_name: '',
-            image: '',
-            equipment: '',
-            partUserId: '',
+            image: ''
+            // equipment: '',
+            // partUserId: '',
           },
           games: []
         }

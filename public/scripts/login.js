@@ -16,7 +16,7 @@ $(() => {
       dataType: "JSON",
       success: function(data) {
           console.log(data);
-        if(data != "error"){
+        if(data[0] != "error"){
           window.location = '/';
         }
         else {

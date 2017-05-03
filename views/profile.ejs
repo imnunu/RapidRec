@@ -48,7 +48,9 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
 
-                                <li><a class="logout_button" >Log Out</a></li>s
+                              <li><a href="/user/ <%= seshId %> /profile" >Profile Page</a></li>
+                              <li><a href="/user/ <%= seshId %> /edit" >Edit Profile</a></li>
+                              <li><a class="logout_button" >Log Out</a></li>
 
                             </ul>
                         </div>
@@ -91,8 +93,31 @@
 
             <h2><strong><%= profile.user_games.user.first_name %> <%= profile.user_games.user.last_name %></strong></h2>
             <hr>
-            <!-- Upcoming Events. -->
-            <h2>Upcoming Events:</h2>
+
+            <!-- Todays Events. -->
+            <h2>Todays Events:</h2>
+            <% for (let game of todays_games) { %>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pull-left">
+                            <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </div>
+
+                    <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
+                    <hr>
+                    <div class="post-content" >
+                      <a href="#" style="text-decoration:none;">
+                      <p><strong>Location: </strong> <%= game.location %></p>
+                      <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                      </a>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <% } %>
+
+            <!-- Future Events. -->
+            <h2>Future Events:</h2>
             <% for (let game of upcoming_games) { %>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -112,6 +137,7 @@
                 </div>
             </div>
             <% } %>
+
             <!-- Past Events -->
             <h2>Past Events:</h2>
               <% for (let game of past_games) { %>
