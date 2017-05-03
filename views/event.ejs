@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="game_id" content="<%= gameId %>">
+    <meta name="game_id" content="<%= game_id %>">
 
 
     <title>RapidRec</title>
@@ -40,14 +40,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
               <ul class="nav navbar-nav">
-
-                <% if (id) { %>
-                <li><a href="/user/<%=id%>/profile">Profile</a></li>
-                  <li><a class="logout_button">Log Out</a></li>
-                    <%  } else { %>
-                     <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
-                    <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-                    <% } %>
+                <% if (user_id) { %>
+                <li><a href="/user/<%=user_id%>/profile">Profile</a></li>
+                <li><a class="logout_button">Log Out</a></li>
+                <%  } else { %>
+                <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+                <% } %>
                </ul>
             </div>
         </div>
@@ -81,42 +80,44 @@
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel-group">
                 <div class="panel panel-default">
-                <% if (!partUserId) { %>
+                <% if (info.users.every(someUser => { %>%>
+                <%  return (someUser.partUserId !== user_id) %>
+                <%   })) { %>
                     <div class="panel-heading">
                         <span class="event_join_button" role="button" style="text-decoration:none;">
                             <h4 class="panel-title" id= "joinGame">Join</h4>
                         </span>
                         <div id= "joinToggle" style="display: none">
                           <label>
-                            <input type="checkbox" class="join_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+                            <input type="checkbox" class="join_event_equipment"></input>Bring a basketball?<span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
                           </label>
                         <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
                         </div>
                     </div>
-                    <% } else  {%>
+                    <% } else {%>
                     <div class="panel-heading">
                         <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
                             <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
                         </a>
                     </div>
-                       <% } %>
+                   <% } %>
                 </div>
             </div>
             <h3>Player List </h3>
             <div class="list-group">
-                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span> Player 1 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>Player 2 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"></span>Player 3 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"></span>Player 4 Name</a>
-                <a href="#" class="list-group-item"><span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>Player 5 Name</a>
+              <% if (info.users.length) { %>
+                <% info.users.forEach((user) => { %>
+                <a href="#" class="list-group-item"><span class="pull-right">
+                <% if (user.equipment) { %>
+                <img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
+                <% } %>
+                </span> <%= (user.first_name + ' ' + user.last_name)%></a>
+                <% }); %>
+                <% } %>
             </div>
 
         </div>
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-
-            <nav id="usr-nav">
-                <button class="nav-btn" id="compose-btn">Post comment</button>
-            </nav>
 
         <div class="panel panel-default panel-body media">
              <section class="new-post">
@@ -151,7 +152,6 @@
                     <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
                     <hr>
                     <div class="post-content">
-                        <p>We'll be meeting a bit earlier than planned. If anyone is nearby come over!</p>
                     </div>
                     <hr>
                     <div class="media">
@@ -159,7 +159,10 @@
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                         </div>
                         <div class="media-body">
+                        <form id="form" action="/posts" method="POST">
                             <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
+                            <input type="submit" value="Post">
+                            </form>
                         </div>
                     </div>
             </div>
@@ -230,14 +233,14 @@
   <script src="/scripts/eventjoin.js"></script>
   <script>
     $(() => {
-      loadPage(<%= id %>);
+      loadPage(<%= game_id %>);
     });
   </script>
   <script>
-  const myId = <%= id %>;
+  const myId = <%= game_id %>;
   </script>
   <script>
-  const yourId = <%= id %>;
+  const yourId = <%= game_id %>;
   </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>

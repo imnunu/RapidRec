@@ -1,10 +1,10 @@
 $(() => {
 
 function joinEvent(eventID) {
-  let equipment = $('.join_event_equipment').val();
+  let equipment = $('.join_event_equipment')[0].checked;
   let data = equipment
 
-  console.log(data);
+  console.log('equipment', data);
   $.ajax({
     method: 'POST',
     url: '/api/event/' + eventID+ '/join',

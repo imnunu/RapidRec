@@ -110,41 +110,32 @@ app.get('/create_event', (req, res) => {
 });
 
 app.get('/event/:id', (req, res) => {
-  let id = req.session.user_id;
-  let url = req.params.id;
+  let user_id = Number(req.session.user_id);
+  let game_id = Number(req.params.id);
   console.log("this is req params id", req.params.id);
-  if (!id) {
+
+  if (!user_id) {
     res.status(401).send('Please log in first');
     return;
   } else {
     Promise.all([
-      profileData.queryUserGames(Number(id)),
-      knex('posts').select('*').where({ game_id: url })
-        .then(posts => {
-          const postIds = posts.map(post => post.id);
-          return knex('comments').select('*').whereIn('post_id', postIds)
-            .then(comments => {
-              comments.forEach(comment => {
-                const post = posts.find(post => post.id === comment.post_id);
-                post.comments = post.comment || [];
-                post.comments.push(comment)
-              });
-              return posts;
-            })
-        })
-    ]).then(([profile, posts]) => {
+      profileData.queryUserGames(user_id),
+      profileData.getPostsAndCommentsForGame(game_id),
+      profileData.queryPartPlayers(game_id)
+      // profileData.someOtherQuery(whatever)
+    ]).then(([profile, posts, info]) => {
       const templateVars = {
-        id: url,
-        profile: '',
-        posts: '',
-        partUserId: '',
-        gameId: req.params.id
+        game_id,
+        user_id,
+        profile,
+        posts,
+        info
       };
       // res.render('event', templateVars);
       res.render('event', templateVars);
     }).catch(error => {
       res.status(500).json({ error: error.message });
-    })
+    });
     // return profileData.queryUserGames(Number(id))
     //   .then(data => {
     //     // res.json(data);
@@ -160,7 +151,7 @@ app.get('/event/:id', (req, res) => {
     //     console.log('THIS IS THE TEMPLATE VARS:', templateVars);
     //     res.render('event', templateVars);
     //   })
-  };
+  }
 });
 
 
@@ -253,19 +244,20 @@ app.get("/user/:id/edit", (req, res) => {
   })
 });
 
-app.post("/addComment", (req, res) => {
-  console.log("posting to addd comment");
+app.post("/event/:id/addPosts", (req, res) => {
   knex.insert({
-    post_id: '',
-    user_id: '',
-    content: '',
+    game_id: req.params.id,
+    user_id: req.session.user_id,
+    content: req.body.content,
     created_at: new Date()
   })
-  .into('comments')
+  .into('posts')
   .then(() =>{
+    res.json('success');
     console.log("you're done");
   });
 });
+
 
 app.post("/logout", (req, res) => {
   delete req.session.user_id;
