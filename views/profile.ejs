@@ -87,22 +87,10 @@
 						
 					</div>
 
-
-					<!-- Widget - Follow -->
-					<!--<div class="widget">
-						<h6 class="text-uppercase">Connect Us</h6>
-						<img class="img-circle mb-20" src='/img/avatars/avatar_hoody_guy.png' alt="">
-
-					</div>-->
-
-				</div>
-
-				<!-- Sidebar #1 left left -->
-				<div class="sidebar col-md-3 clearfix">
-					<!-- Widget - Twitter -->
+					<!-- Widget -->
 					<div class="widget">
 						<!--<h6 class="text-uppercase text-muted">Latest Tweets</h6>-->
-						<button type="submit" class="btn btn-primary btn-sm btn-block add_friend_button"><span>Add Friend</span></button>
+						<button type="submit" class="btn btn-warning btn-sm btn-block add_friend_button"><span>Add Friend</span></button>
 						<!--<button class="add_friend_button" type="">Add Friend</button>-->
 					</div>
 					
@@ -122,11 +110,43 @@
 							
 						</ul>
 					</div>
+
+
+					<!-- Widget - Follow -->
+					<!--<div class="widget">
+						<h6 class="text-uppercase">Connect Us</h6>
+						<img class="img-circle mb-20" src='/img/avatars/avatar_hoody_guy.png' alt="">
+
+					</div>-->
+
 				</div>
+
+				<!-- Sidebar #1 left left -->
+				<!--<div class="sidebar col-md-3 clearfix">
+					<div class="widget">
+						<button type="submit" class="btn btn-warning btn-sm btn-block add_friend_button"><span>Add Friend</span></button>
+					</div>
+					
+					<div class="widget widget-recent-posts">
+						<h6 class="text-uppercase text-muted">Friend List</h6>
+						
+						<ul class="list-posts">
+							<% for (let friend of profile.user_friends.friends) { %>
+							<li><a href=""><%= friend.first_name %> <%= friend.last_name %></a></li>
+                            <% } %>
+						
+							<li>
+								<a href=""></a>
+								
+							</li>
+							
+						</ul>
+					</div>
+				</div>-->
 				<!-- Content -->
-				<div class="content col-md-6">
+				<div class="content col-md-9">
 					<!-- Upcoming Events. -->
-					<h3>Upcoming Games</h3>
+					<!--<h3>Upcoming Games</h3>
 					<hr>
 					<% for (let game of upcoming_games) { %>
 					<div class="testimonial testimonial-primary testimonial-2">
@@ -135,24 +155,51 @@
                       				<p><strong>Date/Time: </strong><%= game.start_time %></p>
 								</div>
 								<div class="author">
-									<div class="name"><%= game.title %></div>
+									<br />
+									<div class="name pull-right"><%= game.title %></div>
 								</div>
-							</div>
-					<% } %>
+					</div>
+					<% } %>-->
+
+
+
+
+
+
+					<!-- Section / Simple -->
+					<h3 class="text-center mb-20">Upcoming Games</h3>
+					<hr>
+					<section class="bg-primary dark">
+						<div class="container">
+								<div class="col-lg-5 col-md-6">
+									<% for (let game of upcoming_games) { %>
+									<div class="testimonial testimonial-1">
+										<div class="quote">
+											<p><strong>Location: </strong> <%= game.location %></p>
+                      						<p><strong>Date/Time: </strong><%= game.start_time %></p>
+										</div>
+										<div class="author">
+											<span class="name text-uppercase"><%= game.title %></span>
+										</div>
+									</div>
+									<% } %>
+								</div>
+						</div>
+					</section>
 					<br />
 					<!-- Past Events -->
-					<h3>Past Games</h3>
+					<h3 class="text-center mb-20">Past Games</h3>
 					<hr>
 					<% for (let game of past_games) { %>
-					<div class="testimonial testimonial-2">
-						<div class="quote">
-							<p><strong>Location: </strong><%= game.location %></p>
-                        	<p><strong>Date/Time: </strong><%= game.start_time %></p>
+						<div class="testimonial testimonial-1">
+							<div class="quote">
+								<p><strong>Location: </strong> <%= game.location %></p>
+                      			<p><strong>Date/Time: </strong><%= game.start_time %></p>
+							</div>
+							<div class="author">
+								<span class="name text-uppercase"><%= game.title %></span>
+							</div>
 						</div>
-						<div class="author">
-							<div class="name"><%= game.title %></div>
-						</div>
-					</div>
 					<% } %>
 				</div>
 			</div>
