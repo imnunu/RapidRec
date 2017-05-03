@@ -176,16 +176,20 @@ app.get('/create_game/:id', (req, res) => {
   res.render('event', {id: req.session.user_id});
 });
 
-// routes used for navigating profile + edit profile
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
       // console.log("this is array of all games~~~~~~~~", result.user_games.games);
-      // console.log("this is result:", result);
       let loggedInId = req.session.user_id;
-      let friendsArr = req.session.friends
-      // let currentTime = moment.utc().tz('America/Los_Angeles');
+      console.log("this is req.session.friends~~~~~~~~~~~~~~: ", req.session.friends);
+      console.log("this is req.params.id in profile + in ajax add friends: ", req.params.id);
+      let friendsArr = req.session.friends;
+      let session = req.session;
+      // console.log("TOTAL UPDATE thisis howmany friends you have: ", friendsArr);
+      console.log("**************************")
       let currentTime = moment.utc(new Date(),"YYYY/MM/DD HH:mm:ss").tz('America/Los_Angeles');
+      console.log("current___", moment.tz('America/Los_Angeles').format());
+      console.log("current time ", currentTime);
       let gameCount = 1;
       let totalCount = 0;
 
@@ -197,24 +201,23 @@ app.get('/user/:id/profile', (req, res) => {
 
       // --- PRINTING OUT INDIVIDUAL GAMES
       result.user_games.games.forEach(game => {
-        // let startTime = moment(game.start_time).tz('America/Los_Angeles');
-        // let endTime = moment(game.end_time).tz('America/Los_Angeles');
         let startTime = moment.utc(game.start_time,"YYYY/MM/DD HH:mm:ss");
         let endTime = moment.utc(game.end_time,"YYYY/MM/DD HH:mm:ss");
+        console.log("start", startTime);
+        console.log("end", endTime);
         totalCount = totalCount + 1;
-        console.log('this is current time----:', currentTime);
-        console.log('this is start time:~~~~~', startTime);
-        console.log('this is end time:~~~~~', endTime);
+        // console.log('this is current time----:', currentTime);
+        // console.log('this is start time:~~~~~', startTime);
+        // console.log('this is end time:~~~~~', endTime);
         let upcoming = startTime - currentTime;
         let past = currentTime - endTime;
-        console.log('this is math UPCOMING: >>>', upcoming);
-        console.log('this is math PAST: >>>', past);
-        if (upcoming > - 25200000 && upcoming < 0) {
-          console.log("true");
-        } else {
-          console.log("false");
-        }
-        // console.log('this is end time:', endTime);
+        // console.log('this is math UPCOMING: >>>', upcoming);
+        // console.log('this is math PAST: >>>', past);
+        // if (upcoming > - 25200000 && upcoming < 0) {
+        //   console.log("true");
+        // } else {
+        //   console.log("false");
+        // }
 
 
         // --- TODAYS GAMES
@@ -254,27 +257,20 @@ app.get('/user/:id/profile', (req, res) => {
           });
         }
       });
+      console.log("FRIENDS");
       console.log("***************************************************************")
+      console.log("GAMES");
       console.log(totalCount + " games were sorted");
       console.log("this is array of todays games", all_games.todays_games);
       console.log("this is array of upcoming games", all_games.upcoming_games);
       console.log("this is array of past games", all_games.past_games);
-      // res.json(data);
 
-      // let arr = [];
-      // all_games.past_games.reduce((currentTime, game) => {
-      //   game.start_time.push(arr);
-
-      // }, currentTime);
-
-      // let pastSorted = arr.sort(function(a, b) {
-      //   return b - a;
-      // });
       let templateVars = {
         seshId: loggedInId,
         urlId: req.params.id,
         friendsArr: friendsArr,
-        // id: req.params.id,
+        // addFriendsArray: addFriendsArray,
+        session: session,
         profile: result,
         todays_games: all_games.todays_games.reverse(),
         upcoming_games: all_games.upcoming_games.reverse(),
@@ -319,16 +315,39 @@ app.post("/logout", (req, res) => {
 });
 
 app.post("/user/:id/friend", (req, res) => {
-    knex.insert({
-      user_id: req.session.user_id,
-      other_id: req.params.id,
+  console.log("this is user SESSION examine me: ", req.session.user_id);
+  console.log("this is user PARAMS examine me: ", req.params.id);
+    knex("relationships")
+    .insert([
+    {
+      user_id: Number(req.session.user_id),
+      other_id: Number(req.params.id),
       status: 'Approved'
-    })
-    .into("relationships")
-    .then(() => {
-      req.session.friends.push(req.params.id);
-      console.log("this is updated array of friedns", req.session.friends);
-      // congrats
+    },
+    {
+      user_id: Number(req.params.id),
+      other_id: Number(req.session.user_id),
+      status: 'Approved'
+    }
+    ])
+    .returning('status')
+    .then (() => {
+      return profileData.queryProfileData(req.session.user_id)
+        .then(result => {
+          // console.log("this is result friends in BUTTON PRESSED ADD FRIEND", result.user_friends.friends);
+          console.log("req session.friends -BEFORE- push/concat <<>>", req.session.friends);
+          // for (let friend of result.user_friends.friends) {
+
+            req.session.friends = req.session.friends.concat([{
+              other_id: Number(req.params.id),
+              status: 'Approved'
+            }]);
+          // }
+          console.log("req session.friends -AFTER- push/concat <<>>", req.session.friends);
+
+          // congrats
+      });
+
     });
 });
 

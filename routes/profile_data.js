@@ -48,7 +48,7 @@ module.exports = (knex) => ({
 
   queryUserFriends: function(userId) {
     return knex('users')
-      .select('users.first_name', 'users.last_name', 'users.image', 'relationships.status', 'relationships.other_id', 'relationships.user_id')
+      .select('users.id', 'users.first_name', 'users.last_name', 'users.image', 'relationships.status', 'relationships.other_id', 'relationships.user_id')
 // leftOuterJoin means connecting left table (users table) value to match to the right table (relationships table)
 // will only print rows that have the column value indicated (user.id)---ALSO must === relationships.user_id
       .leftOuterJoin('relationships', 'users.id', 'relationships.other_id')
@@ -60,6 +60,7 @@ module.exports = (knex) => ({
         rows.forEach(row => {
           if(row.first_name) {
             result.friends.push({
+              id: row.id,
               first_name: row.first_name,
               last_name: row.last_name,
               image: row.image,

@@ -1,6 +1,5 @@
 "use strict";
 
-const profileData = require('./profile_data.js');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -43,31 +42,18 @@ module.exports = (knex) => {
         })
         .into('users')
         .returning('id')
-        .then(function(id){
-          req.session.user_id = id;
-
-          // return profileData.queryProfileData(req.params.id)
-          //   .then(data => {
-          //   console.log("inside user registration handler<<<<<<<<<<<<<");
-          //   let loggedInId = req.session.user_id[0];
-          //   console.log("user logged id is >>>>>>>>", loggedInId);
-          //   console.log("this is logged in friends dataaa: ", data.user_friends.friends);
-          //   let idsOfFriends = [];
-
-          //   for (let friend of data.user_friends.friends) {
-          //       idsOfFriends.push(friend.other_id);
-          //   }
-          //   console.log("id's of my friends:",idsOfFriends);
-
-          //   req.session.friends = idsOfFriends;
-          //   console.log("this is req.session.friends id's: ", req.session.friends);
-          //   console.log(idsOfFriends);
-          // });
-
-
-
+        .then((id) => {
+          req.session = {
+            user_id: Number(id)
+            // friends: []
+          }
+          console.log("########=>registered no friends yet", req.session);
           res.json('id');
         })
+        .catch((error) => {
+          res.json('error');
+        });
+        // });
       }
     })
   });

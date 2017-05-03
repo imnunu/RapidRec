@@ -13,7 +13,7 @@
     <meta name='lastName' content='<%= profile.user_games.user.last_name %>'>
     <meta name='session_id' content='<%= seshId %>'>
     <meta name='friends_array' content='<%= friendsArr %>'>
-
+    <meta name='session' content='<%= session %>'>
 
     <link href="http://localhost:8080/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
@@ -33,6 +33,21 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
+
+    <style>
+      a:link a:visited .gameblock {
+        background-color: #f44336;
+        color: white;
+        padding: 14px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+      a:hover, a:active{
+        background-color: red;
+      }
+    </style>
+
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 <!-- nav bar -->
@@ -79,7 +94,7 @@
                             <span class="validation" id="add_friend_popup"></span>
                             <ul>
                             <% for (let friend of profile.user_friends.friends) { %>
-                                <li><%= friend.first_name %> <%= friend.last_name %></li>
+                                <li><a href="/user/ <%= friend.id %> /profile" ><%= friend.first_name %> <%= friend.last_name %></a></li>
                                 <img class="media-object img-circle"  src="http://localhost:8080/uploads/<%= friend.image %>"  width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                             <% } %>
                             </ul>
@@ -95,68 +110,78 @@
             <hr>
 
             <!-- Todays Events. -->
-            <h2>Todays Events:</h2>
-            <% for (let game of todays_games) { %>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                    </div>
+            <% if (todays_games.length) { %>
+              <h2>Todays Events:</h2>
+              <% for (let game of todays_games) { %>
+                <div class="panel panel-default">
+                <a class="gameblock" href="/event/ <%= game.id %>" target="_blank">
+                  <p>
+                    <div class="panel-body">
+                        <div class="pull-left">
+                                <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </div>
 
-                    <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
-                    <hr>
-                    <div class="post-content" >
-                      <a href="#" style="text-decoration:none;">
-                      <p><strong>Location: </strong> <%= game.location %></p>
-                      <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                      </a>
+                        <h4 class="event_title"><strong><%= game.title %></strong> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
+                        <hr>
+                        <div class="post-content" >
+                          <a href="#" style="text-decoration:none;">
+                          <p><strong>Location: </strong> <%= game.location %></p>
+                          <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                          </a>
+                        </div>
+                        <hr>
                     </div>
-                    <hr>
+                    </p>
+                  </a>
                 </div>
-            </div>
+              <% } %>
             <% } %>
 
             <!-- Future Events. -->
-            <h2>Future Events:</h2>
-            <% for (let game of upcoming_games) { %>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                    </div>
-
-                    <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
-                    <hr>
-                    <div class="post-content" >
-                      <a href="#" style="text-decoration:none;">
-                      <p><strong>Location: </strong> <%= game.location %></p>
-                      <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                      </a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <% } %>
-
-            <!-- Past Events -->
-            <h2>Past Events:</h2>
-              <% for (let game of past_games) { %>
+            <% if (upcoming_games.length) { %>
+              <h2>Future Events:</h2>
+              <% for (let game of upcoming_games) { %>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="pull-left">
-                          <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                      </div>
-                      <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
-                      <hr>
-                      <div class="post-content" >
-                        <a href="#" style="text-decoration:none;">
-                        <p><strong>Location: </strong><%= game.location %></p>
-                        <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                        </a>
-                      </div>
-                      <hr>
-                  </div>
+                                <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </div>
+
+                        <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"></a></small></small></h4>
+                        <hr>
+                        <div class="post-content" >
+                          <a href="#" style="text-decoration:none;">
+                          <p><strong>Location: </strong> <%= game.location %></p>
+                          <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                          </a>
+                        </div>
+                        <hr>
+                    </div>
                 </div>
+              <% } %>
+            <% } %>
+
+            <!-- Past Events -->
+            <% if (past_games.length) { %>
+              <h2>Past Events:</h2>
+                <% for (let game of past_games) { %>
+                  <div class="panel panel-default">
+                      <div class="panel-body">
+                          <div class="pull-left">
+                            <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </div>
+                        <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
+                        <hr>
+                        <div class="post-content" >
+                          <a href="#" style="text-decoration:none;">
+                          <p><strong>Location: </strong><%= game.location %></p>
+                          <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                          </a>
+                        </div>
+                        <hr>
+                    </div>
+                  </div>
+              <% } %>
             <% } %>
 
 

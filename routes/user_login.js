@@ -1,6 +1,5 @@
 "use strict";
 
-const profileData = require('./profile_data.js');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -11,6 +10,7 @@ module.exports = (knex) => {
       .select('id', 'password')
       .where('email', req.body.email)
       .limit(1)
+
       .then((results) => {
         const user = results[0];
         if(!user) {
@@ -21,42 +21,39 @@ module.exports = (knex) => {
 
         return Promise.all([bcrypt.compare(req.body.password, user.password), user]);
       })
+
       .then((results) => {
         const match = results[0];
         const user = results[1];
-        console.log(match);
-        console.log(user);
+        // console.log("THIS IS MATCH LOGIN:", match);
+        // console.log("THIS IS USER:", user);
         if(!match) {
           return Promise.reject(
             res.send('Incorrect Credentials')
           );
-        }
-
-        else{
+        } else {
           req.session.user_id = user.id;
-
-          return profileData.queryProfileData(req.params.id)
-            .then(data => {
-            console.log("inside user login handler<<<<<<<<<<<<<");
-            let loggedInId = req.session.user_id[0];
-            console.log("user logged id is >>>>>>>>", loggedInId);
-            console.log("this is logged in friends dataaa: ", data.user_friends.friends);
-            let idsOfFriends = [];
-
-            for (let friend of data.user_friends.friends) {
-                idsOfFriends.push(friend.other_id);
-            }
-            console.log("id's of my friends:",idsOfFriends);
-
-            req.session.friends = idsOfFriends;
-            console.log("this is req.session.friends id's: ", req.session.friends);
-            console.log(idsOfFriends);
-          });
-
-
-          res.json(results)
+          return knex('relationships')
+            .select('relationships.status', 'relationships.other_id', 'relationships.user_id')
+            .where('relationships.user_id', '=', req.session.user_id)
+            .then(rows => {
+              const result = {
+                friends: []
+              }
+              rows.forEach(row => {
+                if(row.other_id) {
+                  result.friends.push({
+                    other_id: row.other_id,
+                    status: row.status
+                  });
+                }
+              });
+              req.session.friends = result.friends;
+              console.log("this is req.session up LOGIN: ", req.session);
+              // console.log("what are RESULTS.. too late?no: ", results);
+              res.json(results)
+            })
         }
-
       })
       .catch((error) => {
         res.json('error')

@@ -1,8 +1,10 @@
 $(() => {
   let idsOfFriends = [];
   let sessionId = $('meta[name = "session_id"]').attr('content');
+  let session = $('meta[name = "session"]').attr('content');
   let urlId = $('meta[name = "urlId"]').attr('content');
   let friendsArray = $('meta[name = "friends_array"]').attr('content');
+  // let addFriendsArray = $('meta[name = "add_friends_array"]').attr('content');
   let firstName = $('meta[name = "firstName"]').attr('content');
   let lastName = $('meta[name = "lastName"]').attr('content');
 
@@ -27,7 +29,9 @@ $(() => {
 
   $('.add-friend-submit-button').on('click', function(e) {
     e.preventDefault();
-    console.log("seshid is friends w these ids: ", friendsArray);
+    console.log("seshid is friends w these ids upon login: ", friendsArray);
+    // console.log("seshid add friend update ids: ", addFriendsArray);
+    console.log("this is what currently is in the sessions: ", session);
     console.log("first name is: ", firstName);
     console.log("last name is: ", lastName);
     console.log("sesh id", sessionId);
@@ -35,10 +39,12 @@ $(() => {
 
     if (friendsArray) {
       for (let id in friendsArray) {
-        if (urlId === friendsArray[id]) {
-          $('#add_friend_popup').html("You are already friends with " + firstName + " " + lastName).css('color', 'red');
-          return;
-        }
+        // for (let idTwo in addFriendsArray) {
+          if (urlId === friendsArray[id]) {
+            $('#add_friend_popup').html("You are already friends with " + firstName + " " + lastName).css('color', 'red');
+            return;
+          }
+        // }
       }
     }
 
@@ -47,8 +53,8 @@ $(() => {
       return;
     } else {
       addFriend(urlId);
+      console.log("this is req session all the way in AJAX!: ", session);
       $('#add_friend_popup').html("You are now friends with " + firstName + " " + lastName).css('color', 'green');
-
       return;
     }
   });
