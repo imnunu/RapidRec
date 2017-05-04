@@ -127,20 +127,14 @@ app.get('/event/:id', (req, res) => {
       // profileData.someOtherQuery(whatever)
     ]).then(([profile, posts, info]) => {
       const templateVars = {
-<<<<<<< HEAD
-        game_id,
-        user_id,
-        profile,
-        posts,
-        info
-=======
+
         id: url,
         seshId: id,
         profile: '',
         posts: '',
         partUserId: '',
         gameId: req.params.id
->>>>>>> 8eecc76dc72425109384e60b145aa488976f3521
+
       };
       // res.render('event', templateVars);
       res.render('event', templateVars);
