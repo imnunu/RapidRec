@@ -69,10 +69,10 @@ function createMarker(place) {
   infowindow = new google.maps.InfoWindow();
 
       infowindow.setContent(
-        '<div id="iw-container">' + '<div class="iw-title">' + place.name + '</div>' + "<br />" +
-        '<div class="iw-content">'+ '<div class="iw-subTitle">' + place.vicinity + '</div>'+ "<br />" + '<div class="iw-subTitle">' +
-        "Rating: " + '</div>'+ place.rating +
-        '<div class="iw-title">' + "<br /><a class='btn btn-primary' data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+
+        '<div id="iw-container">' + '<h5 class="text-primary border-bottom center-block">' + place.name + '</h5>' +
+        '<h6 class="text-success center-block">' + place.vicinity + '</h6>' + '<h6>' + '<strong>' +
+        "Rating: " + '</strong>' + '</h6>' + place.rating +
+        '<div class="iw-title">' + "<br /><a class='btn btn-primary center-block' data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+
         place.vicinity + "');\" >Create Game</a>") + '</div>';
 
       infowindow.open(map, this);
@@ -118,13 +118,10 @@ function createCurrentGameMarker(event) {
   google.maps.event.addListener(marker, 'click', function() {
 
       infowindow.setContent(
-        '<div id="iw-container">' + '<div class="iw-title">' + event.location + '</div>' + "<br />" +
-        '<div class="iw-content">'+ '<div class="iw-subTitle">' + event.description + '</div>'+ "<br />" +
-        '<div class="iw-subTitle">' + "Start:" + '</div>' +
-        event.start_time + "<br />" + '<div class="iw-subTitle">' + "End:" + '</div>' +
-        event.end_time + '<div class="iw-title">' + "<br /><a class='btn btn-primary' data-toggle='modal' href='/event/" +
+        '<div id="iw-container">' + '<h5 class="text-primary border-bottom center-block">' + event.location + '</h5>' + '<h6>' + '<strong>' + 'Start: ' + '</strong>' + event.start_time + '</h6>' + '<h6>' + '<strong>' + 'End: ' + '</strong>' + event.end_time  + '</h6>'
+        + '<div class="text-warning">' + event.description + '</div>' + "<br /><a class='btn btn-primary center-block' data-toggle='modal' href='/event/" +
         event.id + "' onclick=\"$('.create_event').val('"+
-        event.vicinity + "');\" >View Event</a>") + '</div>' + '</div>';
+        event.vicinity + "');\" >View Event</a>") + '</div>';
 
 
       infowindow.open(map, this);
@@ -162,7 +159,7 @@ function testFunction() {
 function moveMapToLocation() {
   var place = autocomplete.getPlace();
   map.setCenter(place.geometry.location)
-  map.setZoom(10);
+  map.setZoom(12);
 
 }
 
