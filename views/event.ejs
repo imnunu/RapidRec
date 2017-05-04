@@ -15,6 +15,7 @@
 
 <!-- CSS Styles -->
 <link rel="stylesheet" href="/styles/styles.css" />
+<link rel="stylesheet" href="/styles/custom.css" />
 
 <!-- CSS Base -->
 <link id="theme" rel="stylesheet" href="/styles/theme-classic.css" />
@@ -126,7 +127,7 @@
 				<!-- Content -->
 				<div class="content col-md-6">
 					<!--post-->
-					<div class="testimonial testimonial-primary testimonial-2">
+					<!--<div class="testimonial testimonial-primary testimonial-2">
 								<div class="quote">
 									<p></p>
 								</div>
@@ -136,9 +137,9 @@
 									<div class="name">Name</div>
 									<span class="text-muted"></span>
 								</div>
-					</div>
+					</div>-->
 					<!--comment-->
-					<div class="col-md-8 pull-right">
+					<!--<div class="col-md-8 pull-right">
 						<div class="testimonial testimonial-2">
 								<div class="quote">
 									<p></p>
@@ -150,7 +151,76 @@
 									<span class="text-muted"></span>
 								</div>
 						</div>
-					</div>
+					</div>-->
+
+                    <!--merged with Bassim'branch-->
+                    <div class="panel panel-default panel-body media">
+                        <section class="new-post">
+                            <div class="pull-left">
+                                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
+                            </div>
+                            <div class="media-body">
+                                <form id="form" action="/posts" method="POST">
+                                    <span id="error"></span>
+                                    <textarea class="form-control" rows="2" name="text"></textarea>
+                                    <input type="submit" value="Post">
+                                </form>
+                            </div>
+                        </section>
+                        <section id="posts">
+                        </section>
+                    </div>
+                    <!-- Sample post content with comments. -->
+                    <% posts.forEach((user) => { %>
+           
+
+                    <div class="pull-left">
+                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong><%= (user.first_name + ' ' + user.last_name)%></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> <%=time %></i></a></small></small></h4>
+
+
+                    <hr>
+                    <div class="post-content">
+                        <p><%=user.content %></p>
+                    </div>
+                    <hr>
+                    <input id= 'hiddenPostId' type="hidden" value="<%= user.id %>"/>
+
+                    <% user.comments.forEach((comment) => { %>
+                    <div>
+                        <div class="post-content panel-default panel-body">
+                                    <div class="pull-left">
+                                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
+                                    </div>
+                                    <h4><a href="#" style="text-decoration:none;"><strong><%= (comment.first_name + ' ' + comment.last_name)%></strong></a></h4>
+                                    <hr>
+                                    <div class="post-content">
+                                        <%=comment.content%><br><br>
+                                        <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#">
+                                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                            </a>
+                        </div>
+                <% }); %>
+                        <div class="media-body" id='commentBox' >
+                            <textarea class="form-control" rows="1" placeholder="Comment"  ></textarea>
+                            <input type="submit" value="Comment"  >
+                        </div>
+                    </div>
+                    <% }); %>
+
+              
+
+
+            <!--end of post with comment-->
+
+                    <!--end-->
 
 				</div>
 

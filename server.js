@@ -87,6 +87,7 @@ app.get("/", (req, res) => {
   res.redirect("/index");
 });
 
+
 app.get("/index", (req, res) => {
   let id = req.session.user_id;
   let templateVars = {id: id};
@@ -103,6 +104,12 @@ app.get('/create_event', (req, res) => {
   }
 });
 
+app.get('/foo', (req, res) => {
+  profileData.getPostsAndCommentsForGame(req.query.gameId).then(data => {
+    res.json(data);
+  })
+})
+
 app.get('/event/:id', (req, res) => {
   let user_id = Number(req.session.user_id);
   let game_id = Number(req.params.id);
@@ -117,12 +124,15 @@ app.get('/event/:id', (req, res) => {
       profileData.getPostsAndCommentsForGame(game_id),
       profileData.queryPartPlayers(game_id)
     ]).then(([profile, posts, info]) => {
+      console.log('THESEWEEDCASDSDC ARE THE POSTSJASDKJH;ALSDFJLKS;AJFAKLS;FJ', posts);
+      console.log('TIIIIME');
       const templateVars = {
 
         game_id,
         user_id,
         profile,
         posts,
+        time: moment(posts.created_at).fromNow(),
         info
 
 
@@ -147,6 +157,7 @@ app.get('/create_game/:id', (req, res) => {
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
+
       // console.log("this is array of all games~~~~~~~~", result.user_games.games);
       let loggedInId = req.session.user_id;
       console.log("this is req.session.friends~~~~~~~~~~~~~~: ", req.session.friends);
@@ -160,6 +171,12 @@ app.get('/user/:id/profile', (req, res) => {
       console.log("current time ", currentTime);
       let gameCount = 1;
       let totalCount = 0;
+
+      // let currentTime = moment.utc().tz('America/Los_Angeles');
+      let pasts = 1;
+      let future = 1;
+      let count = 0;
+
       let all_games = {
         todays_games: [],
         upcoming_games: [],
@@ -194,7 +211,7 @@ app.get('/user/:id/profile', (req, res) => {
 
         // --- FUTURE GAMES
         if (startTime > currentTime) {
-          console.log("pushing game ", gameCount++, "into upcoming games array");
+
           all_games.upcoming_games.push({
             id: game.id,
             title: game.title,
@@ -206,10 +223,10 @@ app.get('/user/:id/profile', (req, res) => {
 
         // --- PAST GAMES
 
-        // endTime <= currentTime
-        if (upcoming < - 25200000) {
-          console.log("pushing game ", gameCount++, "into past games array");
 
+        // endTime <= currentTime
+
+        if (endTime < currentTime) {
           all_games.past_games.push({
             id: game.id,
             title: game.title,
@@ -220,13 +237,6 @@ app.get('/user/:id/profile', (req, res) => {
         }
       });
 
-      console.log("FRIENDS");
-      console.log("***************************************************************")
-      console.log("GAMES");
-      console.log(totalCount + " games were sorted");
-      console.log("this is array of todays games", all_games.todays_games);
-      console.log("this is array of upcoming games", all_games.upcoming_games);
-      console.log("this is array of past games", all_games.past_games);
 
 
       let templateVars = {

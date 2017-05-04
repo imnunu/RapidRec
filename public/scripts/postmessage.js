@@ -63,8 +63,34 @@ $('.new-post form').on('submit', function (e) {
       },
       success: function() {
         loadPosts();
+        window.location.reload();
       },
       error: function() {
+      }
+    })
+}
+});
+
+$('#commentBox').on('click', function (e) {
+  e.preventDefault();
+  $('#error').text("");
+  var newComment = $('#commentBox .form-control').val().trim();
+  var post_id = $('#hiddenPostId').val();
+  if (newComment.length === 0) {
+    $('#error').text("Cannot post empty message.");
+  } else {
+    $.ajax ({
+      method: 'POST',
+      url: '/api/events/' + gameId + '/addComments',
+      data: {
+        content: newComment,
+        post_id
+      },
+      success: function() {
+        window.location.reload();
+      },
+      error: function(err) {
+        console.log(err);
       }
     })
 }
