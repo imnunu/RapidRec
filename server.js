@@ -128,12 +128,12 @@ app.get('/event/:id', (req, res) => {
     ]).then(([profile, posts, info]) => {
       const templateVars = {
 
-        id: url,
-        seshId: id,
-        profile: '',
-        posts: '',
-        partUserId: '',
-        gameId: req.params.id
+        game_id,
+        user_id,
+        profile,
+        posts,
+        info
+
 
       };
       // res.render('event', templateVars);
