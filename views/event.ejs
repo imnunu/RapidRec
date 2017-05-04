@@ -37,12 +37,8 @@
 	<!-- Navigation Bar -->
 	<div id="nav-bar">
 
-		<!-- Logo -->
-		<!--<a class="logo-wrapper" href="index.html">
-			<img class="logo logo-dark" src="assets/img/logo-dark.png" alt="Okno">
-		</a>-->
 		<nav class="module-group right">
-			<!-- Primary Menu -->
+			
 			<div class="module menu left">
 				<ul id="nav-primary" class="nav nav-primary">
 					<li><a href="/index">Home</a></li>
@@ -78,7 +74,7 @@
 		<div class="container">
 			<div class="row">
 				<!-- left Sidebar -->
-				<div class="sidebar col-md-4 clearfix">
+				<div class="sidebar col-md-3 clearfix mr-30">
 					<div class="widget">
 						<% if (info.users.every(someUser => { %>%>
                 		<%  return (someUser.partUserId !== user_id) %>
@@ -129,6 +125,9 @@
 							<% info.users.forEach((user) => { %>
 							<a href= "/user/<%=user.id%>/profile">
 							<button class="btn-warning btn btn-sm  btn-block">
+								<!--<div class="pull-left">
+                            		<img class="media-object img-circle" src="/uploads/<%=user.image%>" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    			</div>-->
 								<span class="pull-right">
 								<% if (user.equipment) { %>
 									<img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
@@ -143,128 +142,60 @@
 				</div>
 
 				<!-- Content -->
-				<div class="content col-md-8">
-                    <!--input area-->
-                    <div class="new-post">
-                        <form id="form" action="/posts" method="POST">
-                            <span id="error"></span>
-                            <textarea class=" form form-control" rows="4" name="Message"></textarea>
-                            <button class="btn btn-primary btn-filled btn-xs" type="submit" value="Post">Submit</button>
-                        </form>
-                    </div>
-                    <hr>
+				<div class="content col-md-8 ml-30">
+					<div class="container">
+						<div class="row">
+       					 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            				<h2>Post comment</h2>
+           					 <div class="new-post mb-50">
+                        		<form id="form" action="/posts" method="POST">
+                            		<span id="error"></span>
+                            		<textarea class=" form form-control mb-15" rows="4" name="Message" placeholder="Post your message..."></textarea>
+                            		<button class="btn btn-primary btn-filled btn-xs" type="submit" value="Post">Submit</button>
+                        		</form>
+                    		</div>
+            				
+        
+            				<div class="panel panel-default panel-body">
+								<% posts.forEach((user) => { %>
+                    			<div class="pull-left">
+                            		<img class="media-object img-circle" src="/uploads/<%= user.image %>" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    			</div>
+                    			<h4><a href="#" style="text-decoration:none;"><strong><%= (user.first_name + ' ' + user.last_name)%></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    			<hr>
+                    			<div class="post-content">
+                        			<p class="lead font-secondary"><%=user.content %></p>
+                    			</div>
+                    			<hr>
+                    			<input id= 'hiddenPostId' type="hidden" value="<%= user.id %>"/>
 
-                    
-
-
-					<!--post-->
-					<!--<div class="testimonial testimonial-primary testimonial-2" id="posts">
-								<div class="quote">
-									<p></p>
-								</div>
-								<div class="author with-image">
-									<br />
-									<img src="/img/avatars/avatar_sport_girl.png" alt="">
-									<div class="name"></div>
-									<span class="text-muted"></span>
-								</div>
-
-                                <div class="quote">
-									<p></p>
-								</div>
-								<div class="author with-image">
-									<br />
-									<img src="/img/avatars/avatar_sport_girl.png" alt="">
-									<div class="name"></div>
-									<span class="text-muted"></span>
-								</div>
-					</div>-->
-					<!--comment-->
-					<!--<div class="col-md-8 pull-right">
-						<div class="testimonial testimonial-2">
-								<div class="quote">
-									<p></p>
-								</div>
-								<div class="author with-image">
-									<br />
-									<img src="/img/avatars/avatar_sport_girl.png" alt="">
-									<div class="name">Name</div>
-									<span class="text-muted"></span>
-								</div>
-						</div>
-					</div>-->
-
-                    <!--merged with Bassim'branch-->
-                    <!--<div class="panel panel-default panel-body media">-->
-                        <!--<section class="new-post">
-                            <div class="pull-left">-->
-                                <!--<img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">-->
-                            <!--</div>
-                            <div class="media-body">
-                                <form id="form" action="/posts" method="POST">
-                                    <span id="error"></span>
-                                    <textarea class=" form form-control" rows="2" name="text"></textarea>
-                                    <input type="submit" value="Post">
-                                </form>
-                            </div>
-                        </section>-->
-                        <!--<section id="posts">
-                        </section>-->
-                    <!--</div>-->
-                    <!-- Sample post content with comments. -->
-                    <% posts.forEach((user) => { %>
-           
-
-                    <div class="pull-left">
-                            <img class="media-object img-circle" src="/uploads/<%= user.image %>" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                    </div>
-                    <h4><a href="/user/<%= user.id %>/profile" style="text-decoration:none;"><strong><%= (user.first_name + ' ' + user.last_name)%></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> <%=time %></i></a></small></small></h4>
-
-
-                    <hr>
-                    <div class="post-content">
-                        <p><%=user.content %></p>
-                    </div>
-                    <hr>
-                    <input id= 'hiddenPostId' type="hidden" value="<%= user.id %>"/>
-
-                    <% user.comments.forEach((comment) => { %>
-                    <div>
-                        <div class="post-content panel-default panel-body">
-                                    <div class="pull-left">
-                                            <img class="media-object img-circle" src="/uploads/<%= user.image %>" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
-                                    </div>
-                                    <h4><a href="/user/<%= comment.user_id %>/profile" style="text-decoration:none;"><strong><%= (comment.first_name + ' ' + comment.last_name)%></strong></a></h4>
+                    			<% user.comments.forEach((comment) => { %>
+                        		<div class="post-content panel-default panel-body">
+                                    
+                                    <h4><a href="#" style="text-decoration:none;"><strong><%= (comment.first_name + ' ' + comment.last_name)%></strong></a></h4>
                                     <hr>
                                     <div class="post-content">
                                         <%=comment.content%><br><br>
                                         <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
                                     </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object img-circle" src="/uploads/<%= user.image %>" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                            </a>
-                        </div>
-                <% }); %>
-                        <div class="media-body" id='commentBox' >
-                            <textarea class="form-control" rows="1" placeholder="Comment"  ></textarea>
-                            <input type="submit" value="Comment"  >
-                        </div>
-                    </div>
-                    <% }); %>
-
-              
-
+                        		</div>
+                    			
+                    			<div class="media">
+                        			
+									<% }); %>
+                        			<div class="media-body" id='commentBox' >
+                            			<textarea class="form-control" rows="1" placeholder="Comment to this post"  ></textarea>
+                            			<input type="submit" value="Comment"  >
+                        			</div>
+                    			</div>
+                			</div>
+            			</div>
+        			</div>
+              		<% }); %>
+					</div>
 				</div>
-
-				<!-- right Sidebar -->
-				<!--<div class="sidebar col-md-3 clearfix">
-
-				</div>-->
-                <!--end of right side bar-->
+				</div>
+				<!--end og left side -->
 			</div>
 		</div>
 	</section>
@@ -282,6 +213,7 @@
 <script src="/scripts/postmessage.js"></script>
 <script src="/scripts/event.js"></script>
 <script src="/scripts/eventjoin.js"></script>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>
 <script>
