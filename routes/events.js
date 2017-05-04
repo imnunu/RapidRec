@@ -25,10 +25,23 @@ module.exports = (knex) => {
       })
   })
 
-  router.post('/:game_id/addComment', (req, res) => {
-    const { game_id } = req.params;
-
+  router.post('/:game_id/addComments', (req, res) => {
+    console.log(req.body)
+    knex.insert({
+    post_id: req.body.post_id,
+    user_id: req.session.user_id,
+    content: req.body.content,
+    created_at: new Date()
+  })
+  .into('comments')
+  .then((results) =>{
+    console.log(results);
+    res.json(results);
+    console.log("you're done");
   });
+});
+
+
 
   return router;
 }

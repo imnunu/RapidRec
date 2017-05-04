@@ -140,56 +140,33 @@
         </div>
 
 
-            <hr>
-            <!-- Simple post content -->
-            <div class="panel panel-default panel-body" >
-                <div class="panel-body">
-                    <div class="pull-left">
-                        <a href="#">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </a>
-                    </div>
-                    <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-                    <hr>
-                    <div class="post-content">
-                    </div>
-                    <hr>
-                    <div class="media">
-                        <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                        </div>
-                        <div class="media-body">
-                        <form id="form" action="/posts" method="POST">
-                            <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
-                            <input type="submit" value="Post">
-                            </form>
-                        </div>
-                    </div>
-            </div>
-
             <!-- Sample post content with comments. -->
+            <% posts.forEach((user) => { %>
             <div class="panel panel-default panel-body">
 
                     <div class="pull-left">
                             <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
                     </div>
-                    <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <h4><a href="#" style="text-decoration:none;"><strong><%= (user.first_name + ' ' + user.last_name)%></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> <%=time %></i></a></small></small></h4>
 
 
                     <hr>
                     <div class="post-content">
-                        <p>Excited!</p>
+                        <p><%=user.content %></p>
                     </div>
                     <hr>
+                    <input id= 'hiddenPostId' type="hidden" value="<%= user.id %>"/>
+
+                    <% user.comments.forEach((comment) => { %>
                     <div>
                         <div class="post-content panel-default panel-body">
                                     <div class="pull-left">
                                             <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
                                     </div>
-                                    <h4><a href="#" style="text-decoration:none;"><strong>HoHo Meow</strong></a></h4>
+                                    <h4><a href="#" style="text-decoration:none;"><strong><%= (comment.first_name + ' ' + comment.last_name)%></strong></a></h4>
                                     <hr>
                                     <div class="post-content">
-                                        Same! I'll be bringing an extra ball with me<br><br>
+                                        <%=comment.content%><br><br>
                                         <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
                                     </div>
                         </div>
@@ -200,12 +177,16 @@
                                 <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
                             </a>
                         </div>
-                        <div class="media-body">
-                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+                <% }); %>
+                        <div class="media-body" id='commentBox' >
+                            <textarea class="form-control" rows="1" placeholder="Comment"  ></textarea>
+                            <input type="submit" value="Comment"  >
                         </div>
                     </div>
+                    <% }); %>
 
                 </div>
+
 
             <!--end of post with comment-->
 

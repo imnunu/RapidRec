@@ -93,6 +93,7 @@ app.get("/", (req, res) => {
   res.redirect("/index");
 });
 
+
 app.get("/index", (req, res) => {
   let id = req.session.user_id;
   let templateVars = {id: id};
@@ -109,6 +110,12 @@ app.get('/create_event', (req, res) => {
   }
 });
 
+app.get('/foo', (req, res) => {
+  profileData.getPostsAndCommentsForGame(req.query.gameId).then(data => {
+    res.json(data);
+  })
+})
+
 app.get('/event/:id', (req, res) => {
   let user_id = Number(req.session.user_id);
   let game_id = Number(req.params.id);
@@ -124,11 +131,14 @@ app.get('/event/:id', (req, res) => {
       profileData.queryPartPlayers(game_id)
       // profileData.someOtherQuery(whatever)
     ]).then(([profile, posts, info]) => {
+      console.log('THESEWEEDCASDSDC ARE THE POSTSJASDKJH;ALSDFJLKS;AJFAKLS;FJ', posts);
+      console.log('TIIIIME');
       const templateVars = {
         game_id,
         user_id,
         profile,
         posts,
+        time: moment(posts.created_at).fromNow(),
         info
       };
       // res.render('event', templateVars);
@@ -136,21 +146,6 @@ app.get('/event/:id', (req, res) => {
     }).catch(error => {
       res.status(500).json({ error: error.message });
     });
-    // return profileData.queryUserGames(Number(id))
-    //   .then(data => {
-    //     // res.json(data);
-    //     console.log('THIS IS THE DATAAAAAA', data);
-    //     let templateVars = {
-    //       id: url,
-    //       first_name: data.user.first_name,
-    //       last_name: data.user.last_name,
-    //       img: data.user.img,
-    //       equipment: data.user.equipment,
-    //       partUserId: data.user.partUserId
-    //     }
-    //     console.log('THIS IS THE TEMPLATE VARS:', templateVars);
-    //     res.render('event', templateVars);
-    //   })
   }
 });
 
@@ -167,7 +162,6 @@ app.get('/create_game/:id', (req, res) => {
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
-      console.log("this is array of all games~~~~~~~~", result.user_games.games);
       let currentTime = moment.utc().tz('America/Los_Angeles');
       let pasts = 1;
       let future = 1;
@@ -185,7 +179,6 @@ app.get('/user/:id/profile', (req, res) => {
 
         // --- UPCOMING GAMES
         if (startTime > currentTime) {
-          console.log("pushing game ", future++, "into upcoming games array");
           all_games.upcoming_games.push({
             id: game.id,
             title: game.title,
@@ -196,7 +189,6 @@ app.get('/user/:id/profile', (req, res) => {
         }
         // --- PAST GAMES
         if (endTime < currentTime) {
-          console.log("pushing game ", pasts++, "into past games array");
           all_games.past_games.push({
             id: game.id,
             title: game.title,
@@ -206,10 +198,6 @@ app.get('/user/:id/profile', (req, res) => {
           });
         }
       });
-      console.log("***************************************************************")
-      console.log(count + " games were sorted");
-      console.log("this is array of past games", all_games.past_games);
-      console.log("this is array of upcoming games", all_games.upcoming_games);
       // res.json(data);
 
       // let arr = [];

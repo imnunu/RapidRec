@@ -136,18 +136,26 @@ module.exports = (knex) => ({
     });
 	},
 
-  getPostsAndCommentsForGame: function(game_id) {
+    getPostsAndCommentsForGame: function(game_id) {
     return knex('posts')
-      .select('*')
+      .select('posts.id','posts.created_at', 'posts.content', 'users.first_name', 'users.last_name', 'users.image')
+      .join('users', 'posts.user_id', '=', 'users.id')
       .where({ game_id })
+      .orderBy('created_at', 'desc')
       .then(posts => {
+
         const postIds = posts.map(post => post.id);
-        return knex('comments').select('*').whereIn('post_id', postIds)
-          .then(comments => {
+
+        posts.forEach(post => {
+          post.comments = [];
+        });
+
+        return knex('comments').select('comments.*', 'users.first_name', 'users.last_name', 'users.image').whereIn('post_id', postIds)
+          .innerJoin('users', 'comments.user_id', 'users.id')
+          .then((comments) => {
             comments.forEach(comment => {
-              const post = posts.find(post => post.id === comment.post_id);
-              post.comments = post.comment || [];
-              post.comments.push(comment)
+              const myPost = posts.find(post => post.id === comment.post_id);
+              myPost.comments.push(comment);
             });
             return posts;
           })
