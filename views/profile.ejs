@@ -198,8 +198,9 @@
 					<h3 class="text-center mb-20">Past Games</h3>
 					<hr>
 					<div onClick="location.href='/event/<%= game.id %>'">
-                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+            <div class="gamesRoute">
 						<div class="testimonial testimonial-1">
+
 							<div class="quote">
 								<p><strong>Location: </strong> <%= game.location %></p>
                       			<p><strong>Date/Time: </strong><%= game.start_time %></p>
@@ -207,11 +208,12 @@
 							<div class="author">
 								<span class="name text-uppercase"><%= game.title %></span>
 							</div>
+
 						</div>
+            </div>
+             </div>
 					<% } %>
 					<% } %>
-          </a>
-          </div>
 				</div>
 			</div>
 		</div>
