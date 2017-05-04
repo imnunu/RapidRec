@@ -1,98 +1,129 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="en" data-cookies-popup="false">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RapidRec</title>
-    <link href="vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-	  <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-	  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-       <link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
-	  <link href="vendor/animate.css" rel="stylesheet" />
-    <!-- Squad theme CSS -->
-    <link href="styles/style.css" rel="stylesheet">
-	  <link href="styles/default.css" rel="stylesheet">
-    <link href="styles/custom.css" rel="stylesheet">
-    <!-- <link href="styles/reset.css" rel="stylesheet"> -->
+
+<!-- Meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Title -->
+<title>RapidRec</title>
+
+<!-- Google Web Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
+
+<!-- CSS Styles -->
+<link rel="stylesheet" href="styles/styles.css" />
+
+<!-- CSS Base -->
+<!--<link id="theme" rel="stylesheet" href="styles/theme-energy.css" />-->
+<link id="theme" rel="stylesheet" href="/styles/theme-classic.css" />
+<!--time picker-->
+<link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+<!--custom css-->
+<link rel="stylesheet" href="styles/custom.css" />
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-	<!-- Preloader -->
-	<div id="preloader">
-	  <div id="load"></div>
+<body class="one-page header-absolute">
+
+<!-- Loader -->
+<div id="page-loader"><svg class="loader-1 loader-primary" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>
+<!-- Loader / End -->
+
+<!-- Header -->
+<header id="header" class="absolute fullwidth transparent">
+
+	<!-- Navigation Bar -->
+	<div id="nav-bar">
+
+		<!-- Logo -->
+		<!--<a class="logo-wrapper" href="index.html">
+			<img class="logo logo-light" src="assets/img/logo-light.png" alt="Okno">
+			<img class="logo logo-dark" src="assets/img/logo-dark.png" alt="Okno">
+		</a>-->
+
+		<nav class="module-group right">
+
+			<!-- Primary Menu -->
+			<div class="module menu left">
+				<ul id="nav-primary" class="nav nav-primary">
+					<li><a href="/index">Home</a></li>
+					<% if (id) { %>
+					<li><a href="/user/<%= id %>/profile">Profile</a></li>
+					<li><a class="logout_button">Sign Out</a></li>
+					<%  } else { %>
+					<li><a class="register_button" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+					<li><a class="login_button" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+					<% } %>
+					
+				</ul>
+			</div>
+		</nav>
 	</div>
 
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="/index">
-                    <h1>RapidRec</h1>
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                  <% if (id) { %>
-                  <li><a class="logout_button">Log Out</a></li>
-                  <li><a href="/user/<%= id %>/profile" >Profile Page</a></li>
-                    <%  } else { %>
-                     <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
-                    <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-                    <% } %>
+	<!-- Notification Bar -->
+	<div id="notification-bar"></div>
 
-               </ul>
-            </div>
-        </div>
-    </nav>
+</header>
+<!-- Header / End -->
 
-	<!-- Section: intro -->
-  <section id="intro" class="intro">
-    <div class="slogan">
-      <h2>WELCOME TO <span class="text_color">RapidRec</span> </h2>
-      <h4>Find a basketball game near you</h4>
-    </div>
-  </section>
+<!-- Content -->
+<div id="content">
+
+	<!-- Section -->
+	<section id="home" class="h-lg dark bg-black">
+
+		<div class="bg-image"><img src="img/bg1.jpg" alt=""></div>
+
+		<div class="container v-center">
+			<div class="row">
+				<div class="col-lg-8 col-lg-push-1">
+					<h3 class="mb-10 font-secondary">Find a basketball game near you</h3>
+					<h1 class="font-secondary"><span class="typing">Welcome to RapidRec</span></h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section google map-->
+	<section class="protrude bg-grey pt-0">
+		<div class="container">
+			<div class="row pull-up-30 mb-60">
+				<div class="col-md-12">
+					<div class="feature feature-1 boxed bg-white rounded animated" data-animation="fadeInUp">
+						<div class="container google_map">		
+    							<div class="row">
+    								<input id="pac-input" class="form-control input-2 input-sm" type="text" placeholder="Enter Location">
+								</div>
+						</div>
+      					<div id="map"></div>
+					</div>
+							
+				</div>	
+			</div>
+		</div>
+	</section>
+</div>	
+<!-- Content / End -->
 
 
-  <!-- login | register -->
-  <div id="login-modal" class="modal fade" role="dialog">
-	<div class="modal-dialog margin-auto">
-    	<div class="modal-content">
-        	<div class="modal-body">
-            	<h2 class="text-center text-uppercase">Login to Your Account</h2>
-                <form>
-                	<div class="form-group">
-                    	<input type="text" class="form-control login_email" id="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                    	<input type="password" class="form-control login_password" id="password" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                    	<input type="submit" class="form-control btn-primary login_submit_button" value="Login">
-                    </div>
-                </form>
-                <span class="validation" id="login_error"></span>
-                <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Register</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="register-modal" class="modal fade" role="dialog">
-	<div class="modal-dialog margin-auto">
-    	<div class="modal-content">
-        	<div class="modal-body">
-            	<h2 class="text-center text-uppercase">Register for an Account</h2>
-                <form>
-                	<div class="form-group">
-                    	<input type="text" class="form-control register_first_name" placeholder="First Name" required>
-                    </div>
-                	<div class="form-group">
+
+<!-- Modal / Basic Register-->
+<div class="modal fade" id="register-modal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="row">
+				<div class="col-lg-8 col-lg-push-2">
+					<div class="text-center">
+						<h3>Sign Up Today</h3>
+					</div>
+					<!-- Input -->
+					<div class="form-group">
+						<input type="text" class="form-control register_first_name" placeholder="First Name" required>
+					</div>
+					<div class="form-group">
                     	<input type="text" class="form-control register_last_name" placeholder="Last Name" required>
                     </div>
                     <div class="form-group">
@@ -103,56 +134,68 @@
                     </div>
                     <div class="form-group">
                     	<input type="password" class="form-control register_password_confirm" placeholder="Confirm Password" required>
-                      <span class="validation" id="register_error"></span>
+                      	<span class="validation" id="register_error"></span>
+                    </div>
+					<span class="validation flash-message"></span>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary register_submit_button">Register</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal / Basic Login-->
+<div class="modal fade" id="login-modal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="row">
+				<div class="col-lg-8 col-lg-push-2">
+					<div class="text-center">
+						<h3>Login to Your Account</h3>
+					</div>
+					<!-- Input -->
+					<div class="form-group">
+                    	<input type="text" class="form-control login_email" id="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                    	<input type="submit" class="form-control btn-primary register_submit_button" value="Register">
+                    	<input type="password" class="form-control login_password" id="password" placeholder="Password" required>
                     </div>
-                </form>
-                <span class="validation flash-message"></span>
-                <p><a class="small modal-links" href="#" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Login</a></p>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-info login_submit_button">LogIn</button>
+				<span class="validation" id="login_error"></span>
+			</div>
+		</div>
+	</div>
 </div>
 
 
+<!-- Modal / Basic Create Game-->
 
-<!-- google map -->
-<div class="container google_map">
-  <div class="col-sm-12 col-lg-12">
-    <div class="row">
-    <input id="pac-input" class="controls" type="text" placeholder="Start typing here">
-    <div>
-        <div id="title">Enter Location</div>
-      <div id="map"></div>
-    </div>
-  </div>
-  <br />
-<hr>
-<div class="col-sm-12 col-lg-12">
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
 
-        <div class="row">
-
-          <% if (id) { %>
-          <div class="col-sm-12 col-lg-12">
-            <a data-toggle="modal" href="#myModal" class="btn btn-info btn-block create_event_button">Create Your Own Game</a>
-          </div>
-          <%  } else { %>
-          <h3>Please Login to create your own game</h3>
-          <% } %>
-
-          <div class="col-sm-8 col-lg-8">
-
-             <!-- sample modal content -->
-            <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="container create_event">
-    	   <div class="col-lg-12 well">
-    	      <div class="row">
-    				<form class="create_event_form" action="" method="POST">
+			<div class="modal-body">
+				<div class="row">
+				<div class="col-lg-8 col-lg-push-2">
+					<% if (id) { %>
+					<div class="text-center">
+						<h3>Create Your Own Game</h3>
+					</div>
+					<!-- Input -->
+					<form class="create_event_form" action="" method="POST">
     					<div class="col-sm-12">
     						<div class="row">
-                  <div class="col-sm-12 form-group">
+                  				<div class="col-sm-12 form-group">
     								<label>Title</label>
     								<input type="text" placeholder="title" class="form-control create_event_title" required>
     							</div>
@@ -164,79 +207,88 @@
     								<label>End Time</label>
     								<input type="text" placeholder="Select end time" class="form-control create_event_end_date_time" id="create_event_end_date_time" name="end_time" required>
     							</div>
-    						</div>
-
-    						<div class="row">
-    							<div class="col-sm-4 form-group location">
+								<div class="col-sm-12 form-group location">
     								<label>Location</label>
     								<input type="text" placeholder="location" class="form-control create_event_location" required>
     							</div>
-    							<div class="col-sm-4 form-group">
+    						</div>
+
+    						<div class="row">
+    							
+    							<div class="col-sm-6 form-group">
     								<label>Number of Players</label>
-                    <select class="form-control create_event_number_of_players" required>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10</option>
-                    </select>
+										<select class="form-control create_event_number_of_players" required>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+										</select>
     							</div>
-    							<div class="col-sm-4 form-group">
-                    <div class="checkbox">
-                        <label>
-                          <input type="checkbox" class="create_event_equipment">Bring a basketball?</input><span class="pull-right"><img src="img/32basketball.png" class="basketball" width="24px" height="24px"></span>
-                        </label>
-                      </div>
+    							<div class="col-sm-6 form-group">
+									<div class="checkbox form-check form-check-inline">
+										<label class="form-check-label">
+										<input type="checkbox" class="form-check-input create_event_equipment">Bring a basketball?</input>
+										<span class="pull-right"><img src="img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+										</label>
+									</div>
     							</div>
     						</div>
-                <div class="form-group">
+                			<div class="form-group">
       							<label>Description</label>
       							<input type="text" placeholder="Give potential players more details..." class="form-control create_event_description"></input>
-      					</div>
-    					<button type="button" class="btn btn-lg btn-info create_event_submit_button">Create</button>
-              <span id=dateError></span>
+      						</div>
     					</div>
     				</form>
-    				</div>
-    	</div>
-    	</div>
-            </div><!-- /.modal -->
-          </div>
-        </div>
-      </div>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-info create_event_submit_button">Create</button>
+				<span id=dateError></span>
 
+			</div>
+		</div>
+	</div>
 </div>
+					<%  } else { %>
+							<div class="text-center">
+						<h3>Please <a class="login_button" data-toggle="modal" data-target="#login-modal">Sign In</a> | <a class="register_button" data-toggle="modal" data-target="#register-modal">Sign Up</a> to create your own game</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+          <% } %>
+<!-- Footer -->
 
+<!-- Footer / End -->
 
-<br />
-<br />
-<!-- Core JavaScript Files -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="vendor/bootstrap.min.js"></script>
-  <script src="vendor/jquery.easing.min.js"></script>
-  <script src="vendor/jquery.scrollTo.js"></script>
-  <script src="vendor/jquery.js"></script>
-  <script src="vendor/jquery.simple-dtpicker.js"></script>
-  <script src="vendor/wow.min.js"></script>
-  <script src="scripts/googleApi.js"></script>
-  <script src="scripts/main.js"></script>
-  <script src="scripts/login.js"></script>
-  <script src="scripts/register.js"></script>
-  <script src="scripts/create_game.js"></script>
+<!-- JS Libraries -->
+<script src="vendor/js/jquery-1.12.3.min.js"></script>
 
-  <!-- google API -->
+<!-- JS Plugins -->
+<script src="scripts/plugins.js"></script>
+
+<!-- JS Core -->
+<script src="scripts/core.js"></script>
+
+<script src="scripts/register.js"></script>
+<script src="scripts/login.js"></script>
+
+<script src="scripts/create_game.js"></script>
+<script src="scripts/googleApi.js"></script>
+<!--time picker -->
+<script src="vendor/jquery.simple-dtpicker.js"></script>
+<!-- google API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9KGVsj13oDFAXoWJoNguMVkqnEZ9GY0&libraries=places&callback=initialize"></script>
 
-
-
-
-
-
-
 </body>
-
 </html>

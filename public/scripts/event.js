@@ -10,15 +10,13 @@ function loadPage(id){
     console.log('THE INFO', JSON.stringify(info, null, 2));
     console.log('items found in INFO');
     info.forEach(function (item) {
-      $('#intro .event_title').text(item.title);
-      $('#intro .description').text('Description: ' + item.description);
-      $('#intro .event_location').text('Location: ' + item.location);
-      $('#intro .number_of_players').text('Players: ' + item.number_of_players);
-      $('#intro .event_start_time').text('Start time: ' + moment(item.start_time).calendar());
-      $('#intro .event_end_time').text('End time: ' + moment(item.end_time).calendar());
+      $('#page-title .event_title').text(item.title);
+      $('#event_details .description').text(item.description);
+      $('#event_details .event_location').text(item.location);
+      $('#event_details .number_of_players').text(item.number_of_players);
+      $('#event_details .event_start_time').text(moment(item.start_time).calendar());
+      $('#event_details .event_end_time').text(moment(item.end_time).calendar());
     });
-    // for(i of info) {
-    //   $("<div>").text('Location: ' + i.location).appendTo($("#intro > event_title"));
 
   });
 }
@@ -29,5 +27,5 @@ function loadPage(id){
 
 function createMembersElement(item){
   let $members = $('<div>').addClass('list-group')
-  .append($('<a>').attr('href', '/profile/' + item.id).addClass('list-group-item'))
+  .append($('<a>').attr('href', '/profile/' + item.id).addClass('btn-warning btn btn-sm btn-block'))
 }

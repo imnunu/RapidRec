@@ -15,8 +15,8 @@ $(() => {
       data: data,
       dataType: "JSON",
       success: function(data) {
-          console.log(data);
-        if(data != "error"){
+          console.log("THIS IS DATA IN AJAX LOGIN", data);
+        if(data[0] != "error"){
           window.location = '/';
         }
         else {

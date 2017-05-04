@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="game_id" content="<%= game_id %>">
+
+
+    <title>RapidRec</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="/vendor/typeahead.min.css" rel="stylesheet" type="text/css">-->
+    <!-- Fonts -->
+    <!-- Website Font style -->
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	  <link href="/vendor/animate.css" rel="stylesheet" />
+    <link href="/vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="/styles/style.css" rel="stylesheet">
+	  <link href="/styles/default.css" rel="stylesheet">
+    <link href="/styles/custom.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/index">
+                    <h1>RapidRec</h1>
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav">
+                <% if (user_id) { %>
+                <li><a href="/user/<%=user_id%>/profile">Profile</a></li>
+                <li><a class="logout_button">Log Out</a></li>
+                <%  } else { %>
+                <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+                <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+                <% } %>
+               </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="intro" class="intro">
+      <div class="slogan">
+
+        <h2 class="event_title"></h2>
+        <div class="event_details"><br />
+            <h4 class="event_description"></h4>
+            <h4 class="event_location"></h4>
+            <h4 class="number_of_players"></h4>
+            <h4 class="event_start_time"></h4>
+            <h4 class="event_end_time"></h4>
+        </div>
+      </div>
+
+      <!--join and drop button-->
+    </section>
+
+
+    <!-- create event form -->
+
+
+<div class="container">
+<div class="mainbody container-fluid">
+    <div class="row">
+
+        <div style="padding-top:50px;"> </div>
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                <% if (info.users.every(someUser => { %>%>
+                <%  return (someUser.partUserId !== user_id) %>
+                <%   })) { %>
+                    <div class="panel-heading">
+                        <span class="event_join_button" role="button" style="text-decoration:none;">
+                            <h4 class="panel-title" id= "joinGame">Join</h4>
+                        </span>
+                        <div id= "joinToggle" style="display: none">
+                          <label>
+                            <input type="checkbox" class="join_event_equipment"></input>Bring a basketball?<span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+                          </label>
+                        <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
+                        </div>
+                    </div>
+                    <% } else {%>
+                    <div class="panel-heading">
+                        <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
+                            <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
+                        </a>
+                    </div>
+                   <% } %>
+                </div>
+            </div>
+            <h3>Player List </h3>
+            <div class="list-group">
+              <a href="#" class="list-group-item">
+                <span class="pull-right">
+                  <img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
+                </span>Player 5 Name</a>
+
+                
+              <% if (info.users.length) { %>
+                <% info.users.forEach((user) => { %>
+                <a href="#" class="list-group-item"><span class="pull-right">
+                <% if (user.equipment) { %>
+                <img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
+                <% } %>
+                </span> <%= (user.first_name + ' ' + user.last_name)%></a>
+                <% }); %>
+                <% } %>
+            </div>
+
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+        <div class="panel panel-default panel-body media">
+             <section class="new-post">
+            <div class="pull-left">
+                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
+            </div>
+            <div class="media-body">
+                <form id="form" action="/posts" method="POST">
+                <span id="error"></span>
+             <textarea class="form-control" rows="2" name="text"></textarea>
+             <input type="submit" value="Post">
+             </form>
+             </div>
+
+            </section>
+
+            <section id="posts">
+            </section>
+
+        </div>
+
+
+            <hr>
+            <!-- Simple post content -->
+            <div class="panel panel-default panel-body" >
+                <div class="panel-body">
+                    <div class="pull-left">
+                        <a href="#">
+                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </a>
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+                    <hr>
+                    <div class="post-content">
+                    </div>
+                    <hr>
+                    <div class="media">
+                        <div class="pull-left">
+                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                        </div>
+                        <div class="media-body">
+                        <form id="form" action="/posts" method="POST">
+                            <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
+                            <input type="submit" value="Post">
+                            </form>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- Sample post content with comments. -->
+            <div class="panel panel-default panel-body">
+
+                    <div class="pull-left">
+                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </div>
+                    <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
+
+
+                    <hr>
+                    <div class="post-content">
+                        <p>Excited!</p>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="post-content panel-default panel-body">
+                                    <div class="pull-left">
+                                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
+                                    </div>
+                                    <h4><a href="#" style="text-decoration:none;"><strong>HoHo Meow</strong></a></h4>
+                                    <hr>
+                                    <div class="post-content">
+                                        Same! I'll be bringing an extra ball with me<br><br>
+                                        <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#">
+                                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            <!--end of post with comment-->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+  </main>
+    <!-- Core JavaScript Files -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!-- <script src="vendor/jquery.min.js"></script> -->
+  <script src="/vendor/bootstrap.min.js"></script>
+  <script src="/vendor/jquery.easing.min.js"></script>
+  <script src="/vendor/jquery.scrollTo.js"></script>
+  <script src="/vendor/jquery.js"></script>
+  <script src="/vendor/wow.min.js"></script>
+  <script src="/vendor/jquery.simple-dtpicker.js"></script>
+  <script src="/scripts/main.js"></script>
+  <script src="/scripts/postmessage.js"></script>
+  <script src="/scripts/event.js"></script>
+  <script src="/scripts/login.js"></script>
+  <script src="/scripts/eventjoin.js"></script>
+  <script>
+    $(() => {
+      loadPage(<%= game_id %>);
+    });
+  </script>
+  <script>
+  const myId = <%= game_id %>;
+  </script>
+  <script>
+  const yourId = <%= game_id %>;
+  </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>
+</body>
+
+
+</html>

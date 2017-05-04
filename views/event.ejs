@@ -1,237 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-cookies-popup="false">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="game_id" content="<%= game_id %>">
 
+<!-- Meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>RapidRec</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!--<link href="/vendor/typeahead.min.css" rel="stylesheet" type="text/css">-->
-    <!-- Fonts -->
-    <!-- Website Font style -->
-	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-		<!-- Google Fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-	  <link href="/vendor/animate.css" rel="stylesheet" />
-    <link href="/vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
-    <!-- Squad theme CSS -->
-    <link href="/styles/style.css" rel="stylesheet">
-	  <link href="/styles/default.css" rel="stylesheet">
-    <link href="/styles/custom.css" rel="stylesheet">
+<!-- Title -->
+<title>RapidRec</title>
+
+<!-- Google Web Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
+
+<!-- CSS Styles -->
+<link rel="stylesheet" href="/styles/styles.css" />
+
+<!-- CSS Base -->
+<link id="theme" rel="stylesheet" href="/styles/theme-classic.css" />
+<!--<link id="theme" rel="stylesheet" href="/styles/theme-energy.css" />-->
 
 </head>
+
 <body>
 
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="/index">
-                    <h1>RapidRec</h1>
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav">
-                <% if (user_id) { %>
-                <li><a href="/user/<%=user_id%>/profile">Profile</a></li>
-                <li><a class="logout_button">Log Out</a></li>
-                <%  } else { %>
-                <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
-                <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-                <% } %>
-               </ul>
-            </div>
-        </div>
-    </nav>
+<!-- Loader -->
+<div id="page-loader"><svg class="loader-1 loader-primary" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>
+<!-- Loader / End -->
 
-    <section id="intro" class="intro">
-      <div class="slogan">
+<!-- Header -->
+<header id="header" class="absolute fullwidth transparent">
+	
+	<!-- Navigation Bar -->
+	<div id="nav-bar">
 
-        <h2 class="event_title"></h2>
-        <div class="event_details"><br />
-            <h4 class="event_description"></h4>
-            <h4 class="event_location"></h4>
-            <h4 class="number_of_players"></h4>
-            <h4 class="event_start_time"></h4>
-            <h4 class="event_end_time"></h4>
-        </div>
-      </div>
+		<!-- Logo -->
+		<!--<a class="logo-wrapper" href="index.html">
+			<img class="logo logo-dark" src="assets/img/logo-dark.png" alt="Okno">
+		</a>-->
+		<nav class="module-group right">
+			<!-- Primary Menu -->
+			<div class="module menu left">
+				<ul id="nav-primary" class="nav nav-primary">
+					<li><a href="/index">Home</a></li>
+					<% if (user_id) { %>
+					<li><a href="/user/<%=user_id%>/profile">Profile</a></li>
+					<li><a class="logout_button">Sign Out</a></li>
+					<%  } else { %>
+					<li><a class="register_button" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+					<li><a class="login_button" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+					<% } %>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</header>
+<!-- Header / End -->
 
-      <!--join and drop button-->
-    </section>
-
-
-    <!-- create event form -->
-
-
-<div class="container">
-<div class="mainbody container-fluid">
-    <div class="row">
-
-        <div style="padding-top:50px;"> </div>
-        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                <% if (info.users.every(someUser => { %>%>
-                <%  return (someUser.partUserId !== user_id) %>
-                <%   })) { %>
-                    <div class="panel-heading">
-                        <span class="event_join_button" role="button" style="text-decoration:none;">
-                            <h4 class="panel-title" id= "joinGame">Join</h4>
-                        </span>
-                        <div id= "joinToggle" style="display: none">
-                          <label>
-                            <input type="checkbox" class="join_event_equipment"></input>Bring a basketball?<span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
-                          </label>
-                        <button type="button" class="btn btn-lg btn-info join_event_submit_button">Confirm</button>
-                        </div>
-                    </div>
-                    <% } else {%>
-                    <div class="panel-heading">
-                        <a class="event_drop_button" role="button" style="text-decoration:none;" href="/index">
-                            <h4 class="panel-title" id= "dropGame" data=>Drop</h4>
-                        </a>
-                    </div>
-                   <% } %>
-                </div>
-            </div>
-            <h3>Player List </h3>
-            <div class="list-group">
-              <% if (info.users.length) { %>
-                <% info.users.forEach((user) => { %>
-                <a href="#" class="list-group-item"><span class="pull-right">
-                <% if (user.equipment) { %>
-                <img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
-                <% } %>
-                </span> <%= (user.first_name + ' ' + user.last_name)%></a>
-                <% }); %>
-                <% } %>
-            </div>
-
-        </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-
-        <div class="panel panel-default panel-body media">
-             <section class="new-post">
-            <div class="pull-left">
-                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px">
-            </div>
-            <div class="media-body">
-                <form id="form" action="/posts" method="POST">
-                <span id="error"></span>
-             <textarea class="form-control" rows="2" name="text"></textarea>
-             <input type="submit" value="Post">
-             </form>
-             </div>
-
-            </section>
-
-            <section id="posts">
-            </section>
-
-        </div>
-
-
-            <hr>
-            <!-- Simple post content -->
-            <div class="panel panel-default panel-body" >
-                <div class="panel-body">
-                    <div class="pull-left">
-                        <a href="#">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </a>
-                    </div>
-                    <h4><a href="#" style="text-decoration:none;"><strong>User First Name + Last Name</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-                    <hr>
-                    <div class="post-content">
-                    </div>
-                    <hr>
-                    <div class="media">
-                        <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                        </div>
-                        <div class="media-body">
-                        <form id="form" action="/posts" method="POST">
-                            <textarea class="form-control" id="neweventcomment" rows="1" placeholder="Comment"></textarea>
-                            <input type="submit" value="Post">
-                            </form>
-                        </div>
-                    </div>
-            </div>
-
-            <!-- Sample post content with comments. -->
-            <div class="panel panel-default panel-body">
-
-                    <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                    </div>
-                    <h4><a href="#" style="text-decoration:none;"><strong>Dan Meow</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 42 minutes ago</i></a></small></small></h4>
-
-
-                    <hr>
-                    <div class="post-content">
-                        <p>Excited!</p>
-                    </div>
-                    <hr>
-                    <div>
-                        <div class="post-content panel-default panel-body">
-                                    <div class="pull-left">
-                                            <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="35px" height="35px" style="margin-right:8px; margin-top:-5px;">
-                                    </div>
-                                    <h4><a href="#" style="text-decoration:none;"><strong>HoHo Meow</strong></a></h4>
-                                    <hr>
-                                    <div class="post-content">
-                                        Same! I'll be bringing an extra ball with me<br><br>
-                                        <br><small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> 2 minutes ago</i></a></small></small>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="pull-left">
-                            <a href="#">
-                                <img class="media-object img-circle" src="/img/avatars/1493188279_ninja.png" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
-                        </div>
-                    </div>
-
-                </div>
-
-            <!--end of post with comment-->
-
-                </div>
-            </div>
-
-        </div>
-    </div>
+<!-- Page Title -->
+<div id="page-title" class="page-title page-title-1 bg-info">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center">
+				<h1 class="event_title"></h1>
+			</div>
+		</div>
+	</div>
 </div>
+<!-- Page Title / End -->
+
+<!-- Content -->
+<div id="content">
+
+	<section>
+
+		<div class="container">
+			<div class="row">
+
+				<!-- left Sidebar -->
+				<div class="sidebar col-md-3 clearfix">
+					<div class="widget">
+						<% if (info.users.every(someUser => { %>%>
+                		<%  return (someUser.partUserId !== user_id) %>
+                		<%   })) { %>
+						<button type="submit" class="btn btn-primary btn-sm  btn-block" id= "joinGame"><span>Join Game</span></button>
+							<div id= "joinToggle" style="display: none">
+								<label>
+									<input type="checkbox" class="join_event_equipment"></input>Bring a basketball?<span class="pull-right"><img src="/img/32basketball.png" class="basketball" width="24px" height="24px"></span>
+								</label>
+								<button type="button" class="btn btn-primary btn-sm  btn-block join_event_submit_button">Confirm</button>
+							</div>
+
+						<% } else {%>
+						<button type="submit" class="btn btn-primary btn-sm  btn-block" id= "dropGame"><span>Drop Game</span></button>
+						<% } %>
+					</div>
+					<!-- Widget - Recent posts -->
+					<div class="widget widget-recent-posts">
+						<h6 class="text-uppercase text-muted">Game Info</h6>
+						<ul class="list-posts" id="event_details">
+							<li>
+								<a>Location</a>
+								<span class="event_location"></span>
+							</li>
+							<li>
+								<a>Start time</a>
+								<span class="event_start_time"></span>
+							</li>
+							<li>
+								<a>End time</a>
+								<span class="event_end_time"></span>
+							</li>
+							<li>
+								<a>Players Needed</a>
+								<span class="number_of_players"></span>
+							</li>
+							<li>
+								<a>Description</a>
+								<span class="description"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Content -->
+				<div class="content col-md-6">
+					<!--post-->
+					<div class="testimonial testimonial-primary testimonial-2">
+								<div class="quote">
+									<p></p>
+								</div>
+								<div class="author with-image">
+									<br />
+									<img src="/img/avatars/avatar_sport_girl.png" alt="">
+									<div class="name">Name</div>
+									<span class="text-muted"></span>
+								</div>
+					</div>
+					<!--comment-->
+					<div class="col-md-8 pull-right">
+						<div class="testimonial testimonial-2">
+								<div class="quote">
+									<p></p>
+								</div>
+								<div class="author with-image">
+									<br />
+									<img src="/img/avatars/avatar_sport_girl.png" alt="">
+									<div class="name">Name</div>
+									<span class="text-muted"></span>
+								</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- right Sidebar -->
+				<div class="sidebar col-md-3 clearfix">
+
+					<!-- Widget  -->
+					<div class="widget widget-newsletter">
+						<h6 class="text-uppercase">Player List</h6>
+						
+						<div class="list-group">
+							<% if (info.users.length) { %>
+							<% info.users.forEach((user) => { %>
+							
+							<button class="btn-warning btn btn-sm  btn-block">
+								<span class="pull-right">
+								<% if (user.equipment) { %>
+									<img src="/img/32basketball.png" class="basketball" width="24px" height="24px">
+								<% } %>
+								</span>
+								<span><%= (user.first_name + ' ' + user.last_name)%></span>
+							</button>
+							<% }); %>
+							<% } %>
+            			</div>
+					</div>
+
+					<!-- Widget - Twitter -->
+					
+					<!-- Widget - Portfolio -->
+					
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+
 </div>
-  </main>
-    <!-- Core JavaScript Files -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <!-- <script src="vendor/jquery.min.js"></script> -->
-  <script src="/vendor/bootstrap.min.js"></script>
-  <script src="/vendor/jquery.easing.min.js"></script>
-  <script src="/vendor/jquery.scrollTo.js"></script>
-  <script src="/vendor/jquery.js"></script>
-  <script src="/vendor/wow.min.js"></script>
-  <script src="/vendor/jquery.simple-dtpicker.js"></script>
-  <script src="/scripts/main.js"></script>
-  <script src="/scripts/postmessage.js"></script>
-  <script src="/scripts/event.js"></script>
-  <script src="/scripts/login.js"></script>
-  <script src="/scripts/eventjoin.js"></script>
-  <script>
+<!-- Content / End -->
+
+<!-- JS Libraries -->
+<script src="/vendor/js/jquery-1.12.3.min.js"></script>
+
+<!-- JS Plugins -->
+<script src="/scripts/plugins.js"></script>
+
+<!-- JS Core -->
+<script src="/scripts/core.js"></script>
+
+<script src="/scripts/register.js"></script>
+<script src="/scripts/login.js"></script>
+
+<script src="/scripts/postmessage.js"></script>
+<script src="/scripts/event.js"></script>
+<script src="/scripts/eventjoin.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>
+<script>
     $(() => {
       loadPage(<%= game_id %>);
     });
@@ -242,9 +221,6 @@
   <script>
   const yourId = <%= game_id %>;
   </script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-ca.js"></script>
 </body>
-
 
 </html>

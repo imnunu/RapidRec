@@ -1,25 +1,158 @@
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <h1>RapidRec</h1>
-                </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                  <% if (id) { %>
-                  <li><a class="" href="#" data-toggle="modal" data-target="#login-modal">Log Out</a></li>
-                   
-                    <%  } else { %>
-                     <li><a class="register_button" href="#" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
-                    <li><a class="login_button" href="#" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-                    <% } %>
+<!DOCTYPE html>
+<html lang="en" data-cookies-popup="true">
+<head>
 
-               </ul>
-            </div>
-        </div>
-    </nav>
+<!-- Meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Title -->
+<title>RapidRec</title>
+
+<!-- Google Web Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
+
+<!-- CSS Styles -->
+<link rel="stylesheet" href="styles/styles.css" />
+
+<!-- CSS Base -->
+<link id="theme" rel="stylesheet" href="styles/theme-energy.css" />
+<!--time picker-->
+<link href="vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
+<!--custom css-->
+<link rel="stylesheet" href="styles/custom.css" />
+</head>
+
+<body class="one-page header-absolute">
+
+<!-- Loader -->
+<div id="page-loader"><svg class="loader-1 loader-primary" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>
+<!-- Loader / End -->
+
+<!-- Header -->
+<header id="header" class="absolute fullwidth transparent">
+
+	<!-- Navigation Bar -->
+	<div id="nav-bar">
+
+		<!-- Logo -->
+		<!--<a class="logo-wrapper" href="index.html">
+			<img class="logo logo-light" src="assets/img/logo-light.png" alt="Okno">
+			<img class="logo logo-dark" src="assets/img/logo-dark.png" alt="Okno">
+		</a>-->
+
+		<nav class="module-group right">
+
+			<!-- Primary Menu -->
+			<div class="module menu left">
+				<ul id="nav-primary" class="nav nav-primary">
+					<li><a href="/index">Home</a></li>
+					<% if (id) { %>
+					<li><a href="/user/<%= id %>/profile">Profile</a></li>
+					<li><a class="logout_button">Sign Out</a></li>
+					<%  } else { %>
+					<li><a class="register_button" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>
+					<li><a class="login_button" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+					<% } %>
+					
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Notification Bar -->
+	<div id="notification-bar"></div>
+
+</header>
+
+<!-- Modal / Basic Register-->
+<div class="modal fade" id="register-modal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="row">
+				<div class="col-lg-8 col-lg-push-2">
+					<div class="text-center">
+						<h3>Sign Up Today</h3>
+					</div>
+					<!-- Input -->
+					<div class="form-group">
+						<input type="text" class="form-control register_first_name" placeholder="First Name" required>
+					</div>
+					<div class="form-group">
+                    	<input type="text" class="form-control register_last_name" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-group">
+                    	<input type="text" class="form-control register_email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                    	<input type="password" class="form-control register_password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                    	<input type="password" class="form-control register_password_confirm" placeholder="Confirm Password" required>
+                      	<span class="validation" id="register_error"></span>
+                    </div>
+					<span class="validation flash-message"></span>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary register_submit_button">Register</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal / Basic Login-->
+<div class="modal fade" id="login-modal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<!--<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close"></i></button>
+				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+			</div>-->
+			<div class="modal-body">
+				<div class="row">
+				<div class="col-lg-8 col-lg-push-2">
+					<div class="text-center">
+						<h3>Login to Your Account</h3>
+						<!--<p class="lead text-center">Default Input &amp; Textarea with placeholders.</p>-->
+					</div>
+					<!-- Input -->
+					<div class="form-group">
+                    	<input type="text" class="form-control login_email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                    	<input type="password" class="form-control login_password" id="password" placeholder="Password" required>
+                    </div>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-info login_submit_button">LogIn</button>
+				<span class="validation" id="login_error"></span>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- JS Libraries -->
+<script src="vendor/js/jquery-1.12.3.min.js"></script>
+
+<!-- JS Plugins -->
+<script src="scripts/plugins.js"></script>
+
+<!-- JS Core -->
+<script src="scripts/core.js"></script>
+
+<script src="scripts/register.js"></script>
+<script src="scripts/login.js"></script>
+
+</body>
+
+</html>

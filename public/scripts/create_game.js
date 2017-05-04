@@ -25,7 +25,7 @@ $(() => {
       lat,
       lng
     };
-
+    console.log("this is theeee data", data);
     $.ajax({
       method:'POST',
       url: '/api/games/new',
@@ -43,7 +43,18 @@ $(() => {
       error: function(error){
         console.log("IN SCRIPT", error.responseText);
         $('#dateError').html(error.responseText).css('color', 'red');
-    }
+      }
   })
 });
+
+// time picker
+
+	$(function(){
+		$('*[name=start_time]').appendDtpicker();
+	});
+
+	$(function(){
+		$('*[name=end_time]').appendDtpicker();
+	});
+
 });
