@@ -1,40 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-cookies-popup="false">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RapidRec</title>
+
+<!-- Meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- used in scripts/add_friend.js file (this makes data available in the dom for available use)-->
+<meta name='urlId' content='<%= urlId %>'>
+<meta name='firstName' content='<%= profile.user_games.user.first_name %>'>
+<meta name='lastName' content='<%= profile.user_games.user.last_name %>'>
+<meta name='session_id' content='<%= seshId %>'>
+<meta name='friends_array' content='<%= friendsArr %>'>
+<meta name='session' content='<%= session %>'>
+
+<!-- Title -->
+<title>RapidRec</title>
+
+<!-- Google Web Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
+
+<!-- CSS Styles -->
+<link rel="stylesheet" href="/styles/styles.css" />
+
+<!-- CSS Base -->
+<link id="theme" rel="stylesheet" href="/styles/theme-classic.css" />
+<style>
+      a:link a:visited .gameblock {
+        background-color: #f44336;
+        color: white;
+        padding: 14px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
 
 
-    <!-- used in scripts/add_friend.js file (this makes data available in the dom for available use)-->
-    <meta name='urlId' content='<%= urlId %>'>
-    <meta name='firstName' content='<%= profile.user_games.user.first_name %>'>
-    <meta name='lastName' content='<%= profile.user_games.user.last_name %>'>
-    <meta name='session_id' content='<%= seshId %>'>
-    <meta name='friends_array' content='<%= friendsArr %>'>
-    <meta name='session' content='<%= session %>'>
 
-    <link href="http://localhost:8080/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-       <link href="http://localhost:8080/vendor/jquery.simple-dtpicker.css" rel="stylesheet" />
-    <link href="http://localhost:8080/vendor/animate.css" rel="stylesheet" />
-    <!-- Squad theme CSS -->
-    <link href="http://localhost:8080/styles/style.css" rel="stylesheet">
-    <link href="http://localhost:8080/styles/default.css" rel="stylesheet">
-    <link href="http://localhost:8080/styles/custom.css" rel="stylesheet">
-    <!-- <link href="styles/reset.css" rel="stylesheet"> -->
-
-
-
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
-
-    <style>
 
       div.gamesRoute:hover, div.gamesRoute:active {
         box-shadow: 10px 10px 5px #888888;
@@ -44,178 +47,189 @@
     </style>
 
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-<!-- nav bar -->
-<div class="mainbody container-fluid">
-    <div class="row">
-        <div class="navbar-wrapper">
-            <div class="container-fluid">
-                <div class="navbar navbar-default navbar-static-top" id="navbar-profile" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="/index">RapidRec</a>
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
 
-                              <li><a href="/user/ <%= seshId %> /profile" >Profile Page</a></li>
-                              <li><a href="/user/ <%= seshId %> /edit" >Edit Profile</a></li>
-                              <li><a class="logout_button" >Log Out</a></li>
+<body>
 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
- <div class="container">
-        <!--left side pic etc..-->
-        <div style="padding-top:50px;"> </div>
-        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="media">
-                        <div align="center">
-                            <img class="thumbnail img-responsive" src="/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
-                        </div>
-                        <div class="media-body">
+<!-- Loader -->
+<div id="page-loader"><svg class="loader-1 loader-primary" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>
+<!-- Loader / End -->
 
-                          <% if (seshId != urlId) { %>
-                            <form>
-                              <div class="form-group">
-                                <input type="submit" class="btn add-friend-submit-button" value="Add Friend">
-                              </div>
-                            </form>
-                          <% } %>
+<!-- Header -->
+<header id="header" class="absolute fullwidth transparent">
 
-                            <hr>
-                            <h3><strong>Friends</strong></h3>
-                            <span class="validation" id="add_friend_popup"></span>
-                            <ul>
-                            <% for (let friend of profile.user_friends.friends) { %>
-                                <li><a href="/user/ <%= friend.id %> /profile" ><%= friend.first_name %> <%= friend.last_name %></a></li>
-                                <img class="media-object img-circle"  src="http://localhost:8080/uploads/<%= friend.image %>"  width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+	<!-- Navigation Bar -->
+	<div id="nav-bar">
+		<nav class="module-group right">
+			<div class="module menu left">
+				<ul id="nav-primary" class="nav nav-primary">
+					<li><a href="/index">Home</a></li>
+					<li><a href="/user/<%= seshId %>/profile">Profile</a></li>
+					<li><a href="/user/<%= seshId %>/edit">Profile Edit</a></li>
+					<li><a class="logout_button">Sign Out</a></li>
+
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Notification Bar -->
+	<div id="notification-bar"></div>
+
+	<!-- Search Bar -->
+
+
+</header>
+<!-- Header / End -->
+
+<!-- Page Title -->
+<div id="page-title" class="page-title page-title-1 bg-grey">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h1><%= profile.user_games.user.first_name %> <%= profile.user_games.user.last_name %></h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Page Title / End -->
+
+<!-- Content -->
+<div id="content">
+	<section>
+		<div class="container">
+			<div class="row">
+				<!-- Sidebar #2 left-->
+				<div class="sidebar col-md-3 clearfix">
+
+					<!-- Widget - Newsletter -->
+					<div class="widget widget-newsletter">
+						<h6 class="text-uppercase">About Me</h6>
+						<!--<img class="img-circle mb-50" src='/img/avatars/avatar_hoody_guy.png' alt="">-->
+						<img class="img-circle mb-50" src='/uploads/<%= profile.user_games.user.image %>' alt="">
+						<button type="submit" class="btn btn-primary btn-sm  btn-block"><span>Update avatar picture</span></button>
+					</div>
+
+					<!-- Widget -->
+					<div class="widget">
+						<button type="submit" class="btn btn-warning btn-sm btn-block add-friend-submit-button"><span>Add Friend</span></button>
+					</div>
+
+					<!-- Widget - Recent posts -->
+					<div class="widget widget-recent-posts">
+						<h6 class="text-uppercase text-muted">Friend List</h6>
+						<span class="validation" id="add_friend_popup"></span>
+						<ul class="list-posts">
+							<% for (let friend of profile.user_friends.friends) { %>
+							<li><a href="/user/ <%= friend.id %> /profile" ><%= friend.first_name %> <%= friend.last_name %></a></li>
+							<img class="img-circle"  src="http://localhost:8080/uploads/<%= friend.image %>"  width="50px" height="50px">
                             <% } %>
-                            </ul>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
+
+							<!--need to delete after add friend function working-->
+							<li>
+								<a href=""></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+
+				<!-- Content -->
+				<div class="content col-md-9">
+					<!-- Todays Events Section / Simple -->
+					<% if (todays_games.length) { %>
+          <% for (let game of todays_games) { %>
+					<h3 class="text-center mb-20">Today's Upcoming Games</h3>
+					<hr>
+					<section class="bg-primary dark">
+            <div onClick="location.href='/event/<%= game.id %>'">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+						<div class="container">
+								<div class="col-lg-5 col-md-6">
+
+									<div class="testimonial testimonial-1">
+										<div class="quote">
+											<p><strong>Location: </strong> <%= game.location %></p>
+                      						<p><strong>Date/Time: </strong><%= game.start_time %></p>
+										</div>
+										<div class="author">
+											<span class="name text-uppercase"><%= game.title %></span>
+										</div>
+									</div>
+									<% } %>
+									<% } %>
+								</div>
+						</div>
+            </a>
             </div>
-        </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+					</section>
+					<br />
+					<!-- Section / Simple -->
+					<% if (upcoming_games.length) { %>
+          	<% for (let game of upcoming_games) { %>
+					<h3 class="text-center mb-20">Upcoming Games</h3>
+					<hr>
+					<section class="bg-primary dark">
+            <div onClick="location.href='/event/<%= game.id %>'">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+						<div class="container">
 
-            <h2><strong><%= profile.user_games.user.first_name %> <%= profile.user_games.user.last_name %></strong></h2>
-            <hr>
+								<div class="col-lg-5 col-md-6">
 
-            <!-- Todays Events. -->
-            <% if (todays_games.length) { %>
-              <h2>Todays Events:</h2>
-              <% for (let game of todays_games) { %>
-              <div onClick="location.href='/event/<%= game.id %>'">
-                <div class="panel panel-default">
-                <div class="gamesRoute">
-                    <div class="panel-body">
-                        <div class="pull-left">
-                                <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </div>
+									<div class="testimonial testimonial-1">
+										<div class="quote">
+											<p><strong>Location: </strong> <%= game.location %></p>
+                      						<p><strong>Date/Time: </strong><%= game.start_time %></p>
+										</div>
+										<div class="author">
+											<span class="name text-uppercase"><%= game.title %></span>
+										</div>
+									</div>
+									<% } %>
+									<% } %>
+								</div>
+						</div>
+            </a>
+            </div>
+					</section>
+					<br />
+					<!-- Past Events -->
+					<% if (past_games.length) { %>
+          <% for (let game of past_games) { %>
+					<h3 class="text-center mb-20">Past Games</h3>
+					<hr>
+					<div onClick="location.href='/event/<%= game.id %>'">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+						<div class="testimonial testimonial-1">
+							<div class="quote">
+								<p><strong>Location: </strong> <%= game.location %></p>
+                      			<p><strong>Date/Time: </strong><%= game.start_time %></p>
+							</div>
+							<div class="author">
+								<span class="name text-uppercase"><%= game.title %></span>
+							</div>
+						</div>
+					<% } %>
+					<% } %>
+          </a>
+          </div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- Content / End -->
 
-                        <h4 class="event_title"><strong><%= game.title %></strong> <small><small><a href="#" style="text-decoration:none; color:grey;"><i></a></small></small></h4>
-                        <hr>
-                        <div class="post-content" >
-                          <a href="#" style="text-decoration:none;">
-                          <p><strong>Location: </strong> <%= game.location %></p>
-                          <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                          </a>
-                        </div>
-                        <hr>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              <% } %>
-            <% } %>
+<!-- JS Libraries -->
+<script src="/vendor/js/jquery-1.12.3.min.js"></script>
 
-            <!-- Future Events. -->
-            <% if (upcoming_games.length) { %>
-              <h2>Future Events:</h2>
-              <% for (let game of upcoming_games) { %>
-              <div onClick="location.href='/event/<%= game.id %>'">
-                  <div class="panel panel-default">
-                    <div class="gamesRoute">
-                      <div class="panel-body">
-                          <div class="pull-left">
-                                  <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                          </div>
+<!-- JS Plugins -->
+<script src="/scripts/plugins.js"></script>
 
-                          <h4 class="event_title"><strong><%= game.title %></strong></a> <small><small><a href="#" style="text-decoration:none; color:grey;"></a></small></small></h4>
-                          <hr>
-                          <div class="post-content" >
-                            <a href="#" style="text-decoration:none;">
-                            <p><strong>Location: </strong> <%= game.location %></p>
-                            <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                            </a>
-                          </div>
-                          <hr>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% } %>
-            <% } %>
-
-            <!-- Past Events -->
-            <% if (past_games.length) { %>
-              <h2>Past Events:</h2>
-                <% for (let game of past_games) { %>
-
-                  <div onClick="location.href='/event/<%= game.id %>'">
-                    <div class="panel panel-default">
-                      <div class="gamesRoute">
-                      <div class="panel-body">
-                        <div class="pull-left">
-                          <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </div>
-
-                        <h4 class="event_title"><strong><%= game.title %></strong></a> <small><small><a href="#" style="text-decoration:none; color:grey;"></a></small></small></h4>
-                        <hr>
-
-                        <div class="post-content" >
-                          <a href="#" style="text-decoration:none;">
-                            <p><strong>Location: </strong><%= game.location %></p>
-                            <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                          </a>
-                        </div>
-
-                        <hr>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% } %>
-            <% } %>
-
-
-        </div>
-
-      </div>
-  </div>
-     </div>
-<!-- Core JavaScript Files -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="http://localhost:8080/vendor/bootstrap.min.js"></script>
-  <script src="http://localhost:8080/vendor/jquery.easing.min.js"></script>
-  <script src="http://localhost:8080/vendor/jquery.scrollTo.js"></script>
-  <script src="http://localhost:8080/vendor/jquery.js"></script>
-  <script src="http://localhost:8080/vendor/jquery.simple-dtpicker.js"></script>
-  <script src="http://localhost:8080/vendor/wow.min.js"></script>
-  <script src="http://localhost:8080/scripts/googleApi.js"></script>
-  <script src="http://localhost:8080/scripts/main.js"></script>
-  <script src="http://localhost:8080/scripts/login.js"></script>
-  <script src="http://localhost:8080/scripts/register.js"></script>
-  <script src="/scripts/create_game.js"></script>
-  <script src="/scripts/add_friend.js"></script>
-
+<!-- JS Core -->
+<script src="/scripts/core.js"></script>
+<script src="/scripts/add_friend.js"></script>
+<script src="/scripts/register.js"></script>
+<script src="/scripts/login.js"></script>
 </body>
 
 </html>

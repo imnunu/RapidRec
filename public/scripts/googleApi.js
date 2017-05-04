@@ -72,7 +72,7 @@ function createMarker(place) {
         '<div id="iw-container">' + '<div class="iw-title">' + place.name + '</div>' + "<br />" +
         '<div class="iw-content">'+ '<div class="iw-subTitle">' + place.vicinity + '</div>'+ "<br />" + '<div class="iw-subTitle">' +
         "Rating: " + '</div>'+ place.rating +
-        '<div class="iw-title">' + "<br /><a data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+
+        '<div class="iw-title">' + "<br /><a class='btn btn-primary' data-toggle='modal' href='#myModal' onclick=\"$('.create_event_location').val('"+
         place.vicinity + "');\" >Create Game</a>") + '</div>';
 
       infowindow.open(map, this);
@@ -122,7 +122,7 @@ function createCurrentGameMarker(event) {
         '<div class="iw-content">'+ '<div class="iw-subTitle">' + event.description + '</div>'+ "<br />" +
         '<div class="iw-subTitle">' + "Start:" + '</div>' +
         event.start_time + "<br />" + '<div class="iw-subTitle">' + "End:" + '</div>' +
-        event.end_time + '<div class="iw-title">' + "<br /><a data-toggle='modal' href='/event/" +
+        event.end_time + '<div class="iw-title">' + "<br /><a class='btn btn-primary' data-toggle='modal' href='/event/" +
         event.id + "' onclick=\"$('.create_event').val('"+
         event.vicinity + "');\" >View Event</a>") + '</div>' + '</div>';
 

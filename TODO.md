@@ -13,3 +13,8 @@
 
 
 5. todays/ all games
+
+
+NOTIFICATOINS
+adding friend
+joing/ dropping game
