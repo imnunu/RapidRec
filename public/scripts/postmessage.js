@@ -19,17 +19,10 @@ function createPostElement(newpost) {
   });
 }
 
-function createHeader(data) {
-}
-
 function createBody(data) {
   var body = $('<div>')
   body.append($('<p>').text(data.content));
   return body;
-}
-
-function createFooter(data) {
-
 }
 
 function loadPosts() {
@@ -67,7 +60,7 @@ $('.new-post form').on('submit', function (e) {
       error: function() {
       }
     })
-}
+  }
 });
 
 loadPosts();

@@ -18,7 +18,6 @@ router.post('/', (req, res) => {
   let badTime = endsBeforeStart(r.start_time, r.end_time);
   let loggedInUser = req.session.user_id;
 
-  console.log('Post to Create Games', r, badTime);
   if (badTime) {
       res.status(400).send("Please start your basketball game before the end time");
   } else {

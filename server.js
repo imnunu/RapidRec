@@ -113,6 +113,7 @@ app.get('/foo', (req, res) => {
 app.get('/event/:id', (req, res) => {
   let user_id = Number(req.session.user_id);
   let game_id = Number(req.params.id);
+  console.log("GAME IDDDD", req.params);
 
   if (!user_id) {
     res.status(401).send('<p>You have not logged in.</p><a href="/index">Login Here</a>');
@@ -124,7 +125,6 @@ app.get('/event/:id', (req, res) => {
       profileData.queryPartPlayers(game_id)
     ]).then(([profile, posts, info]) => {
       const templateVars = {
-
         game_id,
         user_id,
         profile,

@@ -3,11 +3,9 @@ $(() => {
 function joinEvent(eventID) {
   let equipment = $('.join_event_equipment')[0].checked;
   let data = equipment
-
-  console.log('equipment', data);
   $.ajax({
     method: 'POST',
-    url: '/api/event/' + eventID+ '/join',
+    url: '/api/event/' + eventID + '/join',
     dataType: 'JSON',
     data: {data},
     success: function(data) {
@@ -22,14 +20,13 @@ function joinEvent(eventID) {
 function dropEvent(eventID) {
   $.ajax({
     method: "POST",
-    url: '/api/event/' + eventID+ '/drop',
+    url: '/api/event/' + eventID + '/drop',
     dataType: "JSON",
     data: {},
     success: function(data) {
       window.location.reload();
     },
     error: function(data) {
-      console.log('THIS IS THE ERROR IN DROPEVENT FUNCTION', error);
     }
  });
 }
