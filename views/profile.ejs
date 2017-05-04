@@ -35,13 +35,14 @@
         text-decoration: none;
         display: inline-block;
       }
-      
 
-  
+
+
 
       div.gamesRoute:hover, div.gamesRoute:active {
         box-shadow: 10px 10px 5px #888888;
-        background-color: #baeaff;
+        border-style: double;
+        padding: 10px;
       }
 
     </style>
@@ -56,7 +57,7 @@
 
 <!-- Header -->
 <header id="header" class="absolute fullwidth transparent">
-	
+
 	<!-- Navigation Bar -->
 	<div id="nav-bar">
 		<nav class="module-group right">
@@ -66,7 +67,7 @@
 					<li><a href="/user/<%= seshId %>/profile">Profile</a></li>
 					<li><a href="/user/<%= seshId %>/edit">Profile Edit</a></li>
 					<li><a class="logout_button">Sign Out</a></li>
-					
+
 				</ul>
 			</div>
 		</nav>
@@ -113,7 +114,7 @@
 					<div class="widget">
 						<button type="submit" class="btn btn-warning btn-sm btn-block add-friend-submit-button"><span>Add Friend</span></button>
 					</div>
-					
+
 					<!-- Widget - Recent posts -->
 					<div class="widget widget-recent-posts">
 						<h6 class="text-uppercase text-muted">Friend List</h6>
@@ -123,7 +124,7 @@
 							<li><a href="/user/ <%= friend.id %> /profile" ><%= friend.first_name %> <%= friend.last_name %></a></li>
 							<img class="img-circle"  src="http://localhost:8080/uploads/<%= friend.image %>"  width="50px" height="50px">
                             <% } %>
-                            
+
 							<!--need to delete after add friend function working-->
 							<li>
 								<a href=""></a>
@@ -132,49 +133,51 @@
 					</div>
 				</div>
 
-			
-				<!-- Content -->
-				<div class="content col-md-9">
+
+  			<!-- Content -->
+  			<div class="content col-md-9">
 					<!-- Todays Events Section / Simple -->
 					<% if (todays_games.length) { %>
           <% for (let game of todays_games) { %>
-					<h3 class="text-center mb-20">Today's Upcoming Games</h3>
+					<h3 class="text-center mb-20">Today's Upcoming Game</h3>
 					<hr>
 					<section class="bg-primary dark">
             <div onClick="location.href='/event/<%= game.id %>'">
-                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+            <div class=“gamesRoute”>
 						<div class="container">
-								<div class="col-lg-5 col-md-6">
-									
-									<div class="testimonial testimonial-1">
-										<div class="quote">
-											<p><strong>Location: </strong> <%= game.location %></p>
-                      						<p><strong>Date/Time: </strong><%= game.start_time %></p>
-										</div>
-										<div class="author">
-											<span class="name text-uppercase"><%= game.title %></span>
-										</div>
+							<div class="col-lg-5 col-md-6">
+
+								<div class="testimonial testimonial-1">
+									<div class="quote">
+										<p><strong>Location: </strong> <%= game.location %></p>
+                    						<p><strong>Date/Time: </strong><%= game.start_time %></p>
 									</div>
-									<% } %>
-									<% } %>
-								</div>
+									<div class="author">
+										<span class="name text-uppercase"><%= game.title %></span>
+									</div>
+                </div>
+
+							</div>
 						</div>
-            </a>
+						</div>
             </div>
 					</section>
-					<br />
+        <% } %>
+        <% } %>
+				<br />
+
+
 					<!-- Section / Simple -->
 					<% if (upcoming_games.length) { %>
           	<% for (let game of upcoming_games) { %>
-					<h3 class="text-center mb-20">Upcoming Games</h3>
+					<h3 class="text-center mb-20">Upcoming Game</h3>
 					<hr>
 					<section class="bg-primary dark">
             <div onClick="location.href='/event/<%= game.id %>'">
-                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+            <div class=“gamesRoute”>
 						<div class="container">
-              
 								<div class="col-lg-5 col-md-6">
-								
+
 									<div class="testimonial testimonial-1">
 										<div class="quote">
 											<p><strong>Location: </strong> <%= game.location %></p>
@@ -184,22 +187,27 @@
 											<span class="name text-uppercase"><%= game.title %></span>
 										</div>
 									</div>
-									<% } %>
-									<% } %>
+
 								</div>
 						</div>
-            </a>
+            </div>
             </div>
 					</section>
+          <% } %>
+          <% } %>
 					<br />
+
+
+
 					<!-- Past Events -->
 					<% if (past_games.length) { %>
           <% for (let game of past_games) { %>
-					<h3 class="text-center mb-20">Past Games</h3>
+					<h3 class="text-center mb-20">Past Game</h3>
 					<hr>
 					<div onClick="location.href='/event/<%= game.id %>'">
-                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+            <div class="gamesRoute">
 						<div class="testimonial testimonial-1">
+
 							<div class="quote">
 								<p><strong>Location: </strong> <%= game.location %></p>
                       			<p><strong>Date/Time: </strong><%= game.start_time %></p>
@@ -207,16 +215,13 @@
 							<div class="author">
 								<span class="name text-uppercase"><%= game.title %></span>
 							</div>
+
 						</div>
-					<% } %>
-					<% } %>
-          </a>
-          </div>
-				</div>
-			</div>
-		</div>
-	</section>
-</div>
+            </div>
+             </div>
+          <% } %>
+        <% } %>
+      </div>
 <!-- Content / End -->
 
 <!-- JS Libraries -->

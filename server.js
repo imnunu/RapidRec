@@ -223,8 +223,6 @@ app.get('/user/:id/profile', (req, res) => {
         // --- PAST GAMES
 
 
-        // endTime <= currentTime
-
         if (endTime < currentTime) {
           all_games.past_games.push({
             id: game.id,
