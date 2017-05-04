@@ -36,8 +36,9 @@
 
     <style>
 
-      a:hover, a:active .gameBlock {
-        background-color: red;
+      div.gamesRoute:hover, div.gamesRoute:active {
+        box-shadow: 10px 10px 5px #888888;
+        background-color: #baeaff;
       }
 
     </style>
@@ -111,9 +112,9 @@
             <% if (todays_games.length) { %>
               <h2>Todays Events:</h2>
               <% for (let game of todays_games) { %>
+              <div onClick="location.href='/event/<%= game.id %>'">
                 <div class="panel panel-default">
-                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
-                  <p>
+                <div class="gamesRoute">
                     <div class="panel-body">
                         <div class="pull-left">
                                 <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
@@ -129,8 +130,8 @@
                         </div>
                         <hr>
                     </div>
-                    </p>
-                  </a>
+                  </div>
+                  </div>
                 </div>
               <% } %>
             <% } %>
@@ -139,22 +140,26 @@
             <% if (upcoming_games.length) { %>
               <h2>Future Events:</h2>
               <% for (let game of upcoming_games) { %>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="pull-left">
-                                <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </div>
+              <div onClick="location.href='/event/<%= game.id %>'">
+                  <div class="panel panel-default">
+                    <div class="gamesRoute">
+                      <div class="panel-body">
+                          <div class="pull-left">
+                                  <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                          </div>
 
-                        <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"></a></small></small></h4>
-                        <hr>
-                        <div class="post-content" >
-                          <a href="#" style="text-decoration:none;">
-                          <p><strong>Location: </strong> <%= game.location %></p>
-                          <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                          </a>
-                        </div>
-                        <hr>
+                          <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"></a></small></small></h4>
+                          <hr>
+                          <div class="post-content" >
+                            <a href="#" style="text-decoration:none;">
+                            <p><strong>Location: </strong> <%= game.location %></p>
+                            <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                            </a>
+                          </div>
+                          <hr>
+                      </div>
                     </div>
+                  </div>
                 </div>
               <% } %>
             <% } %>
@@ -163,23 +168,29 @@
             <% if (past_games.length) { %>
               <h2>Past Events:</h2>
                 <% for (let game of past_games) { %>
-                <div class="panel panel-default">
-                  <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
-                    <div class="panel-body">
-                      <div class="pull-left">
-                        <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+
+                  <div onClick="location.href='/event/<%= game.id %>'">
+                    <div class="panel panel-default">
+                      <div class="gamesRoute">
+                      <div class="panel-body">
+                        <div class="pull-left">
+                          <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                        </div>
+
+                        <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"></a></small></small></h4>
+                        <hr>
+
+                        <div class="post-content" >
+                          <a href="#" style="text-decoration:none;">
+                            <p><strong>Location: </strong><%= game.location %></p>
+                            <p><strong>Date/Time: </strong><%= game.start_time %></p>
+                          </a>
+                        </div>
+
+                        <hr>
                       </div>
-                      <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
-                      <hr>
-                      <div class="post-content" >
-                        <a href="#" style="text-decoration:none;">
-                          <p><strong>Location: </strong><%= game.location %></p>
-                          <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                        </a>
-                      </div>
-                      <hr>
                     </div>
-                  </a>
+                  </div>
                 </div>
               <% } %>
             <% } %>
