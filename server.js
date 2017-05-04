@@ -42,9 +42,6 @@ const usersRoutesRegister = require("./routes/user_register");
 const eventRoutes = require("./routes/event");
 const eventsRoutes = require("./routes/events");
 const gamesRoutesCreate = require("./routes/create_game");
-// const friendRoutesAdd = require("./routes/add_friend");
-
-//const postsRoutes = require("./routes/posts");
 const usersRoutesPicture = require('./routes/post_profile_pic');
 
 // knex queries
@@ -54,9 +51,6 @@ const profileData = require('./routes/profile_data.js')(knex);
 
 
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
@@ -86,14 +80,13 @@ app.use("/api/register", usersRoutesRegister(knex));
 app.use("/api/event", eventRoutes(knex));
 app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
-// app.use("/api/user/friend", friendRoutesAdd(knex));
 
-//app.use("/api/posts", postsRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
   res.redirect("/index");
 });
+
 
 app.get("/index", (req, res) => {
   let id = req.session.user_id;
@@ -111,6 +104,12 @@ app.get('/create_event', (req, res) => {
   }
 });
 
+app.get('/foo', (req, res) => {
+  profileData.getPostsAndCommentsForGame(req.query.gameId).then(data => {
+    res.json(data);
+  })
+})
+
 app.get('/event/:id', (req, res) => {
   let user_id = Number(req.session.user_id);
   let game_id = Number(req.params.id);
@@ -124,38 +123,24 @@ app.get('/event/:id', (req, res) => {
       profileData.queryUserGames(user_id),
       profileData.getPostsAndCommentsForGame(game_id),
       profileData.queryPartPlayers(game_id)
-      // profileData.someOtherQuery(whatever)
     ]).then(([profile, posts, info]) => {
+      console.log('THESEWEEDCASDSDC ARE THE POSTSJASDKJH;ALSDFJLKS;AJFAKLS;FJ', posts);
+      console.log('TIIIIME');
       const templateVars = {
 
         game_id,
         user_id,
         profile,
         posts,
+        time: moment(posts.created_at).fromNow(),
         info
 
 
       };
-      // res.render('event', templateVars);
       res.render('event', templateVars);
     }).catch(error => {
       res.status(500).json({ error: error.message });
     });
-    // return profileData.queryUserGames(Number(id))
-    //   .then(data => {
-    //     // res.json(data);
-    //     console.log('THIS IS THE DATAAAAAA', data);
-    //     let templateVars = {
-    //       id: url,
-    //       first_name: data.user.first_name,
-    //       last_name: data.user.last_name,
-    //       img: data.user.img,
-    //       equipment: data.user.equipment,
-    //       partUserId: data.user.partUserId
-    //     }
-    //     console.log('THIS IS THE TEMPLATE VARS:', templateVars);
-    //     res.render('event', templateVars);
-    //   })
   }
 });
 
@@ -172,6 +157,7 @@ app.get('/create_game/:id', (req, res) => {
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
+
       // console.log("this is array of all games~~~~~~~~", result.user_games.games);
       let loggedInId = req.session.user_id;
       console.log("this is req.session.friends~~~~~~~~~~~~~~: ", req.session.friends);
@@ -186,6 +172,11 @@ app.get('/user/:id/profile', (req, res) => {
       let gameCount = 1;
       let totalCount = 0;
 
+      // let currentTime = moment.utc().tz('America/Los_Angeles');
+      let pasts = 1;
+      let future = 1;
+      let count = 0;
+
       let all_games = {
         todays_games: [],
         upcoming_games: [],
@@ -194,23 +185,16 @@ app.get('/user/:id/profile', (req, res) => {
 
       // --- PRINTING OUT INDIVIDUAL GAMES
       result.user_games.games.forEach(game => {
+
         let startTime = moment.utc(game.start_time,"YYYY/MM/DD HH:mm:ss");
         let endTime = moment.utc(game.end_time,"YYYY/MM/DD HH:mm:ss");
         console.log("start", startTime);
         console.log("end", endTime);
         totalCount = totalCount + 1;
-        // console.log('this is current time----:', currentTime);
-        // console.log('this is start time:~~~~~', startTime);
-        // console.log('this is end time:~~~~~', endTime);
+
         let upcoming = startTime - currentTime;
         let past = currentTime - endTime;
-        // console.log('this is math UPCOMING: >>>', upcoming);
-        // console.log('this is math PAST: >>>', past);
-        // if (upcoming > - 25200000 && upcoming < 0) {
-        //   console.log("true");
-        // } else {
-        //   console.log("false");
-        // }
+
 
 
         // --- TODAYS GAMES
@@ -227,7 +211,7 @@ app.get('/user/:id/profile', (req, res) => {
 
         // --- FUTURE GAMES
         if (startTime > currentTime) {
-          console.log("pushing game ", gameCount++, "into upcoming games array");
+
           all_games.upcoming_games.push({
             id: game.id,
             title: game.title,
@@ -238,9 +222,11 @@ app.get('/user/:id/profile', (req, res) => {
         }
 
         // --- PAST GAMES
+
+
         // endTime <= currentTime
-        if (upcoming < - 25200000) {
-          console.log("pushing game ", gameCount++, "into past games array");
+
+        if (endTime < currentTime) {
           all_games.past_games.push({
             id: game.id,
             title: game.title,
@@ -250,13 +236,8 @@ app.get('/user/:id/profile', (req, res) => {
           });
         }
       });
-      console.log("FRIENDS");
-      console.log("***************************************************************")
-      console.log("GAMES");
-      console.log(totalCount + " games were sorted");
-      console.log("this is array of todays games", all_games.todays_games);
-      console.log("this is array of upcoming games", all_games.upcoming_games);
-      console.log("this is array of past games", all_games.past_games);
+
+
 
       let templateVars = {
         seshId: loggedInId,
