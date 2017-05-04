@@ -18,27 +18,8 @@ module.exports = (knex) => ({
               equipment: row.equipment,
               partUserId: row.user_id
             };
-          })/*,
-          games: []*/
+          })
         };
-        // rows.forEach(row => {
-        //   console.log("this is each row: ", row);
-        //   result.user.first_name = row.first_name;
-        //   result.user.last_name = row.last_name;
-        //   result.user.image = row.image;
-        //   result.user.equipment = row.equipment;
-        //   result.user.partUserId = row.user_id;
-        //   if(row.id) {
-        //     result.games.push({
-        //       id: row.id,
-        //       title: row.title,
-        //       location: row.location,
-        //       start_time: row.start_time
-        //     });
-        //   }
-        // });
-
-        console.log("this is finished result USERSGAMES>>>>>: ", result)
         return result;
       })
       .catch(err => {
@@ -154,5 +135,4 @@ module.exports = (knex) => ({
       })
   }
 });
-
-
+2
