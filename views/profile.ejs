@@ -35,9 +35,15 @@
         text-decoration: none;
         display: inline-block;
       }
-      a:hover, a:active{
-        background-color: red;
+      
+
+  
+
+      div.gamesRoute:hover, div.gamesRoute:active {
+        box-shadow: 10px 10px 5px #888888;
+        background-color: #baeaff;
       }
+
     </style>
 
 </head>
@@ -131,12 +137,15 @@
 				<div class="content col-md-9">
 					<!-- Todays Events Section / Simple -->
 					<% if (todays_games.length) { %>
+          <% for (let game of todays_games) { %>
 					<h3 class="text-center mb-20">Today's Upcoming Games</h3>
 					<hr>
 					<section class="bg-primary dark">
+            <div onClick="location.href='/event/<%= game.id %>'">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
 						<div class="container">
 								<div class="col-lg-5 col-md-6">
-									<% for (let game of todays_games) { %>
+									
 									<div class="testimonial testimonial-1">
 										<div class="quote">
 											<p><strong>Location: </strong> <%= game.location %></p>
@@ -150,16 +159,22 @@
 									<% } %>
 								</div>
 						</div>
+            </a>
+            </div>
 					</section>
 					<br />
 					<!-- Section / Simple -->
 					<% if (upcoming_games.length) { %>
+          	<% for (let game of upcoming_games) { %>
 					<h3 class="text-center mb-20">Upcoming Games</h3>
 					<hr>
 					<section class="bg-primary dark">
+            <div onClick="location.href='/event/<%= game.id %>'">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
 						<div class="container">
+              
 								<div class="col-lg-5 col-md-6">
-									<% for (let game of upcoming_games) { %>
+								
 									<div class="testimonial testimonial-1">
 										<div class="quote">
 											<p><strong>Location: </strong> <%= game.location %></p>
@@ -173,13 +188,17 @@
 									<% } %>
 								</div>
 						</div>
+            </a>
+            </div>
 					</section>
 					<br />
 					<!-- Past Events -->
 					<% if (past_games.length) { %>
+          <% for (let game of past_games) { %>
 					<h3 class="text-center mb-20">Past Games</h3>
 					<hr>
-					<% for (let game of past_games) { %>
+					<div onClick="location.href='/event/<%= game.id %>'">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
 						<div class="testimonial testimonial-1">
 							<div class="quote">
 								<p><strong>Location: </strong> <%= game.location %></p>
@@ -191,6 +210,8 @@
 						</div>
 					<% } %>
 					<% } %>
+          </a>
+          </div>
 				</div>
 			</div>
 		</div>

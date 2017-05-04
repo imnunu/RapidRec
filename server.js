@@ -194,7 +194,6 @@ app.get('/user/:id/profile', (req, res) => {
 
         let upcoming = startTime - currentTime;
         let past = currentTime - endTime;
-        
 
 
         // --- TODAYS GAMES
