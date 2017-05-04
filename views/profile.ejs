@@ -35,17 +35,11 @@
     <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
 
     <style>
-      a:link a:visited .gameblock {
-        background-color: #f44336;
-        color: white;
-        padding: 14px 25px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-      }
-      a:hover, a:active {
+
+      a:hover, a:active .gameBlock {
         background-color: red;
       }
+
     </style>
 
 </head>
@@ -84,11 +78,15 @@
                             <img class="thumbnail img-responsive" src="/uploads/<%= profile.user_games.user.image %>" width="300px" height="300px">
                         </div>
                         <div class="media-body">
-                          <form>
-                            <div class="form-group">
-                              <input type="submit" class="btn add-friend-submit-button" value="Add Friend">
-                            </div>
-                          </form>
+
+                          <% if (seshId != urlId) { %>
+                            <form>
+                              <div class="form-group">
+                                <input type="submit" class="btn add-friend-submit-button" value="Add Friend">
+                              </div>
+                            </form>
+                          <% } %>
+
                             <hr>
                             <h3><strong>Friends</strong></h3>
                             <span class="validation" id="add_friend_popup"></span>
@@ -114,7 +112,7 @@
               <h2>Todays Events:</h2>
               <% for (let game of todays_games) { %>
                 <div class="panel panel-default">
-                <a class="gameblock" href="/event/ <%= game.id %>" target="_blank">
+                <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
                   <p>
                     <div class="panel-body">
                         <div class="pull-left">
@@ -165,22 +163,24 @@
             <% if (past_games.length) { %>
               <h2>Past Events:</h2>
                 <% for (let game of past_games) { %>
-                  <div class="panel panel-default">
-                      <div class="panel-body">
-                          <div class="pull-left">
-                            <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
-                        </div>
-                        <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
-                        <hr>
-                        <div class="post-content" >
-                          <a href="#" style="text-decoration:none;">
+                <div class="panel panel-default">
+                  <a class="gameBlock" href="/event/ <%= game.id %>" target="_blank">
+                    <div class="panel-body">
+                      <div class="pull-left">
+                        <img class="media-object img-circle" src="/img/basketball.png" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                      </div>
+                      <h4 class="event_title"><strong><%= game.title %></strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i><%= "42" %> days ago</i></a></small></small></h4>
+                      <hr>
+                      <div class="post-content" >
+                        <a href="#" style="text-decoration:none;">
                           <p><strong>Location: </strong><%= game.location %></p>
                           <p><strong>Date/Time: </strong><%= game.start_time %></p>
-                          </a>
-                        </div>
-                        <hr>
+                        </a>
+                      </div>
+                      <hr>
                     </div>
-                  </div>
+                  </a>
+                </div>
               <% } %>
             <% } %>
 
