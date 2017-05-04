@@ -24,6 +24,7 @@
 
 <body>
 
+<<<<<<< HEAD
 <!-- Loader -->
 <div id="page-loader"><svg class="loader-1 loader-primary" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="circle" fill="none" stroke-width="3" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div>
 <!-- Loader / End -->
@@ -44,7 +45,7 @@
 				<ul id="nav-primary" class="nav nav-primary">
 					<li><a href="/index">Home</a></li>
 					<% if (user_id) { %>
-					<li><a href="/user/<%= user_id %>/profile">Profile</a></li>
+					<li><a href="/user/<%=seshId%>/profile">Profile</a></li>
 					<li><a class="logout_button">Sign Out</a></li>
 					<%  } else { %>
 					<li><a class="register_button" data-toggle="modal" data-target="#register-modal">Sign Up</a></li>

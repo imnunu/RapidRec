@@ -42,6 +42,7 @@ const usersRoutesRegister = require("./routes/user_register");
 const eventRoutes = require("./routes/event");
 const eventsRoutes = require("./routes/events");
 const gamesRoutesCreate = require("./routes/create_game");
+// const friendRoutesAdd = require("./routes/add_friend");
 
 //const postsRoutes = require("./routes/posts");
 const usersRoutesPicture = require('./routes/post_profile_pic');
@@ -85,6 +86,7 @@ app.use("/api/register", usersRoutesRegister(knex));
 app.use("/api/event", eventRoutes(knex));
 app.use("/api/events", eventsRoutes(knex));
 app.use("/api/games/new", gamesRoutesCreate(knex));
+// app.use("/api/user/friend", friendRoutesAdd(knex));
 
 //app.use("/api/posts", postsRoutes(knex));
 
@@ -125,11 +127,20 @@ app.get('/event/:id', (req, res) => {
       // profileData.someOtherQuery(whatever)
     ]).then(([profile, posts, info]) => {
       const templateVars = {
+<<<<<<< HEAD
         game_id,
         user_id,
         profile,
         posts,
         info
+=======
+        id: url,
+        seshId: id,
+        profile: '',
+        posts: '',
+        partUserId: '',
+        gameId: req.params.id
+>>>>>>> 8eecc76dc72425109384e60b145aa488976f3521
       };
       // res.render('event', templateVars);
       res.render('event', templateVars);
@@ -160,32 +171,69 @@ app.post("/create_game/:id", (req, res) => {
 });
 
 app.get('/create_game/:id', (req, res) => {
-  res.render('event')
+  console.log("create game event page loggedin user id is: ", req.session.user_id);
+  res.render('event', {id: req.session.user_id});
 });
 
-// routes used for navigating profile + edit profile
 app.get('/user/:id/profile', (req, res) => {
   return profileData.queryProfileData(req.params.id)
     .then(result => {
-      console.log("this is array of all games~~~~~~~~", result.user_games.games);
-      let currentTime = moment.utc().tz('America/Los_Angeles');
-      let pasts = 1;
-      let future = 1;
-      let count = 0;
+      // console.log("this is array of all games~~~~~~~~", result.user_games.games);
+      let loggedInId = req.session.user_id;
+      console.log("this is req.session.friends~~~~~~~~~~~~~~: ", req.session.friends);
+      console.log("this is req.params.id in profile + in ajax add friends: ", req.params.id);
+      let friendsArr = req.session.friends;
+      let session = req.session;
+      // console.log("TOTAL UPDATE thisis howmany friends you have: ", friendsArr);
+      console.log("**************************")
+      let currentTime = moment.utc(new Date(),"YYYY/MM/DD HH:mm:ss").tz('America/Los_Angeles');
+      console.log("current___", moment.tz('America/Los_Angeles').format());
+      console.log("current time ", currentTime);
+      let gameCount = 1;
+      let totalCount = 0;
+
       let all_games = {
-        past_games: [],
-        upcoming_games: []
+        todays_games: [],
+        upcoming_games: [],
+        past_games: []
       };
 
+      // --- PRINTING OUT INDIVIDUAL GAMES
       result.user_games.games.forEach(game => {
-        count = count + 1;
-        // let date = new Date();
-        let startTime = moment.utc(game.start_time).tz('America/Los_Angeles');
-        let endTime = moment.utc(game.end_time).tz('America/Los_Angeles');
+        let startTime = moment.utc(game.start_time,"YYYY/MM/DD HH:mm:ss");
+        let endTime = moment.utc(game.end_time,"YYYY/MM/DD HH:mm:ss");
+        console.log("start", startTime);
+        console.log("end", endTime);
+        totalCount = totalCount + 1;
+        // console.log('this is current time----:', currentTime);
+        // console.log('this is start time:~~~~~', startTime);
+        // console.log('this is end time:~~~~~', endTime);
+        let upcoming = startTime - currentTime;
+        let past = currentTime - endTime;
+        // console.log('this is math UPCOMING: >>>', upcoming);
+        // console.log('this is math PAST: >>>', past);
+        // if (upcoming > - 25200000 && upcoming < 0) {
+        //   console.log("true");
+        // } else {
+        //   console.log("false");
+        // }
 
-        // --- UPCOMING GAMES
+
+        // --- TODAYS GAMES
+        if (upcoming > - 25200000 && upcoming < 0) {
+          console.log("pushing game ", gameCount++, "into todays games array");
+          all_games.todays_games.push({
+            id: game.id,
+            title: game.title,
+            location: game.location,
+            start_time: game.start_time,
+            end_time: game.start_time
+          });
+        }
+
+        // --- FUTURE GAMES
         if (startTime > currentTime) {
-          console.log("pushing game ", future++, "into upcoming games array");
+          console.log("pushing game ", gameCount++, "into upcoming games array");
           all_games.upcoming_games.push({
             id: game.id,
             title: game.title,
@@ -194,9 +242,11 @@ app.get('/user/:id/profile', (req, res) => {
             end_time: game.start_time
           });
         }
+
         // --- PAST GAMES
-        if (endTime < currentTime) {
-          console.log("pushing game ", pasts++, "into past games array");
+        // endTime <= currentTime
+        if (upcoming < - 25200000) {
+          console.log("pushing game ", gameCount++, "into past games array");
           all_games.past_games.push({
             id: game.id,
             title: game.title,
@@ -206,26 +256,24 @@ app.get('/user/:id/profile', (req, res) => {
           });
         }
       });
+      console.log("FRIENDS");
       console.log("***************************************************************")
-      console.log(count + " games were sorted");
-      console.log("this is array of past games", all_games.past_games);
+      console.log("GAMES");
+      console.log(totalCount + " games were sorted");
+      console.log("this is array of todays games", all_games.todays_games);
       console.log("this is array of upcoming games", all_games.upcoming_games);
-      // res.json(data);
+      console.log("this is array of past games", all_games.past_games);
 
-      // let arr = [];
-      // all_games.past_games.reduce((currentTime, game) => {
-      //   game.start_time.push(arr);
-
-      // }, currentTime);
-
-      // let pastSorted = arr.sort(function(a, b) {
-      //   return b - a;
-      // });
       let templateVars = {
-        id: req.params.id,
+        seshId: loggedInId,
+        urlId: req.params.id,
+        friendsArr: friendsArr,
+        // addFriendsArray: addFriendsArray,
+        session: session,
         profile: result,
-        past_games: all_games.past_games.reverse(),
+        todays_games: all_games.todays_games.reverse(),
         upcoming_games: all_games.upcoming_games.reverse(),
+        past_games: all_games.past_games.reverse(),
         timeNow: moment().tz('America/Los_Angeles')
       }
       res.render('profile', templateVars);
@@ -233,11 +281,13 @@ app.get('/user/:id/profile', (req, res) => {
 });
 
 app.get("/user/:id/edit", (req, res) => {
+  console.log("this is req.params", req.params);
   return profileData.queryProfileData(req.params.id)
     .then(data => {
+      console.log("this is edit data to work w ", data);
       // res.json(data);
       let templateVars = {
-        id: req.session.user_id,
+        seshId: req.session.user_id,
         profile: data
       }
     res.render('profile_edit', templateVars);
@@ -262,6 +312,43 @@ app.post("/event/:id/addPosts", (req, res) => {
 app.post("/logout", (req, res) => {
   delete req.session.user_id;
   res.redirect('index');
+});
+
+app.post("/user/:id/friend", (req, res) => {
+  console.log("this is user SESSION examine me: ", req.session.user_id);
+  console.log("this is user PARAMS examine me: ", req.params.id);
+    knex("relationships")
+    .insert([
+    {
+      user_id: Number(req.session.user_id),
+      other_id: Number(req.params.id),
+      status: 'Approved'
+    },
+    {
+      user_id: Number(req.params.id),
+      other_id: Number(req.session.user_id),
+      status: 'Approved'
+    }
+    ])
+    .returning('status')
+    .then (() => {
+      return profileData.queryProfileData(req.session.user_id)
+        .then(result => {
+          // console.log("this is result friends in BUTTON PRESSED ADD FRIEND", result.user_friends.friends);
+          console.log("req session.friends -BEFORE- push/concat <<>>", req.session.friends);
+          // for (let friend of result.user_friends.friends) {
+
+            req.session.friends = req.session.friends.concat([{
+              other_id: Number(req.params.id),
+              status: 'Approved'
+            }]);
+          // }
+          console.log("req session.friends -AFTER- push/concat <<>>", req.session.friends);
+
+          // congrats
+      });
+
+    });
 });
 
 app.listen(PORT, () => {

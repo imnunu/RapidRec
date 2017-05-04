@@ -6,6 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<!-- used in scripts/add_friend.js file (this makes data available in the dom for available use)-->
+<meta name='urlId' content='<%= urlId %>'>
+<meta name='firstName' content='<%= profile.user_games.user.first_name %>'>
+<meta name='lastName' content='<%= profile.user_games.user.last_name %>'>
+<meta name='session_id' content='<%= seshId %>'>
+<meta name='friends_array' content='<%= friendsArr %>'>
+<meta name='session' content='<%= session %>'>
+
 <!-- Title -->
 <title>RapidRec</title>
 
@@ -18,6 +26,19 @@
 
 <!-- CSS Base -->
 <link id="theme" rel="stylesheet" href="/styles/theme-classic.css" />
+<style>
+      a:link a:visited .gameblock {
+        background-color: #f44336;
+        color: white;
+        padding: 14px 25px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+      }
+      a:hover, a:active{
+        background-color: red;
+      }
+    </style>
 
 </head>
 
@@ -36,8 +57,8 @@
 			<div class="module menu left">
 				<ul id="nav-primary" class="nav nav-primary">
 					<li><a href="/index">Home</a></li>
-					<li><a href="/user/<%= id %>/profile">Profile</a></li>
-					<li><a href="/user/<%= id %>/edit">Profile Edit</a></li>
+					<li><a href="/user/<%= seshId %>/profile">Profile</a></li>
+					<li><a href="/user/<%= seshId %>/edit">Profile Edit</a></li>
 					<li><a class="logout_button">Sign Out</a></li>
 					
 				</ul>
@@ -77,9 +98,9 @@
 					<!-- Widget - Newsletter -->
 					<div class="widget widget-newsletter">
 						<h6 class="text-uppercase">About Me</h6>
-						<img class="img-circle mb-50" src='/img/avatars/avatar_hoody_guy.png' alt="">
+						<!--<img class="img-circle mb-50" src='/img/avatars/avatar_hoody_guy.png' alt="">-->
+						<img class="img-circle mb-50" src='/uploads/<%= profile.user_games.user.image %>' alt="">
 						<button type="submit" class="btn btn-primary btn-sm  btn-block"><span>Update avatar picture</span></button>
-						
 					</div>
 
 					<!-- Widget -->
@@ -90,11 +111,13 @@
 					<!-- Widget - Recent posts -->
 					<div class="widget widget-recent-posts">
 						<h6 class="text-uppercase text-muted">Friend List</h6>
-						
+						<span class="validation" id="add_friend_popup"></span>
 						<ul class="list-posts">
 							<% for (let friend of profile.user_friends.friends) { %>
-							<li><a href=""><%= friend.first_name %> <%= friend.last_name %></a></li>
+							<li><a href="/user/ <%= friend.id %> /profile" ><%= friend.first_name %> <%= friend.last_name %></a></li>
+							<img class="img-circle"  src="http://localhost:8080/uploads/<%= friend.image %>"  width="50px" height="50px">
                             <% } %>
+                            
 							<!--need to delete after add friend function working-->
 							<li>
 								<a href=""></a>
@@ -106,7 +129,31 @@
 			
 				<!-- Content -->
 				<div class="content col-md-9">
+					<!-- Todays Events Section / Simple -->
+					<% if (todays_games.length) { %>
+					<h3 class="text-center mb-20">Today's Upcoming Games</h3>
+					<hr>
+					<section class="bg-primary dark">
+						<div class="container">
+								<div class="col-lg-5 col-md-6">
+									<% for (let game of todays_games) { %>
+									<div class="testimonial testimonial-1">
+										<div class="quote">
+											<p><strong>Location: </strong> <%= game.location %></p>
+                      						<p><strong>Date/Time: </strong><%= game.start_time %></p>
+										</div>
+										<div class="author">
+											<span class="name text-uppercase"><%= game.title %></span>
+										</div>
+									</div>
+									<% } %>
+									<% } %>
+								</div>
+						</div>
+					</section>
+					<br />
 					<!-- Section / Simple -->
+					<% if (upcoming_games.length) { %>
 					<h3 class="text-center mb-20">Upcoming Games</h3>
 					<hr>
 					<section class="bg-primary dark">
@@ -123,11 +170,13 @@
 										</div>
 									</div>
 									<% } %>
+									<% } %>
 								</div>
 						</div>
 					</section>
 					<br />
 					<!-- Past Events -->
+					<% if (past_games.length) { %>
 					<h3 class="text-center mb-20">Past Games</h3>
 					<hr>
 					<% for (let game of past_games) { %>
@@ -140,6 +189,7 @@
 								<span class="name text-uppercase"><%= game.title %></span>
 							</div>
 						</div>
+					<% } %>
 					<% } %>
 				</div>
 			</div>
@@ -156,7 +206,7 @@
 
 <!-- JS Core -->
 <script src="/scripts/core.js"></script>
-
+<script src="/scripts/add_friend.js"></script>
 <script src="/scripts/register.js"></script>
 <script src="/scripts/login.js"></script>
 </body>

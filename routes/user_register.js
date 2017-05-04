@@ -42,10 +42,18 @@ module.exports = (knex) => {
         })
         .into('users')
         .returning('id')
-        .then(function(id){
-          req.session.user_id = id;
+        .then((id) => {
+          req.session = {
+            user_id: Number(id)
+            // friends: []
+          }
+          console.log("########=>registered no friends yet", req.session);
           res.json('id');
         })
+        .catch((error) => {
+          res.json('error');
+        });
+        // });
       }
     })
   });
