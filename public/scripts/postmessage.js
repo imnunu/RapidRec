@@ -62,7 +62,6 @@ $('.new-post form').on('submit', function (e) {
         content: newPost
       },
       success: function() {
-        loadPosts();
         window.location.reload();
       },
       error: function() {
@@ -96,6 +95,6 @@ $('#commentBox').on('click', function (e) {
 }
 });
 
-loadPosts();
+
 
 })

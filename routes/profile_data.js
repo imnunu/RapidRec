@@ -4,7 +4,7 @@ module.exports = (knex) => ({
 
     queryPartPlayers: function(gameId) {
       return knex('users')
-      .select('users.first_name', 'users.last_name', 'participations.equipment', 'participations.user_id')
+      .select('users.first_name', 'users.last_name', 'users.id', 'participations.equipment', 'participations.user_id')
       .innerJoin('participations', 'users.id', '=', 'participations.user_id')
       .where('participations.game_id', '=', gameId)
       .orderBy('participations.created_at', 'desc')
@@ -15,6 +15,7 @@ module.exports = (knex) => ({
             return {
               first_name: row.first_name,
               last_name: row.last_name,
+              id: row.id,
               equipment: row.equipment,
               partUserId: row.user_id
             };

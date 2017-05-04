@@ -280,7 +280,10 @@ app.post("/event/:id/addPosts", (req, res) => {
   .then(() =>{
     res.json('success');
     console.log("you're done");
-  });
+  })
+  .catch(err => {
+    console.log(err);
+  })
 });
 
 
