@@ -171,7 +171,9 @@
 
                     			<% user.comments.forEach((comment) => { %>
                         		<div class="post-content panel-default panel-body">
-                                    
+                                    <div class="pull-left">
+                            		<img class="media-object img-circle" src="/uploads/<%= comment.image %>" width="40px" height="40px" style="margin-right:8px; margin-top:-5px;">
+                    				</div>
                                     <h4><a href="#" style="text-decoration:none;"><strong><%= (comment.first_name + ' ' + comment.last_name)%></strong></a></h4>
                                     <hr>
                                     <div class="post-content">

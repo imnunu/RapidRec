@@ -101,11 +101,11 @@
 						<img class="img-circle" src='/uploads/<%= profile.user_games.user.image %>' alt="">
           </div>
 
-            <!--if session id = user id, then show this one-->
+            <% if (seshId == urlId) {%>
 						<button href="/user/<%= seshId %>/edit" class="btn btn-primary btn-xs btn-block mb-30"><span>Update avatar picture</span></button>
-            <!--if different, then show add friend-->
+            <% } else { %>
 						<button type="submit" class="btn btn-warning btn-sm btn-block add-friend-submit-button mb-30"><span>Add Friend</span></button>
-					
+            <% } %>
 
 					<!-- Widget - Recent posts -->
 					<div class="widget">
