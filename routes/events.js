@@ -7,11 +7,12 @@ const moment = require('moment');
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
-    var currentDate = moment().tz("America/Los_Angeles").format();
+    //var currentDate = moment().tz("America/Los_Angeles").format();
     //var startTime = moment(games.start_time).tz("America/Los_Angeles").format();
-    knex('games')
-      .where('games.start_time', '>', currentDate)
+    knex
+      //.where('games.start_time', '>', currentDate)
       .select("*")
+      .from("games")
       .then((results) => {
         res.json(results);
     });
