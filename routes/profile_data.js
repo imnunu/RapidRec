@@ -120,7 +120,7 @@ module.exports = (knex) => ({
 
     getPostsAndCommentsForGame: function(game_id) {
     return knex('posts')
-      .select('posts.id','posts.created_at', 'posts.content', 'users.first_name', 'users.last_name', 'users.image')
+      .select('posts.id','posts.created_at', 'posts.content', 'posts.user_id', 'users.first_name', 'users.last_name', 'users.image')
       .join('users', 'posts.user_id', '=', 'users.id')
       .where({ game_id })
       .orderBy('created_at', 'desc')
