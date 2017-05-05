@@ -16,7 +16,7 @@ locates nearby pickup basketball games and groups of people wanting to play allo
 
 ## Screenshot
 
-![Screenshot](screenshot1.png)
+![Screenshot](Screenshot1.png)
 
 ## Getting Started
 
