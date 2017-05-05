@@ -1,14 +1,20 @@
-# Node Skeleton
+# RapidRec is a pickup basket game app which locates nearby pickup basketball games and groups of people wanting to play allowing you to connect with people and play basketball.
 
-## Project Setup
+## Skill Set
 
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+- Javascript
+- jQuery
+- Express
+- AJAX
+- Node
+- Bootstrap
+- PostgreSQL for DB
+- Knex.js
+- GitHub for version control
+
+## Screenshot
+
+![Screenshot](screenshot.png)
 
 ## Getting Started
 
