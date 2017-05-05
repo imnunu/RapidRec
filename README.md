@@ -1,4 +1,6 @@
-# RapidRec is a pickup basket game app which locates nearby pickup basketball games and groups of people wanting to play allowing you to connect with people and play basketball.
+# RapidRec is a pickup basketball game app 
+
+locates nearby pickup basketball games and groups of people wanting to play allowing you to connect with people and play basketball.
 
 ## Skill Set
 
@@ -14,7 +16,7 @@
 
 ## Screenshot
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot1.png)
 
 ## Getting Started
 
